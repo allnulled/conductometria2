@@ -1,0 +1,180 @@
+:root {
+    --altura_de_panel_superior: 27px;
+    --altura_de_panel_inferior: 27px;
+    --color_de_fondo_1: #112;
+    --color_de_fondo_2: #FFF;
+    --margen_general_horizontal: 10px;
+    --fuente_principal: "9pt Segoe UI","SegoeUI","Noto Sans","sans-serif";
+}
+
+.marcar {
+    border: 4px solid red;
+}
+
+.capa_fija {
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background-color: var(--color_de_fondo_1);
+    padding-left: var(--margen_general_horizontal);
+    padding-right: var(--margen_general_horizontal);
+    text-align: left;
+    font-family: var(--fuente_principal);
+}
+
+.capa_paneles_fijos {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.panel_fijo_arriba {
+    position: absolute;
+    top: 0px;
+    bottom: auto;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    height: 100%;
+    max-height: var(--altura_de_panel_superior);
+    background-color: var(--color_de_fondo_1);
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+.panel_fijo_intermedio {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+}
+.panel_fijo_abajo {
+    position: absolute;
+    top: auto;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    height: 100%;
+    max-height: var(--altura_de_panel_inferior);
+    background-color: var(--color_de_fondo_1);
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+.panel_contenedor {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.panel_contenidos {
+    position: absolute;
+    top: var(--altura_de_panel_superior);
+    bottom: var(--altura_de_panel_inferior);
+    left: 0px;
+    right: 0px;
+    overflow: scroll;
+    background-color: var(--color_de_fondo_2);
+    border-radius: 4pt;
+}
+.panel_contenidos_interno {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+}
+.panel_editor {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: auto;
+    width: 100%;
+    height: 100%;
+    transition: left .2s linear;
+    padding: 0px;
+}
+.panel_editor.inactivo {
+    left: -100%;
+}
+.panel_editor_contenido {
+    width: 100%;
+    height: 100%;
+    padding: 4px;
+}
+.panel_estadisticas {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: auto;
+    right: 0%;
+    width: 100%;
+    height: 100%;
+    transition: right .2s linear;
+    padding: 0px;
+}
+.panel_estadisticas.inactivo {
+    right: -100%;
+}
+.panel_estadisticas_contenido {
+    padding: 4px;
+}
+.titulo_principal {
+    display: block;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+}
+.entrada_de_codigo {
+    width: 100%;
+    height: 100%;
+    border: 4px double black;
+    color: blue;
+    font-size: 12px;
+    text-wrap: nowrap;
+    overflow: scroll;
+    resize: none;
+}
+.entrada_de_codigo:focus {
+    outline: none;
+    border: 4px double black;
+    box-shadow: 0 0 4px black;
+}
+
+
+.entrada_de_codigo.corrigiendo {
+    background-color: #e8e5bc;
+    color: blue;
+}
+.entrada_de_codigo.corregido {
+    background-color: white;
+    color: blue;
+}
+.entrada_de_codigo.erroneo {
+    background-color: rgb(217, 179, 179);
+    color: rgb(86, 6, 6);
+}
+.cuadro_de_error {
+    text-wrap: wrap;
+    margin: 0px !important;
+    margin-top: 4px !important;
+    margin-bottom: 4px !important;
+    padding: 4px !important;
+    background-color: rgb(217, 179, 179);
+    color: rgb(86, 6, 6);
+    overflow: scroll;
+    height: 200px;
+    resize: vertical;
+    font-family: var(--fuente_principal) !important;
+    font-size: 12px;
+}
+.campo_de_estado_de_ventana {
+    padding: 4px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}

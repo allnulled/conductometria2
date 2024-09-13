@@ -1,0 +1,8 @@
+.mi_input_longable {
+    
+}
+.mi_input_longable textarea {
+    width: 100%;
+    height: 200px;
+    resize: vertical;
+}

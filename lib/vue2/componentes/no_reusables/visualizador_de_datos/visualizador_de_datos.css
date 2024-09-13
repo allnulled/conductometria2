@@ -1,0 +1,61 @@
+.visualizador_de_datos {
+    
+}
+
+.nombre_de_propiedad {
+    font-weight: bold;
+}
+
+.titulo_de_objeto {
+    background-color: #bcbcbc;
+    color: rgb(52, 52, 52);
+    padding: 4px;
+    cursor: pointer;
+}
+
+.titulo_de_objeto:hover {
+    background-color: #9c9c9c;
+    color: rgb(52, 52, 52);
+}
+
+.titulo_de_objeto.expandido {
+    background-color: #7c7c7c;
+    color: white;
+}
+
+.espaciado_lateral {
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.barra_lateral {
+    border-left: 0px solid #333;
+}
+
+.barra_inferior {
+    border-bottom: 0px solid #333;
+}
+
+.barra_inferior_atenuada {
+    border-bottom: 0px solid #CCC;
+}
+
+.lista_de_propiedades,
+.lista_de_items {
+    border: 1px solid #333;
+}
+
+.item_de_lista {
+    margin-top: 4px;
+}
+
+.visualizador_de_datos.barra_inferior {
+    border-right: 0px solid #333;
+}
+.tipo_de_dato_explicado {
+    color: #666;
+    font-size: 9px;
+    font-style: italic;
+}

@@ -1,0 +1,15 @@
+.vertical-layout {
+    display: flex;
+    flex-direction: column;
+}
+
+.horizontal-layout {
+    display: flex;
+    flex-direction: row;
+}
+
+.item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 5px;
+}

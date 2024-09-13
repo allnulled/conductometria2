@@ -1,0 +1,21 @@
+.mi_textviewer {
+    border: 4px double black;
+    background-color: #CCC;
+    position: relative;
+}
+.mi_textviewer > textarea {
+    width: 100%;
+    min-height: 200px;
+    resize: vertical;
+    background-color: #CCC;
+    color: black;
+    font-size: 12px;
+}
+.mi_textviewer .panel_de_botones_de_mi_textviewer {
+    text-align: right;
+    position: absolute;
+    top: auto;
+    bottom: 2px;
+    left: auto;
+    right: 2px;
+}

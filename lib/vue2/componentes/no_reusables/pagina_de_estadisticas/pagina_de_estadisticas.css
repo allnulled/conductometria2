@@ -1,0 +1,18 @@
+:root {
+    
+}
+
+.tabla_de_estadisticas {
+    display: inline-block;
+    border: 4px double black;
+    margin-right: 4px;
+    margin-bottom: 4px;
+    vertical-align: top;
+    background-color: #BBB;
+}
+
+.panel_de_texto {
+    max-width: 100%;
+    max-height: 200px;
+    overflow: scroll;
+}

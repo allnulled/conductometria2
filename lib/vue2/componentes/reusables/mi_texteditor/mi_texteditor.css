@@ -1,0 +1,21 @@
+.mi_texteditor {
+    
+    background-color: #FFF;
+    position: relative;
+}
+.mi_texteditor > textarea {
+    width: 100%;
+    min-height: 200px;
+    resize: vertical;
+    background-color: #FFF;
+    color: black;
+    font-size: 12px;
+}
+.mi_texteditor .panel_de_botones_de_mi_texteditor {
+    text-align: right;
+    position: absolute;
+    top: auto;
+    bottom: 5px;
+    left: auto;
+    right: 5px;
+}

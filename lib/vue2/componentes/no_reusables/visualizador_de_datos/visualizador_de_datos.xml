@@ -1,0 +1,49 @@
+<div class="visualizador_de_datos" :class="{ display_inline_block: !(datos_es_objeto_normal || datos_es_array_normal), barra_inferior: es_tipo_conocido(datos) }">
+    <template v-if="false">-</template>
+    <template v-else-if="datos_es_nulo"><span class="tipo_de_dato_explicado">[nulo]</span></template>
+    <template v-else-if="datos_es_indefinido"><span class="tipo_de_dato_explicado">[indefinido]</span></template>
+    <template v-else-if="datos_es_texto">{{ datos }} <span class="tipo_de_dato_explicado">[texto]</span></template>
+    <template v-else-if="datos_es_numero">{{ datos }} <span class="tipo_de_dato_explicado">[número]</span></template>
+    <template v-else-if="datos_es_funcion">{{ datos.toString() }} <span class="tipo_de_dato_explicado">[función]</span></template>
+    <template v-else-if="datos_es_objeto_vacio">{} <span class="tipo_de_dato_explicado">[objeto]</span></template>
+    <template v-else-if="datos_es_array_vacio">[] <span class="tipo_de_dato_explicado">[lista]</span></template>
+    <template v-else-if="datos_es_objeto_normal">
+        <div class="titulo_de_objeto" :class="{expandido: esta_expandido}" v-on:click="alternar_expansion" v-if="datos.tipo && datos.tipo === 'hora del día'">Hora del día</div>
+        <div class="titulo_de_objeto" :class="{expandido: esta_expandido}" v-on:click="alternar_expansion" v-else-if="datos.tipo && datos.tipo === 'sentencia de definir fenómeno'">Sentencia de definir fenómeno</div>
+        <div class="titulo_de_objeto" :class="{expandido: esta_expandido}" v-on:click="alternar_expansion" v-else-if="datos.tipo && datos.tipo === 'consecuencia de fenómeno'">Consecuencia de fenómeno</div>
+        <div class="titulo_de_objeto" :class="{expandido: esta_expandido}" v-on:click="alternar_expansion" v-else-if="datos.tipo && datos.tipo === 'cantidad de incremento de tiempo'">Cantidad de incremento de tiempo</div>
+        <div class="titulo_de_objeto" :class="{expandido: esta_expandido}" v-on:click="alternar_expansion" v-else-if="datos.tipo && datos.tipo === 'cantidad de tiempo'">Cantidad de tiempo</div>
+        <div class="titulo_de_objeto" :class="{expandido: esta_expandido}" v-on:click="alternar_expansion" v-else-if="datos.tipo && datos.tipo === 'sentencia de registrar fenómenos'">Sentencia de registrar fenómenos</div>
+        <div class="titulo_de_objeto" :class="{expandido: esta_expandido}" v-on:click="alternar_expansion" v-else-if="datos.tipo && datos.tipo === 'día del calendario'">Día del calendario</div>
+        <div class="titulo_de_objeto" :class="{expandido: esta_expandido}" v-on:click="alternar_expansion" v-else-if="datos.tipo && datos.tipo === 'registro de fenómeno en hora'">Registro de fenómeno en hora</div>
+        <div class="titulo_de_objeto" :class="{expandido: esta_expandido}" v-on:click="alternar_expansion" v-else-if="datos.tipo && datos.tipo === 'matiz de registro de fenómeno'">Matiz de registro de fenómeno</div>
+        <div class="titulo_de_objeto" :class="{expandido: esta_expandido}" v-on:click="alternar_expansion" v-else-if="datos.tipo && datos.tipo === 'sentencia de limitar fenómenos'">Sentencia de limitar fenómenos</div>
+        <div class="titulo_de_objeto" :class="{expandido: esta_expandido}" v-on:click="alternar_expansion" v-else-if="datos.tipo && datos.tipo === 'límite de fenómeno'">Límite de fenómeno</div>
+        <div class="titulo_de_objeto" :class="{expandido: esta_expandido}" v-on:click="alternar_expansion" v-else-if="datos.tipo && datos.tipo === 'registro de fenómeno en propagación'">Registro de fenómeno en propagación</div>
+        <div class="titulo_de_objeto" :class="{expandido: esta_expandido}" v-on:click="alternar_expansion" v-else-if="datos.tipo && datos.tipo === 'punto causal según «produce»'">Punto causal según «produce»</div>
+        <div class="titulo_de_objeto" :class="{expandido: esta_expandido}" v-on:click="alternar_expansion" v-else-if="datos.tipo && datos.tipo === 'punto causal según matiz'">Punto causal según matiz</div>
+        <div class="titulo_de_objeto" :class="{expandido: esta_expandido}" v-on:click="alternar_expansion" v-else-if="datos.tipo && datos.tipo === 'registro de fenómeno por matiz'">Registro de fenómeno por matiz</div>
+        <div class="titulo_de_objeto" :class="{expandido: esta_expandido}" v-on:click="alternar_expansion" v-else-if="datos.tipo && datos.tipo === 'acumulación fenoménica'">Acumulación fenoménica</div>
+        <div class="titulo_de_objeto" :class="{expandido: esta_expandido}" v-on:click="alternar_expansion" v-else-if="datos.tipo && datos.tipo === 'unidad de acumulación fenoménica'">Unidad de acumulación fenoménica</div>
+        <div class="titulo_de_objeto" :class="{expandido: esta_expandido}" v-on:click="alternar_expansion" v-else-if="datos.tipo && datos.tipo === 'notificación'">Notificación</div>
+        <div v-else="titulo_de_objeto"></div>
+        <template v-if="es_tipo_conocido(datos) && (!esta_expandido)">
+        </template>
+        <div v-else="" class="lista_de_propiedades">
+            <div class="espaciado_lateral barra_lateral" v-for="dato, dato_propiedad in datos" :class="{barra_inferior: es_objeto_o_array_normal(dato), barra_inferior_atenuada: !es_objeto_o_array_normal(dato)}">
+                <div v-if="es_tipo_conocido(dato)"></div>
+                <div class="nombre_de_propiedad" :class="{display_inline_block: !es_objeto_o_array_normal(dato) }">{{ dato_propiedad }}:</div>
+                <visualizador-de-datos :datos="dato" v-bind:key="'visualizador_de_datos_dato_' + dato_propiedad" />
+            </div>
+        </div>
+    </template>
+    <template v-else-if="datos_es_array_normal">
+        <div class="lista_de_items">
+            <div class="espaciado_lateral item_de_lista" v-for="dato, dato_index in datos">
+                <div class="nombre_de_propiedad" :class="{display_inline_block: !es_objeto_o_array_normal(dato) }">Ítem {{ dato_index }}:</div>
+                <div class="espaciado_entre_items"></div>
+                <visualizador-de-datos :datos="dato" v-bind:key="'visualizador_de_datos_dato_' + dato_index" />
+            </div>
+        </div>
+    </template>
+</div>

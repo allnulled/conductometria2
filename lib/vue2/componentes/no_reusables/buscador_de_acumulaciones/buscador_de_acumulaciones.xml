@@ -1,0 +1,21 @@
+<div>
+    <mi-subtitle>Buscador de acumulaciones</mi-subtitle>
+    <table class="width_100 border_collapse_collapse">
+        <tbody>
+            <tr>
+                <td class="width_100 vertical_align_top">
+                    <mi-input-longable :on-change="actualizar_valor_de_filtro" placeholder="Expresión booleana en JavaScript" :on-enter="cargar_acumulaciones" />
+                </td>
+                <td class="vertical_align_top">
+                    <button class="min_width_0" v-on:click="cargar_acumulaciones">!</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <template v-if="estado_de_busqueda === 'finalizada'">
+        <visualizador-de-datos :inicial="true" :datos="acumulaciones_filtradas" />
+    </template>
+    <template v-if="estado_de_busqueda === 'buscando'">
+        <div>Se está llevando a cabo la búsqueda... Por favor, espere.</div>
+    </template>
+</div>

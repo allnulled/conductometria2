@@ -1,0 +1,61 @@
+.visualizador_de_datos {
+    
+}
+.info_de_dato {
+    display: inline-block;
+}
+.propiedad_de_dato {
+    font-weight: bold;
+    padding: 2px;
+    vertical-align: top;
+}
+.valor_de_dato {
+    padding: 2px;
+    vertical-align: top;
+}
+
+.bloque_de_dato {
+    border-left: 4px double #444;
+    border-top: 4px double #444;
+    border-bottom: 4px double #AAA;
+}
+
+
+.capa_tabulada {
+    padding-left: 4px;
+}
+
+.bloque_de_dato.es_inicial {
+    border: 4px double #444;
+}
+.bloque_de_dato.es_inicial.dato_tipo_array {
+    border: 0px double #444;
+    padding: 0px;
+}
+.bloque_de_dato.es_inicial.dato_tipo_array .bloque_de_dato.es_inicial.dato_tipo_objeto {
+    background-color: #DDD;
+}
+
+.titulo_de_tipo_de_objeto {
+    display: block;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    text-transform: uppercase;
+    padding: 4px;
+}
+.objeto_expandible {
+    cursor: pointer;
+}
+.objeto_expandible:hover,
+.objeto_expandible:hover > .titulo_de_tipo_de_objeto {
+    background-color: #444;
+}
+.objeto_expandible.expandido,
+.objeto_expandible.expandido > .titulo_de_tipo_de_objeto {
+    background-color: #CCC;
+    color: black;
+}
+.objeto_expandible.expandido > .titulo_de_tipo_de_objeto {
+    border-bottom: 1px solid #AAA;
+}

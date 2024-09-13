@@ -1,0 +1,64 @@
+<span class="visualizador_de_datos">
+    <span v-if="datos === null" class="dato_tipo_normal">
+        -
+    </span>
+    <div v-else-if="Array.isArray(datos)" class="bloque_de_dato dato_tipo_array">
+        <template v-if="datos.length">
+            <div class="propiedad_de_array" v-for="dato, dato_index in datos" v-bind:key="'visualizador_de_datos_dato_' + dato_index">
+                <span class="info_de_dato propiedad_de_dato">{{ dato_index }}:</span>
+                <span class="info_de_dato valor_de_dato"><visualizador-de-datos :inicial="inicial" :datos="dato" /></span>
+            </div>
+        </template>
+        <template v-else="">
+            <div class="propiedad_de_array" v-for="dato, dato_propiedad in datos" v-bind:key="'visualizador_de_datos_dato_' + dato_propiedad">
+                <span class="info_de_dato propiedad_de_dato">{{ dato_propiedad }}:</span>
+                <span class="info_de_dato valor_de_dato">[]</span>
+            </div>
+        </template>
+    </div>
+    <div v-else-if="typeof datos === 'object'" class="bloque_de_dato dato_tipo_objeto">
+        <div v-if="datos.tipo" class="objeto_expandible cursor_pointer" :class="{expandido: esta_expandido}" v-on:click="alternar_expansion">
+            <div class="titulo_de_tipo_de_objeto" v-if="typeof datos === 'object' && datos.tipo && datos.tipo === 'hora del día'">Hora del día</div>
+            <div class="titulo_de_tipo_de_objeto" v-else-if="typeof datos === 'object' && datos.tipo && datos.tipo === 'sentencia de definir fenómeno'">Sentencia de definir fenómeno</div>
+            <div class="titulo_de_tipo_de_objeto" v-else-if="typeof datos === 'object' && datos.tipo && datos.tipo === 'consecuencia de fenómeno'">Consecuencia de fenómeno</div>
+            <div class="titulo_de_tipo_de_objeto" v-else-if="typeof datos === 'object' && datos.tipo && datos.tipo === 'cantidad de incremento de tiempo'">Cantidad de incremento de tiempo</div>
+            <div class="titulo_de_tipo_de_objeto" v-else-if="typeof datos === 'object' && datos.tipo && datos.tipo === 'cantidad de tiempo'">Cantidad de tiempo</div>
+            <div class="titulo_de_tipo_de_objeto" v-else-if="typeof datos === 'object' && datos.tipo && datos.tipo === 'sentencia de registrar fenómenos'">Sentencia de registrar fenómenos</div>
+            <div class="titulo_de_tipo_de_objeto" v-else-if="typeof datos === 'object' && datos.tipo && datos.tipo === 'día del calendario'">Día del calendario</div>
+            <div class="titulo_de_tipo_de_objeto" v-else-if="typeof datos === 'object' && datos.tipo && datos.tipo === 'registro de fenómeno en hora'">Registro de fenómeno en hora</div>
+            <div class="titulo_de_tipo_de_objeto" v-else-if="typeof datos === 'object' && datos.tipo && datos.tipo === 'matiz de registro de fenómeno'">Matiz de registro de fenómeno</div>
+            <div class="titulo_de_tipo_de_objeto" v-else-if="typeof datos === 'object' && datos.tipo && datos.tipo === 'sentencia de limitar fenómenos'">Sentencia de limitar fenómenos</div>
+            <div class="titulo_de_tipo_de_objeto" v-else-if="typeof datos === 'object' && datos.tipo && datos.tipo === 'límite de fenómeno'">Límite de fenómeno</div>
+            <div class="titulo_de_tipo_de_objeto" v-else-if="typeof datos === 'object' && datos.tipo && datos.tipo === 'registro de fenómeno en propagación'">Registro de fenómeno en propagación</div>
+            <div class="titulo_de_tipo_de_objeto" v-else-if="typeof datos === 'object' && datos.tipo && datos.tipo === 'punto causal según «produce»'">Punto causal según «produce»</div>
+            <div class="titulo_de_tipo_de_objeto" v-else-if="typeof datos === 'object' && datos.tipo && datos.tipo === 'punto causal según matiz'">Punto causal según matiz</div>
+            <div class="titulo_de_tipo_de_objeto" v-else-if="typeof datos === 'object' && datos.tipo && datos.tipo === 'registro de fenómeno por matiz'">Registro de fenómeno por matiz</div>
+            <div class="titulo_de_tipo_de_objeto" v-else-if="typeof datos === 'object' && datos.tipo && datos.tipo === 'acumulación fenoménica'">Acumulación fenoménica</div>
+            <div class="titulo_de_tipo_de_objeto" v-else-if="typeof datos === 'object' && datos.tipo && datos.tipo === 'unidad de acumulación fenoménica'">Unidad de acumulación fenoménica</div>
+            <div class="titulo_de_tipo_de_objeto" v-else-if="typeof datos === 'object' && datos.tipo && datos.tipo === 'notificación'">Notificación</div>
+        </div>
+        <div class="capa_tabulada" v-if="esta_expandido">
+            <template v-if="Object.keys(datos).length">
+                <div class="propiedad_de_objeto" v-for="dato, dato_propiedad in datos" v-bind:key="'visualizador_de_datos_dato_' + dato_propiedad">
+                    <span class="info_de_dato propiedad_de_dato">{{ dato_propiedad }}:</span>
+                    <span class="info_de_dato valor_de_dato"><visualizador-de-datos :datos="dato" /></span>
+                </div>
+            </template>
+            <template v-else="">
+                <div class="propiedad_de_objeto" v-for="dato, dato_propiedad in datos" v-bind:key="'visualizador_de_datos_dato_' + dato_propiedad">
+                    <span class="info_de_dato propiedad_de_dato">{{ dato_propiedad }}:</span>
+                    <span class="info_de_dato valor_de_dato">{}</span>
+                </div>
+            </template>
+        </div>
+    </div>
+    <span v-else-if="datos === null" class="dato_tipo_normal">
+        [nulo]
+    </span>
+    <span v-else-if="typeof datos === 'undefined'" class="dato_tipo_normal">
+        [indefinido]
+    </span>
+    <span v-else="" class="dato_tipo_normal">
+        {{ datos }}
+    </span>
+</span>

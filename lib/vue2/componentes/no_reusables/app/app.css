@@ -1,0 +1,89 @@
+:root {
+    --fuente_principal: "9pt Segoe UI,SegoeUI,Noto Sans,sans-serif";
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url("Roboto-Regular.ttf");
+}
+
+html {
+    background-color: #A0A0A0;
+    padding: 0px;
+}
+#app {
+    padding: 2px;
+    text-align: center;
+}
+* {
+    box-sizing: border-box;
+}
+#capa_global_solo_maximo {
+    display: inline-block;
+    font-family: var(--fuente_principal);
+    max-width: 800px;
+    width: 100%;
+    overflow: hidden;
+}
+#capa_global {
+    display: inline-block;
+    max-width: 800px;
+    width: 100%;
+    text-align: left;
+    background-color: #DEDEDE;
+    border-left: 1px solid #DDD;
+    border-right: 1px solid #DDD;
+    padding-top: 0px;
+    /*
+    border-bottom: 1px solid #333;
+    */
+
+}
+dialog {
+    border: none;
+    background: rgba(255,255,255,0.7);
+    height: 100%;
+    width: 100%;
+    text-align: left;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+}
+
+button {
+    cursor: pointer;
+}
+
+.width_100 { width: 100%; }
+.width_50 { width: 50%; }
+.height_100 { height: 100%; }
+.height_50 { height: 50%; }
+.min_width_0 { min-width: 0px; }
+.max_width_0 { max-width: 0px; }
+
+.justify_content_space_between { justify-content: space-between; }
+.justify_content_space_around { justify-content: space-around; }
+.justify_content_space_evenly { justify-content: space-evenly; }
+.justify_content_flex_start { justify-content: flex-start; }
+.justify_content_flex_end { justify-content: flex-end; }
+.justify_content_center { justify-content: center; }
+.display_table { display: table; }
+.display_table_cell { display: table-cell; }
+.display_inline_block { display: inline-block; }
+.text_transform_uppercase { text-transform: uppercase; }
+.position_relative { position: relative; }
+.position_absolute { position: absolute; }
+.position_absolute_0 { position: absolute;top:0px;left:0px;right:0px;bottom:0px; }
+.float_left { float: left; }
+.float_right { float: right; }
+.clear_both { clear: both; }
+.cursor_pointer { cursor: pointer; }
+.text_align_left { text-align: left; }
+.text_align_right { text-align: right; }
+.text_align_center { text-align: center; }
+.scrollable { overflow: scroll; }
+.font_weight_bold { font-weight: bold; }
+.border_collapse_collapse { border-collapse: collapse; }
+.vertical_align_top { vertical-align: top; }

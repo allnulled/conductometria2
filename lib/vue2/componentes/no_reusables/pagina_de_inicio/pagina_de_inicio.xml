@@ -1,0 +1,83 @@
+<div>
+    <div class="capa_fija">
+        <div class="capa_paneles_fijos">
+            <div class="panel_fijo_intermedio">
+                <div class="panel_contenedor">
+                    <div class="panel_contenidos">
+                        <div class="panel_contenedor">
+                            <div class="panel_contenidos_interno">
+                                <div class="panel_estadisticas" v-if="seccion_seleccionada === 'estadísticas'" :class="{ inactivo: seccion_seleccionada !== 'estadísticas' }">
+                                    <div class="panel_estadisticas_contenido">
+                                        <pagina-de-estadisticas :root="this" />
+                                    </div>
+                                </div>
+                                <div class="panel_editor" :class="{ inactivo: seccion_seleccionada !== 'editor' }">
+                                    <div class="panel_editor_contenido">
+                                        <textarea class="entrada_de_codigo"
+                                            :class="{ [estado_de_script]: true }"
+                                            ref="entrada_de_codigo_1"
+                                            spellcheck="false"
+                                            v-model="contenido_de_script"
+                                            v-on:input="parsear_script_con_dilacion"
+                                            v-on:keyup="actualizar_posicion_del_cursor"
+                                            v-on:focus="actualizar_posicion_del_cursor"
+                                            v-on:click="actualizar_posicion_del_cursor" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel_fijo_arriba">
+                <div class="titulo_principal">
+                    <span class="display_inline_block text_transform_uppercase">{{ seccion_seleccionada }}</span>
+                    <span class="float_right">
+                        <template v-if="estado_de_script === 'erroneo'">
+                            <button class="boton" v-on:click="mostrar_error" style="min-width: 25px;">?</button>
+                            <button class="boton" v-on:click="ir_a_error">Ir a error</button>
+                        </template>
+                        <button class="boton" v-on:click="ir_a_estadisticas" v-if="(estado_de_script === 'corregido') && (seccion_seleccionada !== 'estadísticas')">Ir a estadísticas</button>
+                        <button class="boton" v-on:click="ir_a_editor" v-if="seccion_seleccionada !== 'editor'">Ir a editor</button>
+                    </span>
+                </div>
+            </div>
+            <div class="panel_fijo_abajo">
+                <span style="color: white;padding-top: 5px;display: inline-block;" v-if="(seccion_seleccionada === 'editor') && posicion_del_cursor">
+                    <span>
+                        <template v-if="posicion_del_cursor.inicio.posicion === posicion_del_cursor.fin.posicion">
+                            <span>Pos: </span> {{ posicion_del_cursor.inicio.posicion }} de {{ contenido_de_script.length }} | Coord: {{ posicion_del_cursor.inicio.linea }}:{{ posicion_del_cursor.inicio.columna }}
+                        </template>
+                        <template v-else>
+                            Pos: {{ posicion_del_cursor.inicio.posicion }}-{{ posicion_del_cursor.fin.posicion }} | Coord: {{ posicion_del_cursor.inicio.linea }}:{{ posicion_del_cursor.inicio.columna }}-{{ posicion_del_cursor.fin.linea }}:{{ posicion_del_cursor.fin.columna }}
+                        </template>
+                    </span>
+                </span>
+                <span class="float_right text_align_right">
+                    <template v-if="seccion_seleccionada === 'editor'">
+                        <button class="boton min_width_0" v-on:click="alternar_familia_de_texto">F</button>
+                        <button class="boton min_width_0" v-on:click="minimizar_texto">-</button>
+                        <button class="boton min_width_0" v-on:click="maximizar_texto">+</button>
+                    </template>
+                </span>
+            </div>
+        </div>
+    </div>
+    <dialog id="dialogo_de_error_de_script">
+        <div class="window">
+            <div class="title-bar">
+                <div class="title-bar-text">Mostrando error de script</div>
+            </div>
+            <div class="window-body has-space scrollable">
+                <div>El error producido es el siguiente:</div>
+                <pre class="cuadro_de_error">{{ JSON.stringify(error_de_script, null, 2) }}</pre>
+                <div class="text_align_right">
+                    <button class="" v-on:click="cerrar_error">De acuerdo</button>
+                </div>
+            </div>
+            <div class="status-bar">
+                <div class="status-field campo_de_estado_de_ventana">{{ error_de_script.name === "SyntaxError" ? "Es un error de sintaxis" : "No es un error de sintaxis" }}</div>
+            </div>
+        </div>
+    </dialog>
+</div>
