@@ -7,9 +7,36 @@
         global.Sistema_de_modulos = modulo;
     }
 })(function () {
+    const momento_de_inicio = new Date();
     class Factoria_de_sistema_de_modulos {
         constructor() {
             this.modulos = {};
+        }
+        padEndSegundos(texto_base, caracteres_minimos, relleno) {
+            let texto = '' + texto_base;
+            let longitud_de_decimales = texto.split(".")[1].length;
+            while(longitud_de_decimales < caracteres_minimos) {
+                texto = texto + relleno;
+                longitud_de_decimales++;
+            }
+            return texto;
+        }
+        obtener_momento() {
+            const diferencia_en_milisegundos = (new Date()) - momento_de_inicio;
+            const diferencia_en_segundos = parseFloat(diferencia_en_milisegundos / 1000);
+            return '' + this.padEndSegundos(diferencia_en_segundos, 3, '0');
+        }
+        objetos_cargados = 0;
+        informar_sobre_objeto_de_carga(mensaje) {
+            try {
+                const mensajero = document.body.querySelector("#global_loading_object");
+                if(mensajero) {
+                    mensajero.textContent = 'Segundo ' + this.obtener_momento() + ' / Objeto ' + (++this.objetos_cargados) + ' / Cargando ' + mensaje + '\n' + mensajero.textContent;
+                    mensajero.scrollTop = 0;
+                }
+            } catch (error) {
+                
+            }
         }
         definir(nombreModulo, dependencias, factoria) {
             this.modulos[nombreModulo] = {
@@ -27,6 +54,7 @@
         }
         async cargar_modulo(nombreModulo) {
             try {
+                this.informar_sobre_objeto_de_carga("módulo " + nombreModulo);
                 const modulo = this.modulos[nombreModulo];
                 if (typeof modulo === "undefined") {
                     throw new Error("No se encontró definido módulo «" + nombreModulo + "»");
@@ -44,7 +72,8 @@
             }
         }
         cargar_script(url) {
-            return new Promise(function (resolve, reject) {
+            this.informar_sobre_objeto_de_carga("script " + url);
+            return new Promise((resolve, reject) => {
                 var script = document.createElement("script");
                 script.type = "text/javascript";
                 if (script.readyState) {  // IE
@@ -67,6 +96,7 @@
             });
         }
         cargar_estilo(url) {
+            this.informar_sobre_objeto_de_carga("estilo " + url);
             return new Promise((resolve, reject) => {
                 const link = document.createElement('link');
                 link.rel = 'stylesheet';
@@ -82,6 +112,7 @@
         }
         async cargar_estilo_dinamico(url) {
             try {
+                this.informar_sobre_objeto_de_carga("estilo dinámico " + url);
                 const style = document.createElement('style');
                 const style_contents_as_template = await this.cargar_texto_remoto(url);
                 const style_contents = await ejs.render(style_contents_as_template, { Sistema_de_modulos: this }, { async: true });
@@ -93,6 +124,7 @@
             }
         }
         cargar_texto_remoto(url) {
+            this.informar_sobre_objeto_de_carga("texto remoto " + url);
             return fetch(url)
                 .then(response => {
                     if (response.ok) {
@@ -104,6 +136,7 @@
         }
         async cargar_script_como_texto(url) {
             try {
+                this.informar_sobre_objeto_de_carga("script como texto " + url);
                 const response = await fetch(url);
                 if (!response.ok) {
                     throw new Error('Error al obtener el texto desde la URL: ' + response.status);

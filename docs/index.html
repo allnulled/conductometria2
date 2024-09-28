@@ -3,11 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Observación de la conducta</title>
+    <title>Conductometría</title>
     <script src="lib/sistema_de_modulos/sistema_de_modulos.js"></script>
     <script src="index.js"></script>
+    <style>
+        .global_landing_page {
+            position: absolute;
+            top: 0px;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            background-color: #001;
+            color: white;
+        }
+        .global_landing_table {
+            width: 100%;
+            height: 100%;
+            border-collapse: collapse;
+        }
+        .global_landing_cell {
+            width: 100%;
+            height: 100%;
+            vertical-align: top;
+            text-align: center;
+        }
+        .global_landing_panel {
+            font-family: Arial;
+        }
+        .global_landing_title {
+            padding: 12px 8px;
+            font-size: 14px;
+            color: #FFF;
+            text-shadow: 0 0 2px white;
+            background-color: #112;
+        }
+        .global_landing_subtitle {
+            font-size: 10px;
+            color: #CCC;
+            text-shadow: 0 0 1px #CCC;
+            text-align: center;
+        }
+        #global_loading_object {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            color: white;
+            text-wrap: nowrap;
+            border: none !important;
+            overflow: scroll;
+            font-size: 10px;
+            font-family: Arial;
+            text-align: left;
+            color: rgb(136, 136, 211);
+            font-family: monospace;
+            font-size: 8px;
+            background-color: #001 !important;
+        }
+        .global_landing_separator {
+            margin: 0px;
+        }
+    </style>
 </head>
 <body>
     <div id="app"></div>
+    <div class="global_landing_page">
+        <table class="global_landing_table">
+            <tbody>
+                <tr>
+                    <td class="global_landing_cell">
+                        <div class="global_landing_panel">
+                            <div class="global_landing_title">Bienvenido a la conductometría</div>
+                            <hr class="global_landing_separator" />
+                            <div class="global_landing_subtitle" style="position: relative;">
+                                <pre id="global_loading_object" style="position: absolute; top: 0;"></pre>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

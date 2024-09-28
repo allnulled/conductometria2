@@ -1,69 +1,38 @@
 <div>
 
-    <div class="tabla_de_estadisticas float_right">
-        <table>
+    <div class="tabla_de_estadisticas">
+        <table class="width_100">
             <tbody>
                 <tr>
-                    <td class="text_align_right font_weight_bold">Notificaciones:</td>
-                    <td class="text_align_right">{{ root.interpretacion_de_script.notificaciones.length }}</td>
+                    <td colspan="2"><button class="width_100 text_align_center" :class="{active: subseccion_seleccionada === 'mostrar datos'}" v-on:click="() => ir_a_subseccion('mostrar datos')">Mostrar datos</button></td>
                 </tr>
                 <tr>
-                    <td class="text_align_right font_weight_bold">Acumulaciones:</td>
-                    <td class="text_align_right">{{ Object.keys(root.interpretacion_de_script.acumulaciones).length }}</td>
+                    <td><button class="width_100 text_align_right" :class="{active: subseccion_seleccionada === 'buscar notificaciones'}" v-on:click="() => ir_a_subseccion('buscar notificaciones')">Notificaciones</button></td>
+                    <td class="width_100 text_align_left font_weight_bold">{{ root.interpretacion_de_script.notificaciones.length }}</td>
+                </tr>
+                <tr> 
+                    <td><button class="width_100 text_align_right" :class="{active: subseccion_seleccionada === 'buscar sentencias'}" v-on:click="() => ir_a_subseccion('buscar sentencias')">Sentencias:</button></td>
+                    <td class="width_100 text_align_left font_weight_bold">{{ root.interpretacion_de_script.sentencias.length }}</td>
                 </tr>
                 <tr>
-                    <td class="text_align_right font_weight_bold">Acciones:</td>
-                    <td class="text_align_right">{{ root.interpretacion_de_script.acciones.length }}</td>
+                    <td><button class="width_100 text_align_right" :class="{active: subseccion_seleccionada === 'buscar acciones'}" v-on:click="() => ir_a_subseccion('buscar acciones')">Acciones:</button></td>
+                    <td class="width_100 text_align_left font_weight_bold">{{ root.interpretacion_de_script.acciones.length }}</td>
                 </tr>
                 <tr>
-                    <td class="text_align_right font_weight_bold">Fenómenos:</td>
-                    <td class="text_align_right">{{ root.interpretacion_de_script.fenomenos.length }}</td>
+                    <td><button class="width_100 text_align_right" :class="{active: subseccion_seleccionada === 'buscar acumulaciones'}" v-on:click="() => ir_a_subseccion('buscar acumulaciones')">Acumulaciones:</button></td>
+                    <td class="width_100 text_align_left font_weight_bold">{{ Object.keys(root.interpretacion_de_script.acumulaciones).length }}</td>
                 </tr>
                 <tr>
-                    <td class="text_align_right font_weight_bold">Creencias:</td>
-                    <td class="text_align_right">{{ root.interpretacion_de_script.creencias.length }}</td>
+                    <td><button class="width_100 text_align_right" :class="{active: subseccion_seleccionada === 'buscar creencias'}" v-on:click="() => ir_a_subseccion('buscar creencias')">Creencias:</button></td>
+                    <td class="width_100 text_align_left font_weight_bold">{{ root.interpretacion_de_script.creencias.length }}</td>
                 </tr>
                 <tr>
-                    <td class="text_align_right font_weight_bold">Límites:</td>
-                    <td class="text_align_right">{{ root.interpretacion_de_script.limites.length }}</td>
+                    <td><button class="width_100 text_align_right" :class="{active: subseccion_seleccionada === 'buscar límites'}" v-on:click="() => ir_a_subseccion('buscar límites')">Límites:</button></td>
+                    <td class="width_100 text_align_left font_weight_bold">{{ root.interpretacion_de_script.limites.length }}</td>
                 </tr>
                 <tr>
-                    <td class="text_align_right font_weight_bold">Sentencias:</td>
-                    <td class="text_align_right">{{ root.interpretacion_de_script.sentencias.length }}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="tabla_de_estadisticas float_left">
-        <table>
-            <tbody>
-                <tr>
-                    <td><button class="width_100 text_align_left" :class="{active: subseccion_seleccionada === 'buscar notificaciones'}" v-on:click="() => ir_a_subseccion('buscar notificaciones')">Buscar notificaciones</button></td>
-                </tr>
-                <!--tr>
-                    <td><button class="width_100 text_align_left" :class="{active: subseccion_seleccionada === 'buscar cualquiera'}" v-on:click="() => ir_a_subseccion('buscar cualquiera')">Buscar cualquiera</button></td>
-                </tr-->
-                <tr>
-                    <td><button class="width_100 text_align_left" :class="{active: subseccion_seleccionada === 'buscar sentencias'}" v-on:click="() => ir_a_subseccion('buscar sentencias')">Buscar sentencias</button></td>
-                </tr>
-                <tr>
-                    <td><button class="width_100 text_align_left" :class="{active: subseccion_seleccionada === 'buscar acciones'}" v-on:click="() => ir_a_subseccion('buscar acciones')">Buscar acciones</button></td>
-                </tr>
-                <tr>
-                    <td><button class="width_100 text_align_left" :class="{active: subseccion_seleccionada === 'buscar acumulaciones'}" v-on:click="() => ir_a_subseccion('buscar acumulaciones')">Buscar acumulaciones</button></td>
-                </tr>
-                <tr>
-                    <td><button class="width_100 text_align_left" :class="{active: subseccion_seleccionada === 'buscar creencias'}" v-on:click="() => ir_a_subseccion('buscar creencias')">Buscar creencias</button></td>
-                </tr>
-                <tr>
-                    <td><button class="width_100 text_align_left" :class="{active: subseccion_seleccionada === 'buscar límites'}" v-on:click="() => ir_a_subseccion('buscar límites')">Buscar límites</button></td>
-                </tr>
-                <tr>
-                    <td><button class="width_100 text_align_left" :class="{active: subseccion_seleccionada === 'buscar fenómenos'}" v-on:click="() => ir_a_subseccion('buscar fenómenos')">Buscar fenómenos</button></td>
-                </tr>
-                <tr>
-                    <td><button class="width_100 text_align_left" :class="{active: subseccion_seleccionada === 'mostrar datos'}" v-on:click="() => ir_a_subseccion('mostrar datos')">Mostrar datos</button></td>
+                    <td><button class="width_100 text_align_right" :class="{active: subseccion_seleccionada === 'buscar fenómenos'}" v-on:click="() => ir_a_subseccion('buscar fenómenos')">Fenómenos:</button></td>
+                    <td class="width_100 text_align_left font_weight_bold">{{ root.interpretacion_de_script.fenomenos.length }}</td>
                 </tr>
             </tbody>
         </table>
@@ -71,7 +40,11 @@
 
     <hr class="clear_both" />
 
-    <div v-if="subseccion_seleccionada === 'mostrar datos'">
+    <div v-if="esta_cargando_subseccion">
+        <cargador-visual />
+    </div>
+
+    <div v-else-if="subseccion_seleccionada === 'mostrar datos'">
         <mi-textviewer :texto="JSON.stringify(root.interpretacion_de_script, null, 2)" />
     </div>
 

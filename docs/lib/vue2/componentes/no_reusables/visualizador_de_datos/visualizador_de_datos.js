@@ -10,7 +10,7 @@ return await Sistema_de_modulos.definir_componente_vue2(
     data() {
       this.$utilidades.tracear("visualizador_de_datos.data");
       return {
-        esta_expandido: false,
+        esta_expandido: true,
       }
     },
     watch: {

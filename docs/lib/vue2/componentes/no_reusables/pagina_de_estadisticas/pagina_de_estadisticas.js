@@ -15,6 +15,7 @@ return await Sistema_de_modulos.definir_componente_vue2(
     data() {
       console.log("[TRACE:pagina_de_estadisticas.data]");
       return {
+        esta_cargando_subseccion: false,
         subseccion_seleccionada: 'buscar notificaciones'
       }
     },
@@ -23,7 +24,13 @@ return await Sistema_de_modulos.definir_componente_vue2(
     },
     methods: {
       ir_a_subseccion(subseccion) {
+        this.esta_cargando_subseccion = true;
         this.subseccion_seleccionada = subseccion;
+        this.$forceUpdate(true);
+        setTimeout(() => {
+          this.esta_cargando_subseccion = false;
+          this.$forceUpdate(true);
+        });
       }
     },
     mounted() {

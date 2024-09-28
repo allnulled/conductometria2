@@ -50,6 +50,7 @@ const main = async function() {
     await Sistema_de_modulos.cargar_script("lib/vue2/componentes/reusables/mi_textviewer/mi_textviewer.js");
     await Sistema_de_modulos.cargar_script("lib/vue2/componentes/reusables/mi_timepicker/mi_timepicker.js");
     await Sistema_de_modulos.cargar_script("lib/vue2/componentes/reusables/mi_title/mi_title.js");
+    await Sistema_de_modulos.cargar_script("lib/vue2/componentes/reusables/cargador_visual/cargador_visual.js");
     await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/no_reusables/app/app.js");
     await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/no_reusables/buscador_de_cualquiera/buscador_de_cualquiera.js");
     await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/no_reusables/buscador_de_acciones/buscador_de_acciones.js");
@@ -95,6 +96,7 @@ const main = async function() {
     await Sistema_de_modulos.cargar_estilo("lib/vue2/componentes/reusables/mi_textviewer/mi_textviewer.css");
     await Sistema_de_modulos.cargar_estilo("lib/vue2/componentes/reusables/mi_timepicker/mi_timepicker.css");
     await Sistema_de_modulos.cargar_estilo("lib/vue2/componentes/reusables/mi_title/mi_title.css");
+    await Sistema_de_modulos.cargar_estilo("lib/vue2/componentes/reusables/cargador_visual/cargador_visual.css");
     await Sistema_de_modulos.cargar_estilo("lib/vue2/componentes/no_reusables/app/app.css");
     await Sistema_de_modulos.cargar_estilo("lib/vue2/componentes/no_reusables/pagina_de_estadisticas/pagina_de_estadisticas.css");
     await Sistema_de_modulos.cargar_estilo("lib/vue2/componentes/no_reusables/pagina_de_inicio/pagina_de_inicio.css");
@@ -117,6 +119,8 @@ const main = async function() {
     await Sistema_de_modulos.cargar_modulo("lib/sistema_de_dialogos");
     await Sistema_de_modulos.cargar_modulo("lib/sistema_de_refresco_automatico");
     await Sistema_de_modulos.cargar_modulo("lib/aplicacion");
+
+    Sistema_de_modulos.informar_sobre_objeto_de_carga("final de la carga de la aplicación");
 
   } catch (error) {
     console.log(error);

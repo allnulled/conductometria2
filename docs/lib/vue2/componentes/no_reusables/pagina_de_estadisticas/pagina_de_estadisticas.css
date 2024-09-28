@@ -3,11 +3,10 @@
 }
 
 .tabla_de_estadisticas {
-    display: inline-block;
+    display: block;
     border: 4px double black;
     margin-right: 4px;
     margin-bottom: 4px;
-    vertical-align: top;
     background-color: #BBB;
 }
 

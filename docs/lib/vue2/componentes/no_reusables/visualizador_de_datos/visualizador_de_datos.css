@@ -20,12 +20,13 @@
 
 .titulo_de_objeto.expandido {
     background-color: #7c7c7c;
-    color: white;
+    color: black;
+    text-shadow: 0 0 1px black;
 }
 
 .espaciado_lateral {
     padding-left: 5px;
-    padding-right: 5px;
+    padding-right: 0px;
     padding-top: 4px;
     padding-bottom: 4px;
 }
@@ -44,7 +45,10 @@
 
 .lista_de_propiedades,
 .lista_de_items {
-    border: 1px solid #333;
+    border: 1px dotted #888;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
 }
 
 .item_de_lista {
