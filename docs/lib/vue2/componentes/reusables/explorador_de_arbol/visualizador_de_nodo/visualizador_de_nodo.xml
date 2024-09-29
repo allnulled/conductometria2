@@ -1,0 +1,68 @@
+<div class="visualizador_de_nodo" :class="{ es_raiz: esRaiz }">
+    <template v-if="typeof dato === 'boolean'">
+        <div class="propiedad_de_dato">{{ propiedad }}: </div>
+        <div class="chivato_de_tipo_de_dato tipo_booleano">boolean</div>
+        <div class="valor_de_dato en_linea tipo_booleano">{{ dato }}</div>
+    </template>
+    <template v-else-if="typeof dato === 'string'">
+        <div class="propiedad_de_dato">{{ propiedad }}: </div>
+        <div class="chivato_de_tipo_de_dato tipo_texto">string</div>
+        <div class="valor_de_dato en_linea tipo_texto">{{ JSON.stringify(dato) }}</div>
+    </template>
+    <template v-else-if="typeof dato === 'number'">
+        <div class="propiedad_de_dato">{{ propiedad }}: </div>
+        <div class="chivato_de_tipo_de_dato tipo_numero">number</div>
+        <div class="valor_de_dato en_linea tipo_numero">{{ dato }}</div>
+    </template>
+    <template v-else-if="typeof dato === 'function'">
+        <div class="propiedad_de_dato">{{ propiedad }}: </div>
+        <div class="chivato_de_tipo_de_dato tipo_funcion">function</div>
+        <div class="valor_de_dato en_linea tipo_funcion">{{ dato.toString() }}</div>
+    </template>
+    <template v-else-if="typeof dato === 'undefined'">
+        <div class="propiedad_de_dato">{{ propiedad }}: </div>
+        <div class="chivato_de_tipo_de_dato tipo_indefinido">undefined</div>
+        <div class="valor_de_dato en_linea tipo_indefinido">undefined</div>
+    </template>
+    <template v-else-if="dato === null">
+        <div class="propiedad_de_dato">{{ propiedad }}: </div>
+        <div class="chivato_de_tipo_de_dato tipo_nulo">null</div>
+        <div class="valor_de_dato en_linea tipo_nulo">null</div>
+    </template>
+    <template v-else-if="Array.isArray(dato)">
+        <div class="propiedad_de_dato tipo_link" v-on:click="alternar_dato" :class="{esta_contraido: esta_contraido}">{{ propiedad }}: </div>
+        <div class="chivato_de_tipo_de_dato tipo_array">array</div>
+        <div class="resumen_de_dato"> {{ dato.length }} ítem(s)</div>
+        <div class="opciones_de_dato" v-if="dato.length && !esta_contraido">
+            <div class="opcion_de_dato" v-on:click="expandir_subdatos">[++]</div>
+            <div class="opcion_de_dato" v-on:click="contraer_subdatos">[--]</div>
+        </div>
+        <div class="decoracion_tipo_de_dato_1" v-if="dato.length && !esta_contraido"></div>
+        <div class="valor_de_dato" :class="{esta_contraido: esta_contraido}">
+            <div class="propiedad_y_valor_de_dato" v-for="propiedad, propiedad_index, propiedad_counter in dato" v-bind:key="'propiedad_' + propiedad_index">
+                <div class="valor_de_dato">
+                    <visualizador-de-nodo :ref="'subnodo_' + propiedad_index" :dato="propiedad" :propiedad="'ítem ' + propiedad_index" />
+                </div>
+            </div>
+        </div>
+        <div class="decoracion_tipo_de_dato_2" v-if="dato.length && !esta_contraido"></div>
+    </template>
+    <template v-else-if="typeof dato === 'object'">
+        <div class="propiedad_de_dato tipo_link" v-on:click="alternar_dato" :class="{esta_contraido: esta_contraido}">{{ propiedad }}: </div>
+        <div class="chivato_de_tipo_de_dato">object</div>
+        <div class="resumen_de_dato"> {{ Object.keys(dato).length }} clave(s)<span v-if="!esta_contraido">: {{ Object.keys(dato).join(", ") }}</span></div>
+        <div class="opciones_de_dato" v-if="Object.keys(dato).length && !esta_contraido">
+            <div class="opcion_de_dato" v-on:click="expandir_subdatos">[++]</div>
+            <div class="opcion_de_dato" v-on:click="contraer_subdatos">[--]</div>
+        </div>
+        <div class="decoracion_tipo_de_dato_1" v-if="Object.keys(dato).length && !esta_contraido"></div>
+        <div class="valor_de_dato" :class="{esta_contraido: esta_contraido}">
+            <div class="propiedad_y_valor_de_dato" v-for="propiedad, propiedad_index, propiedad_counter in dato" v-bind:key="'propiedad_' + propiedad_index">
+                <div class="valor_de_dato">
+                    <visualizador-de-nodo :ref="'subnodo_' + propiedad_counter" :dato="propiedad" :propiedad="propiedad_index" />
+                </div>
+            </div>
+        </div>
+        <div class="decoracion_tipo_de_dato_2" v-if="Object.keys(dato).length && !esta_contraido"></div>
+    </template>
+</div>

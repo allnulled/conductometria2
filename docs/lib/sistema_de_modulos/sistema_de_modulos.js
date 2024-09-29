@@ -31,7 +31,7 @@
             try {
                 const mensajero = document.body.querySelector("#global_loading_object");
                 if(mensajero) {
-                    mensajero.textContent = 'Segundo ' + this.obtener_momento() + ' / Objeto ' + (++this.objetos_cargados) + ' / Cargando ' + mensaje + '\n' + mensajero.textContent;
+                    mensajero.textContent = '' + (++this.objetos_cargados) + '. [' + this.obtener_momento() + 's] Cargando ' + mensaje + '\n' + mensajero.textContent;
                     mensajero.scrollTop = 0;
                 }
             } catch (error) {

@@ -1,0 +1,51 @@
+<div class="explorador_de_arbol">
+    <div class="panel_superior">
+        <div class="lista_de_botones">
+            <div class="celda_de_boton">
+                <button :class="{active: seccion_seleccionada === 'reporte'}" v-on:click="() => ir_a_seccion('reporte')">Rp</button>
+            </div>
+            <div class="celda_de_boton">
+                <button :class="{active: seccion_seleccionada === 'documentos'}" v-on:click="() => ir_a_seccion('documentos')">Dc</button>
+            </div>
+            <div class="celda_de_boton">
+                <button :class="{active: seccion_seleccionada === 'visualizador'}" v-on:click="() => ir_a_seccion('visualizador')">Dt</button>
+            </div>
+            <div class="celda_de_boton">
+                <button :class="{active: seccion_seleccionada === 'fuente'}" v-on:click="() => ir_a_seccion('fuente')">Cd</button>
+            </div>
+            <div class="celda_de_boton">
+                <button :class="{active: seccion_seleccionada === 'personalizar'}" v-on:click="() => ir_a_seccion('personalizar')">Pr</button>
+            </div>
+        </div>
+    </div>
+    <div v-if="esta_cargando_seccion || (typeof seccion_seleccionada === 'undefined')">
+        <div role="progressbar" class="marquee"></div>
+    </div>
+    <div v-else class="panel_inferior">
+        <div v-if="(seccion_seleccionada === 'reporte')">
+            <div v-if="cargar_seccion('reporte')">
+                <reporte-de-arbol :explorador="this" />
+            </div>
+        </div>
+        <div v-if="(seccion_seleccionada === 'documentos')">
+            <div v-if="cargar_seccion('documentos')">
+                <documentos-de-arbol :explorador="this" />
+            </div>
+        </div>
+        <div v-else-if="(seccion_seleccionada === 'visualizador')">
+            <div v-if="cargar_seccion('visualizador')">
+                <visualizador-de-arbol :explorador="this" />
+            </div>
+        </div>
+        <div v-else-if="(seccion_seleccionada === 'fuente')">
+            <div v-if="cargar_seccion('fuente')">
+                <fuente-de-arbol :explorador="this" />
+            </div>
+        </div>
+        <div v-else-if="(seccion_seleccionada === 'personalizar')">
+            <div v-if="cargar_seccion('personalizar')">
+                <personalizar-de-arbol :explorador="this" />
+            </div>
+        </div>
+    </div>
+</div>

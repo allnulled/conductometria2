@@ -51,6 +51,17 @@ const main = async function() {
     await Sistema_de_modulos.cargar_script("lib/vue2/componentes/reusables/mi_timepicker/mi_timepicker.js");
     await Sistema_de_modulos.cargar_script("lib/vue2/componentes/reusables/mi_title/mi_title.js");
     await Sistema_de_modulos.cargar_script("lib/vue2/componentes/reusables/cargador_visual/cargador_visual.js");
+
+    await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/reusables/explorador_de_arbol/editor_de_codigo_1/editor_de_codigo_1.js");
+    await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/reusables/explorador_de_arbol/constructor_de_documento_de_arbol/constructor_de_documento_de_arbol.js");
+    await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/reusables/explorador_de_arbol/documentos_de_arbol/documentos_de_arbol.js");
+    await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/reusables/explorador_de_arbol/fuente_de_arbol/fuente_de_arbol.js");
+    await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/reusables/explorador_de_arbol/reporte_de_arbol/reporte_de_arbol.js");
+    await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/reusables/explorador_de_arbol/visualizador_de_arbol/visualizador_de_arbol.js");
+    await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/reusables/explorador_de_arbol/visualizador_de_nodo/visualizador_de_nodo.js");
+    await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/reusables/explorador_de_arbol/personalizar_de_arbol/personalizar_de_arbol.js");
+    await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/reusables/explorador_de_arbol/explorador_de_arbol/explorador_de_arbol.js");
+
     await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/no_reusables/app/app.js");
     await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/no_reusables/buscador_de_cualquiera/buscador_de_cualquiera.js");
     await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/no_reusables/buscador_de_acciones/buscador_de_acciones.js");
@@ -62,7 +73,7 @@ const main = async function() {
     await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/no_reusables/buscador_de_sentencias/buscador_de_sentencias.js");
     await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/no_reusables/pagina_de_estadisticas/pagina_de_estadisticas.js");
     await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/no_reusables/pagina_de_inicio/pagina_de_inicio.js");
-    await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/no_reusables/visualizador_de_datos/visualizador_de_datos.js");
+    // await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/no_reusables/visualizador_de_datos/visualizador_de_datos.js");
     await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/no_reusables/conductometria_dato/conductometria_dato.js");
     await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/no_reusables/mis_dialogos/mis_dialogos.js");
 
@@ -97,6 +108,7 @@ const main = async function() {
     await Sistema_de_modulos.cargar_estilo("lib/vue2/componentes/reusables/mi_timepicker/mi_timepicker.css");
     await Sistema_de_modulos.cargar_estilo("lib/vue2/componentes/reusables/mi_title/mi_title.css");
     await Sistema_de_modulos.cargar_estilo("lib/vue2/componentes/reusables/cargador_visual/cargador_visual.css");
+    await Sistema_de_modulos.cargar_estilo("lib/vue2/componentes/reusables/explorador_de_arbol/explorador_de_arbol/explorador_de_arbol.css");
     await Sistema_de_modulos.cargar_estilo("lib/vue2/componentes/no_reusables/app/app.css");
     await Sistema_de_modulos.cargar_estilo("lib/vue2/componentes/no_reusables/pagina_de_estadisticas/pagina_de_estadisticas.css");
     await Sistema_de_modulos.cargar_estilo("lib/vue2/componentes/no_reusables/pagina_de_inicio/pagina_de_inicio.css");

@@ -13,7 +13,7 @@
             bottom: 0px;
             left: 0px;
             right: 0px;
-            background-color: #001;
+            background-color: #112;
             color: white;
         }
         .global_landing_table {
@@ -31,23 +31,33 @@
             font-family: Arial;
         }
         .global_landing_title {
-            padding: 12px 8px;
-            font-size: 14px;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-align: left;
+            font-family: "9pt Segoe UI", "SegoeUI", "Noto Sans", "sans-serif";
+            display: block;
+            text-align: left;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
             color: #FFF;
-            text-shadow: 0 0 2px white;
             background-color: #112;
+            text-transform: uppercase;
         }
         .global_landing_subtitle {
             font-size: 10px;
             color: #CCC;
             text-shadow: 0 0 1px #CCC;
             text-align: center;
+            background-color: #112;
+            padding: 24px;
+            padding-top: 0px !important;
         }
         #global_loading_object {
-            display: block;
+            display: inline-block;
             width: 100%;
             max-width: 100%;
-            color: white;
+            color: rgb(255, 225, 0);
             text-wrap: nowrap;
             border: none !important;
             overflow: scroll;
@@ -55,12 +65,17 @@
             font-family: Arial;
             text-align: left;
             color: rgb(136, 136, 211);
+            color: rgb(165, 225, 0);
             font-family: monospace;
-            font-size: 8px;
-            background-color: #001 !important;
+            font-family: "9pt Segoe UI","SegoeUI","Noto Sans","sans-serif";
+            font-size: 10px;
+            box-sizing: border-box;
+            background-color: inherit !important;
+            padding: 0px;
+            margin: 0px !important;
         }
         .global_landing_separator {
-            margin: 0px;
+            margin: 0px !important;
         }
     </style>
 </head>
@@ -72,10 +87,10 @@
                 <tr>
                     <td class="global_landing_cell">
                         <div class="global_landing_panel">
-                            <div class="global_landing_title">Bienvenido a la conductometría</div>
+                            <div class="global_landing_title">cargando conductometría...</div>
                             <hr class="global_landing_separator" />
                             <div class="global_landing_subtitle" style="position: relative;">
-                                <pre id="global_loading_object" style="position: absolute; top: 0;"></pre>
+                                <pre id="global_loading_object" style="position: absolute; top: 0; left: 0; right: 0; bottom: auto;"></pre>
                             </div>
                         </div>
                     </td>

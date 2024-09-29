@@ -10,10 +10,6 @@ return await Sistema_de_modulos.definir_componente_vue2(
       root: {
         type: Object,
         required: true
-      },
-      datosOrigen: {
-        type: Object,
-        required: true
       }
     },
     data() {

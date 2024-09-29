@@ -8,7 +8,7 @@
                             <div class="panel_contenidos_interno">
                                 <div class="panel_estadisticas" v-if="seccion_seleccionada === 'estadísticas'" :class="{ inactivo: seccion_seleccionada !== 'estadísticas' }">
                                     <div class="panel_estadisticas_contenido">
-                                        <pagina-de-estadisticas :root="this" />
+                                        <pagina-de-estadisticas :root="this" :datos-origen="interpretacion_de_script" />
                                     </div>
                                 </div>
                                 <div class="panel_editor" :class="{ inactivo: seccion_seleccionada !== 'editor' }">

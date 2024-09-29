@@ -1,0 +1,8 @@
+<div class="explorador_de_arbol_seccion">
+    <div class="explorador_de_arbol_titulo">Código fuente de datos</div>
+    <editor-de-codigo-1
+        modo="lectura"
+        :explorador="explorador"
+        :codigo-inicial="JSON.stringify(explorador.datosBase, null, 2)"
+    />
+</div>

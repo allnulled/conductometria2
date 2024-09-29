@@ -1,0 +1,4 @@
+<div class="explorador_de_arbol_seccion">
+    <div class="explorador_de_arbol_titulo">Visualizador de datos</div>
+    <visualizador-de-nodo :dato="explorador.datosBase" propiedad="*" :es-raiz="true" />
+</div>

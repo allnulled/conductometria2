@@ -1,0 +1,16 @@
+<div>
+    <div class="editor_de_codigo_1_navegador" style="position: relative;">
+        <textarea ref="editor_de_codigo" class="editor_de_codigo_1_textarea" :disabled="modo === 'lectura'" v-model="codigo" spellcheck="false" />
+        <div class="caja_de_botones_verticales" style="position: absolute; bottom: 5px; right: 5px; left: auto; top: auto;">
+            <div class="caja_de_boton_vertical">
+                <button class="boton_vertical" v-on:click="cambiar_tipo_de_fuente">F</button>
+            </div>
+            <div class="caja_de_boton_vertical">
+                <button class="boton_vertical" v-on:click="decrementar_tamanio_de_fuente">-</button>
+            </div>
+            <div class="caja_de_boton_vertical">
+                <button class="boton_vertical" v-on:click="incrementar_tamanio_de_fuente">+</button>
+            </div>
+        </div>
+    </div>
+</div>

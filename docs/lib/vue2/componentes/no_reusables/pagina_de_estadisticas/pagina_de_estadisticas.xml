@@ -1,83 +1,9 @@
 <div>
 
-    <div class="tabla_de_estadisticas">
-        <table class="width_100">
-            <tbody>
-                <tr>
-                    <td colspan="2"><button class="width_100 text_align_center" :class="{active: subseccion_seleccionada === 'mostrar datos'}" v-on:click="() => ir_a_subseccion('mostrar datos')">Mostrar datos</button></td>
-                </tr>
-                <tr>
-                    <td><button class="width_100 text_align_right" :class="{active: subseccion_seleccionada === 'buscar notificaciones'}" v-on:click="() => ir_a_subseccion('buscar notificaciones')">Notificaciones</button></td>
-                    <td class="width_100 text_align_left font_weight_bold">{{ root.interpretacion_de_script.notificaciones.length }}</td>
-                </tr>
-                <tr> 
-                    <td><button class="width_100 text_align_right" :class="{active: subseccion_seleccionada === 'buscar sentencias'}" v-on:click="() => ir_a_subseccion('buscar sentencias')">Sentencias:</button></td>
-                    <td class="width_100 text_align_left font_weight_bold">{{ root.interpretacion_de_script.sentencias.length }}</td>
-                </tr>
-                <tr>
-                    <td><button class="width_100 text_align_right" :class="{active: subseccion_seleccionada === 'buscar acciones'}" v-on:click="() => ir_a_subseccion('buscar acciones')">Acciones:</button></td>
-                    <td class="width_100 text_align_left font_weight_bold">{{ root.interpretacion_de_script.acciones.length }}</td>
-                </tr>
-                <tr>
-                    <td><button class="width_100 text_align_right" :class="{active: subseccion_seleccionada === 'buscar acumulaciones'}" v-on:click="() => ir_a_subseccion('buscar acumulaciones')">Acumulaciones:</button></td>
-                    <td class="width_100 text_align_left font_weight_bold">{{ Object.keys(root.interpretacion_de_script.acumulaciones).length }}</td>
-                </tr>
-                <tr>
-                    <td><button class="width_100 text_align_right" :class="{active: subseccion_seleccionada === 'buscar creencias'}" v-on:click="() => ir_a_subseccion('buscar creencias')">Creencias:</button></td>
-                    <td class="width_100 text_align_left font_weight_bold">{{ root.interpretacion_de_script.creencias.length }}</td>
-                </tr>
-                <tr>
-                    <td><button class="width_100 text_align_right" :class="{active: subseccion_seleccionada === 'buscar límites'}" v-on:click="() => ir_a_subseccion('buscar límites')">Límites:</button></td>
-                    <td class="width_100 text_align_left font_weight_bold">{{ root.interpretacion_de_script.limites.length }}</td>
-                </tr>
-                <tr>
-                    <td><button class="width_100 text_align_right" :class="{active: subseccion_seleccionada === 'buscar fenómenos'}" v-on:click="() => ir_a_subseccion('buscar fenómenos')">Fenómenos:</button></td>
-                    <td class="width_100 text_align_left font_weight_bold">{{ root.interpretacion_de_script.fenomenos.length }}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <hr class="clear_both" />
-
-    <div v-if="esta_cargando_subseccion">
-        <cargador-visual />
-    </div>
-
-    <div v-else-if="subseccion_seleccionada === 'mostrar datos'">
-        <mi-textviewer :texto="JSON.stringify(root.interpretacion_de_script, null, 2)" />
-    </div>
-
-    <div v-else-if="subseccion_seleccionada === 'buscar cualquiera'">
-        <buscador-de-cualquiera :estadisticas="this" />
-    </div>
-
-    <div v-else-if="subseccion_seleccionada === 'buscar sentencias'">
-        <buscador-de-sentencias :estadisticas="this" />
-    </div>
-
-    <div v-else-if="subseccion_seleccionada === 'buscar acciones'">
-        <buscador-de-acciones :estadisticas="this" />
-    </div>
-
-    <div v-else-if="subseccion_seleccionada === 'buscar acumulaciones'">
-        <buscador-de-acumulaciones :estadisticas="this" />
-    </div>
-
-    <div v-else-if="subseccion_seleccionada === 'buscar creencias'">
-        <buscador-de-creencias :estadisticas="this" />
-    </div>
-
-    <div v-else-if="subseccion_seleccionada === 'buscar límites'">
-        <buscador-de-limites :estadisticas="this" />
-    </div>
-
-    <div v-else-if="subseccion_seleccionada === 'buscar fenómenos'">
-        <buscador-de-fenomenos :estadisticas="this" />
-    </div>
-
-    <div v-else-if="subseccion_seleccionada === 'buscar notificaciones'">
-        <buscador-de-notificaciones :estadisticas="this" />
-    </div>
+    <explorador-de-arbol
+        :base-de-datos-de-reportes="'conductometria2_memoria_de_reportes'"
+        :nodo-padre="undefined"
+        :datos-base="datosOrigen"
+    />
 
 </div>
