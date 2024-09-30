@@ -1,5 +1,33 @@
 <div class="seccion_de_configuracion">
     <div class="tabla_de_botones">
+        <template v-if="explorador.es_explorador_raiz">
+            <div class="fila_de_botones">
+                <div class="celda_de_boton" style="flex: 100; text-align: right; align-content: center; padding-right: 4px;">
+                    <div style="font-size: 10px;">Memoria de reportes: </div>
+                </div>
+                <div class="celda_de_boton" style="flex: 1;">
+                    <button class="boton_pequenio_1" v-on:click="limpiar_reportes">Resetear</button>
+                </div>
+                <div class="celda_de_boton" style="flex: 1;">
+                    <button class="boton_pequenio_1" v-on:click="alternar_panel_de_importar_reportes" :class="{active: panel_seleccionado === 'importar_reportes'}">Importar</button>
+                </div>
+                <div class="celda_de_boton" style="flex: 1;">
+                    <button class="boton_pequenio_1" v-on:click="alternar_panel_de_exportar_reportes" :class="{active: panel_seleccionado === 'exportar_reportes'}">Exportar</button>
+                </div>
+            </div>
+            <div class="fila_de_botones" v-if="panel_seleccionado === 'importar_reportes'">
+                <div class="celda_de_boton" style="flex: 100;">
+                    <textarea class="entrada_de_formulario_1" v-model="texto_de_importar" style="height: 200px;" placeholder='{"Instrucciones": "Escribe el JSON a importar para los reportes"}' />
+                    <button class="boton_pequenio_1" v-on:click="importar_reportes">Importar reportes</button>
+                </div>
+            </div>
+            <div class="fila_de_botones" v-if="panel_seleccionado === 'exportar_reportes'">
+                <div class="celda_de_boton" style="flex: 100;">
+                    <textarea class="entrada_de_formulario_1" v-model="texto_de_exportar" style="height: 200px;" disabled="true" />
+                    <button class="boton_pequenio_1" v-on:click="copiar_texto_de_exportar_reportes">Copiar exportacion</button>
+                </div>
+            </div>
+        </template>
         <div class="fila_de_botones">
             <div class="celda_de_boton" style="flex: 100;">
                 <input class="entrada_de_formulario_1" type="text" ref="nombre_de_reporte" :value="metadatos_de_reporte.nombre" placeholder="Control 1. Nombre del reporte" spellcheck="false" />
