@@ -1,0 +1,3 @@
+<div class="seccion_de_datos">
+    <visualizador-de-arbol :dato="explorador.datos_base_modificados" :explorador="explorador" :propiedad="explorador.datos_de_reportes_relativos.nombre" />
+</div>

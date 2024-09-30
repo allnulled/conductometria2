@@ -269,102 +269,10 @@
 .explorador_de_arbol .boton_de_explorador_arriba {
     font-size: 10px;
     padding: 0px;
-    white-space: nowrap;
 }
 .explorador_de_arbol .boton_pequenio_1 {
     padding-left: 12px;
     padding-right: 12px;
     white-space: nowrap;
     font-size: 10px;
-}
-.explorador_de_arbol .boton_pequenio_2 {
-    padding-left: 12px !important;
-    padding-right: 12px !important;
-    white-space: nowrap;
-    font-size: 10px;
-    white-space: nowrap;
-}
-.explorador_de_arbol .caja_de_explorador_de_arbol {
-    border: 1px solid #CCC;
-    border-right: none;
-    padding: 0px;
-    padding-right: 0px;
-    width: 100%;
-}
-.explorador_de_arbol {
-    background-color: white;
-    box-shadow: 0 0 4px black;
-}
-.explorador_de_arbol .coloreada {
-    background-color: #759ce0;
-}
-.explorador_de_arbol .entrada_de_formulario_1 {
-    width: 100%;
-    font-size: 10px;
-    font-family: "9pt Segoe UI", "SegoeUI", "Noto Sans", "sans-serif";
-    background-color: #E0E0E0;
-    color: black;
-}
-.explorador_de_arbol input[type="text"].entrada_de_formulario_1 {
-    
-}
-.explorador_de_arbol textarea.entrada_de_formulario_1 {
-    resize: vertical;
-    overflow-x: scroll;
-    text-wrap: nowrap;
-}
-.explorador_de_arbol .seccion_de_codigo,
-.explorador_de_arbol .seccion_de_reporte,
-.explorador_de_arbol .seccion_de_datos,
-.explorador_de_arbol .seccion_de_configuracion {
-    padding-top: 4px;
-}
-.explorador_de_arbol .seccion_de_reporte {
-    padding-top: 4px;
-}
-.explorador_de_arbol .seccion_de_reporte .titulo_de_reporte {
-    background-color: #333;
-    color: white;
-    padding: 12px;
-    padding-left: 8px;
-    padding-right: 8px;
-    font-size: 18px;
-    font-family: "9pt Segoe UI", "SegoeUI", "Noto Sans", "sans-serif";
-}
-.explorador_de_arbol .caja_de_error_de_reporte {
-    border: 1px solid red;
-    background-color: rgb(199, 139, 139);
-    color: black;
-    padding: 4px;
-}
-.explorador_de_arbol .mensaje_de_error_de_reporte {
-
-}
-.explorador_de_arbol .visualizador_de_arbol {
-    font-size: 10px;
-}
-.explorador_de_arbol .caja_de_reporte {
-    border: 1px solid black;
-    box-shadow: 0 0 4px black;
-    padding: 8px;
-    background-color: #333;
-    color: white;
-}
-.explorador_de_arbol .seccion_de_datos {
-    background-color: white;
-    padding: 8px;
-    border: 1px solid black;
-    box-shadow: 0 0 4px black;
-    margin-top: 4px;
-}
-.explorador_de_arbol .titulo_de_documento_inicial {
-    font-weight: bold;
-    color: blue;
-    font-size: 10px;
-    padding: 12px;
-    padding-left: 8px;
-    padding-right: 8px;
-    background-color: #759ce0;
-    border: 1px solid #5044b7;
-    box-shadow: 0 0 4px #5044b7;
 }

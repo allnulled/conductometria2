@@ -1,0 +1,17 @@
+<div class="formulario_de_personalizar_arbol">
+    <div class="item_de_formulario">
+        <div>Nombre del reporte:</div>
+        <input type="text" style="width: 100%;" ref="nombre_del_reporte" :value="nombre_del_reporte" />
+    </div>
+    <div class="item_de_formulario">
+        <div>Código del modificador de datos:</div>
+        <editor-de-codigo-1 :explorador="explorador" modo="escritura" :codigo-inicial="modificador_del_reporte" ref="modificador_del_reporte" />
+    </div>
+    <div class="item_de_formulario">
+        <div>Código del reportador:</div>
+        <editor-de-codigo-1 :explorador="explorador" modo="escritura" :codigo-inicial="reportador_del_reporte" ref="reportador_del_reporte" />
+    </div>
+    <div style="text-align: right;">
+        <button v-on:click="guardar_personalizar_reporte">Guardar</button>
+    </div>
+</div>

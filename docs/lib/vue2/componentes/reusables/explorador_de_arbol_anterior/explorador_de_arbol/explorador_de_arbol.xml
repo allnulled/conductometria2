@@ -1,0 +1,95 @@
+<div class="explorador_de_arbol">
+    <div v-if="(seccion_seleccionada === 'documentos') && datos_raiz && es_raiz">
+        <div class="tabla_de_botones">
+            <div class="fila_de_botones">
+                <div class="celda_de_boton" style="flex:1;">
+                    <button style="min-width:20px; padding: 2px;" v-on:click="() => ir_a_seccion('reporte')">↖</button>
+                </div>
+                <div class="celda_de_boton" style="flex:100;">
+                    <button class="boton_de_documento active">{{ datos_raiz.nombre }}</button>
+                </div>
+            </div>
+        </div>
+        <div style="min-height:0px;"></div>
+    </div>
+    <div class="explorador_de_arbol_decoracion_1"></div>
+    <div class="explorador_de_arbol_contenido">
+        <div class="panel_superior">
+            <div class="tabla_de_botones" v-if="(seccion_seleccionada !== 'documentos')">
+                <div class="fila_de_botones">
+                    <div class="celda_de_boton">
+                        <button class="solo_pantalla_pequenia texto_en_bloque boton_de_explorador_arriba" :class="{active: seccion_seleccionada === 'documentos'}" v-on:click="() => ir_a_seccion('documentos')">
+                            🌲 Doc.
+                        </button>
+                        <button class="solo_pantalla_grande" :class="{active: seccion_seleccionada === 'documentos'}" v-on:click="() => ir_a_seccion('documentos')">
+                            🌲 Documentos
+                        </button>
+                    </div>
+                    <div class="celda_de_boton">
+                        <button class="solo_pantalla_pequenia texto_en_bloque boton_de_explorador_arriba" :class="{active: seccion_seleccionada === 'reporte'}" v-on:click="() => ir_a_seccion('reporte')">
+                            📈 Rep.
+                        </button>
+                        <button class="solo_pantalla_grande" :class="{active: seccion_seleccionada === 'reporte'}" v-on:click="() => ir_a_seccion('reporte')">
+                            📈 Reporte
+                        </button>
+                    </div>
+                    <div class="celda_de_boton">
+                        <button class="solo_pantalla_pequenia texto_en_bloque boton_de_explorador_arriba" :class="{active: seccion_seleccionada === 'visualizador'}" v-on:click="() => ir_a_seccion('visualizador')">
+                            📔 Dat.
+                        </button>
+                        <button class="solo_pantalla_grande" :class="{active: seccion_seleccionada === 'visualizador'}" v-on:click="() => ir_a_seccion('visualizador')">
+                            📔 Datos
+                        </button>
+                    </div>
+                    <div class="celda_de_boton">
+                        <button class="solo_pantalla_pequenia texto_en_bloque boton_de_explorador_arriba" :class="{active: seccion_seleccionada === 'fuente'}" v-on:click="() => ir_a_seccion('fuente')">
+                            ❴❵ Cód.
+                        </button>
+                        <button class="solo_pantalla_grande" :class="{active: seccion_seleccionada === 'fuente'}" v-on:click="() => ir_a_seccion('fuente')">
+                            ❴❵ Código
+                        </button>
+                    </div>
+                    <div class="celda_de_boton">
+                        <button class="solo_pantalla_pequenia texto_en_bloque boton_de_explorador_arriba" :class="{active: seccion_seleccionada === 'personalizar'}" v-on:click="() => ir_a_seccion('personalizar')">
+                            ⚡ Per.
+                        </button>
+                        <button class="solo_pantalla_grande" :class="{active: seccion_seleccionada === 'personalizar'}" v-on:click="() => ir_a_seccion('personalizar')">
+                            ⚡ Personalizar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div v-if="esta_cargando_seccion || (typeof seccion_seleccionada === 'undefined')">
+            <div role="progressbar" class="marquee"></div>
+        </div>
+        <div v-else class="panel_inferior">
+            <div v-if="(seccion_seleccionada === 'reporte')">
+                <div v-if="cargar_seccion('reporte')">
+                    <reporte-de-arbol :explorador="this" />
+                </div>
+            </div>
+            <div v-if="(seccion_seleccionada === 'documentos')">
+                <div v-if="cargar_seccion('documentos')">
+                    <documentos-de-arbol :explorador="this" ref="seccion_de_documentos" />
+                </div>
+            </div>
+            <div v-else-if="(seccion_seleccionada === 'visualizador')">
+                <div v-if="cargar_seccion('visualizador')">
+                    <visualizador-de-arbol :explorador="this" />
+                </div>
+            </div>
+            <div v-else-if="(seccion_seleccionada === 'fuente')">
+                <div v-if="cargar_seccion('fuente')">
+                    <fuente-de-arbol :explorador="this" />
+                </div>
+            </div>
+            <div v-else-if="(seccion_seleccionada === 'personalizar')">
+                <div v-if="cargar_seccion('personalizar')">
+                    <personalizar-de-arbol :explorador="this" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="explorador_de_arbol_decoracion_2"></div>
+</div>

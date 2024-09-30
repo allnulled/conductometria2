@@ -52,6 +52,7 @@ const main = async function() {
     await Sistema_de_modulos.cargar_script("lib/vue2/componentes/reusables/mi_title/mi_title.js");
     await Sistema_de_modulos.cargar_script("lib/vue2/componentes/reusables/cargador_visual/cargador_visual.js");
 
+    /*
     await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/reusables/explorador_de_arbol/editor_de_codigo_1/editor_de_codigo_1.js");
     await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/reusables/explorador_de_arbol/constructor_de_documento_de_arbol/constructor_de_documento_de_arbol.js");
     await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/reusables/explorador_de_arbol/documentos_de_arbol/documentos_de_arbol.js");
@@ -60,6 +61,14 @@ const main = async function() {
     await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/reusables/explorador_de_arbol/visualizador_de_arbol/visualizador_de_arbol.js");
     await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/reusables/explorador_de_arbol/visualizador_de_nodo/visualizador_de_nodo.js");
     await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/reusables/explorador_de_arbol/personalizar_de_arbol/personalizar_de_arbol.js");
+    //*/
+    await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/reusables/explorador_de_arbol/seccion_de_configuracion/seccion_de_configuracion.js");
+    await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/reusables/explorador_de_arbol/seccion_de_datos/seccion_de_datos.js");
+    await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/reusables/explorador_de_arbol/seccion_de_documentos/seccion_de_documentos.js");
+    await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/reusables/explorador_de_arbol/seccion_de_reporte/seccion_de_reporte.js");
+    await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/reusables/explorador_de_arbol/seccion_de_codigo/seccion_de_codigo.js");
+    await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/reusables/explorador_de_arbol/visualizador_de_arbol/visualizador_de_arbol.js");
+    await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/reusables/explorador_de_arbol/visualizador_de_nodo/visualizador_de_nodo.js");
     await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/reusables/explorador_de_arbol/explorador_de_arbol/explorador_de_arbol.js");
 
     await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/no_reusables/app/app.js");

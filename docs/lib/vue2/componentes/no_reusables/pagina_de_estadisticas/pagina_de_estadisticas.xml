@@ -1,8 +1,10 @@
 <div>
 
     <explorador-de-arbol
-        :base-de-datos-de-reportes="'conductometria2_memoria_de_reportes'"
-        :nodo-padre="undefined"
+        identificador-de-reportes="conductometria2_memoria_de_reportes"
+        :identificador-de-ruta="[]"
+        explorador-raiz="/"
+        explorador-padre="/"
         :datos-base="datosOrigen"
     />
 

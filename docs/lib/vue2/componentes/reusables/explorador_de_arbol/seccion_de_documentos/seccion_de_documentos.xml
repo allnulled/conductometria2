@@ -1,0 +1,63 @@
+<div class="seccion_de_documentos">
+    <div class="tabla_de_botones">
+        <template v-if="explorador.es_explorador_raiz">
+            <div class="fila_de_botones" style="margin-top: 1px;">
+                <div class="celda_de_boton" style="flex: 100;">
+                    <div class="titulo_de_documento_inicial" style="text-align: right;">
+                        <span>{{ explorador.datos_de_reportes_relativos.nombre }}</span>
+                    </div>
+                </div>
+                <button class="celda_de_boton" style="flex: 1; min-width: 58px;" class="boton_pequenio_2" v-on:click="() => explorador.ir_a_seccion('reporte')">↗</button>
+            </div>
+        </template>
+        <template v-for="documento, documento_index in explorador.datos_de_reportes_relativos.documentos">
+            <div class="fila_de_botones" v-bind:key="'documento-' + documento_index + '-vista-de-boton'">
+                <div class="celda_de_boton" style="flex: 100;">
+                    <button class="boton_de_documento" v-on:click="() => explorador.explorador_raiz.alternar_expansion_de_documento(documento.uuid)" :class="{active: explorador.explorador_raiz.documentos_abiertos.indexOf(documento.uuid) !== -1}">{{ documento_index }}. {{ documento.nombre }}</button>
+                </div>
+                <!--template v-if="explorador.explorador_raiz.documentos_abiertos.indexOf(documento.uuid) !== -1"-->
+                <template v-if="explorador.explorador_raiz.documentos_abiertos.indexOf(documento.uuid) !== -1">
+                    <div class="celda_de_boton" style="flex: 1;">
+                        <button class="boton_pequenio_1" style="min-width: 18px;" v-on:click="() => ir_a_reporte_de_documento(documento_index)">📈</button>
+                    </div>
+                    <div class="celda_de_boton" style="flex: 1;">
+                        <button class="boton_pequenio_1" style="min-width: 18px;" v-on:click="() => ir_a_documentos_de_documento(documento_index)">🌲</button>
+                    </div>
+                </template>
+                <template v-else>
+                    <div class="celda_de_boton" style="flex: 1;">
+                        <button class="boton_pequenio_1" style="min-width: 18px;" v-on:click="() => subir_documento(documento_index)">↑</button>
+                    </div>
+                    <div class="celda_de_boton" style="flex: 1;">
+                        <button class="boton_pequenio_1" style="min-width: 18px;" v-on:click="() => bajar_documento(documento_index)">↓</button>
+                    </div>
+                </template>
+                <div class="celda_de_boton" style="flex: 1;">
+                    <button class="boton_pequenio_1" style="min-width: 18px;" v-on:click="() => eliminar_documento(documento_index)">⨉</button>
+                </div>
+            </div>
+            <template v-if="explorador.explorador_raiz.documentos_abiertos.indexOf(documento.uuid) !== -1">
+                <div class="fila_de_botones" v-bind:key="'documento-' + documento_index + '-vista-de-documento'">
+                    <div class="caja_de_explorador_de_arbol">
+                        <explorador-de-arbol
+                            :ref="'subexplorador_' + documento_index"
+                            identificador-de-reportes="conductometria2_memoria_de_reportes"
+                            :identificador-de-ruta="explorador.identificador_de_ruta.concat(['documentos', documento_index])"
+                            :explorador-raiz="explorador.explorador_raiz"
+                            explorador-padre="explorador"
+                            :datos-base="explorador.datos_base_modificados"
+                        />
+                    </div>
+                </div>
+            </template>
+        </template>
+        <div class="tabla_de_botones">
+            <div class="fila_de_botones">
+                <!--div class="celda_de_boton" style="flex: 100;"></div-->
+                <div class="celda_de_boton" style="flex: 100;">
+                    <button class="boton_pequenio_1" style="min-width: 18px;" v-on:click="() => explorador.aniadir_documento_de_reporte()">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

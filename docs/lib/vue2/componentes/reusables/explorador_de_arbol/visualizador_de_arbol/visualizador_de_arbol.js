@@ -10,6 +10,10 @@ return await Sistema_de_modulos.definir_componente_vue2(
       explorador: {
         type: Object,
         required: true
+      },
+      propiedad: {
+        type: String,
+        required: true
       }
     },
     data() {

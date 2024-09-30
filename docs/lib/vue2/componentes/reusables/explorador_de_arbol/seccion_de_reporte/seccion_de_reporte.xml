@@ -1,0 +1,11 @@
+<div class="seccion_de_reporte">
+    <div class="caja_de_error_de_reporte" v-if="error_de_reporte">
+        <div class="mensaje_de_error_de_reporte" v-on:click="eliminar_error">{{ error_de_reporte.name }}: {{ error_de_reporte.message }}</div>
+    </div>
+    <div v-else-if="esta_cargando" role="progressbar" class="marquee"></div>
+    <div v-else>
+        <div class="caja_de_reporte">
+            <component v-bind:is="nombre_de_componente" :explorador="explorador" :seccion-de-reporte="this" />
+        </div>
+    </div>
+</div>
