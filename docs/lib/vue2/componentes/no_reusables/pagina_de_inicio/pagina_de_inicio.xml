@@ -56,7 +56,7 @@ delete localStorage.conductometria2_memoria_de_reportes"
             </div>
             <div class="panel_fijo_arriba">
                 <div class="titulo_principal">
-                    <span class="display_inline_block text_transform_uppercase">{{ seccion_seleccionada }}</span>
+                    <span class="texto_de_titulo_principal">{{ seccion_seleccionada }}</span>
                     <span class="float_right">
                         <template v-if="estado_de_script === 'erroneo'">
                             <button class="boton" v-on:click="mostrar_error" style="min-width: 25px;">?</button>

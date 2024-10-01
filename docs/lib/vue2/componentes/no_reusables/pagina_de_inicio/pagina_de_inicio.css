@@ -1,6 +1,6 @@
 :root {
-    --altura_de_panel_superior: 27px;
-    --altura_de_panel_inferior: 27px;
+    --altura_de_panel_superior: 45px;
+    --altura_de_panel_inferior: 45px;
     --color_de_fondo_1: #112;
     --color_de_fondo_2: #FFF;
     --margen_general_horizontal: 10px;
@@ -150,6 +150,12 @@
     color: white;
     font-size: 15px;
     font-weight: bold;
+}
+.texto_de_titulo_principal {
+    display: inline-block;
+    margin-top: 9px;
+    padding-left: 8px;
+    text-transform: uppercase;
 }
 .entrada_de_codigo {
     width: 100%;

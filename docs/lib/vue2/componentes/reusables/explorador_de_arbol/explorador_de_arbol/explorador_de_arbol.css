@@ -210,6 +210,8 @@
     padding: 0px;
     min-height: 16px;
     margin-bottom: 2px;
+    min-height: 15px !important;
+    min-width: 15px !important;
 }
 .explorador_de_arbol .tabla_de_botones {
     display: flex;
