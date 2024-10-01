@@ -1,4 +1,4 @@
-<div>
+<div class="pagina_de_inicio">
     <div class="capa_fija">
         <div class="capa_paneles_fijos">
             <div class="panel_fijo_intermedio">
@@ -24,6 +24,31 @@
                                             v-on:click="actualizar_posicion_del_cursor" />
                                     </div>
                                 </div>
+                                <div class="panel_consola_global" :class="{ inactivo: seccion_seleccionada !== 'consola' }">
+                                    <div class="panel_consola_global_contenido" style="position: relative;">
+                                        <textarea class="entrada_de_codigo consola_global"
+                                            :class="{ [estado_de_script]: true }"
+                                            style="font-family: monospace; font-size: 9px;"
+                                            ref="entrada_de_codigo_de_consola_global"
+                                            spellcheck="false"
+                                            v-model="contenido_de_consola"
+                                            v-on:input="() => {}"
+                                            v-on:keyup="() => {}"
+                                            v-on:focus="() => {}"
+                                            v-on:click="() => {}" 
+                                            placeholder="// Para borrar la base de datos de reportes:
+
+delete localStorage.conductometria2_memoria_de_reportes"
+                                        />
+                                        <div style="position: absolute; top: 9px; right: 9px; left: auto; bottom: auto;">
+                                            <button class="boton_transparente" style="min-width: 25px; font-size: 10px;" v-on:click="limpiar_codigo">🗑️ Reset</button>
+                                            <button class="boton_transparente" style="min-width: 25px; font-size: 10px;" v-on:click="ejecutar_codigo">⚡ Ejecutar</button>
+                                        </div>
+                                        <div style="position: absolute; top: 39px; right: 9px; left: 9px; bottom: auto; background-color: red; color: yellow; text-shadow: 0 0 1px black;" v-if="error_de_consola" v-on:click="() => {error_de_consola = undefined;}">
+                                            {{ error_de_consola }}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -37,8 +62,13 @@
                             <button class="boton" v-on:click="mostrar_error" style="min-width: 25px;">?</button>
                             <button class="boton" v-on:click="ir_a_error">Ir a error</button>
                         </template>
-                        <button class="boton" v-on:click="ir_a_estadisticas" v-if="(estado_de_script === 'corregido') && (seccion_seleccionada !== 'estadísticas')">Ir a estadísticas</button>
-                        <button class="boton" v-on:click="ir_a_editor" v-if="seccion_seleccionada !== 'editor'">Ir a editor</button>
+                        <button class="boton_pequenio_1" style="min-width: 20px;" v-on:click="ir_a_consola_global" :class="{ active: seccion_seleccionada === 'consola' }">💻</button>
+                        <button class="boton_pequenio_1" style="min-width: 20px;" v-on:click="ir_a_editor" :class="{ active: seccion_seleccionada === 'editor' }">📄</button>
+                        <button class="boton_pequenio_1" style="min-width: 20px;" v-on:click="ir_a_estadisticas" :class="{ active: seccion_seleccionada === 'estadísticas' }" :disabled="estado_de_script !== 'corregido'">
+                            <span v-if="seccion_seleccionada === 'estadísticas'">🟡</span>
+                            <span v-else-if="!((estado_de_script === 'corregido') && (seccion_seleccionada !== 'estadísticas'))">🔴</span>
+                            <span v-else>🟢</span>
+                        </button>
                     </span>
                 </div>
             </div>

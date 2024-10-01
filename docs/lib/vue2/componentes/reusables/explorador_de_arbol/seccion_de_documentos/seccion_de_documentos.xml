@@ -7,7 +7,7 @@
                         <span>{{ explorador.datos_de_reportes_relativos.nombre }}</span>
                     </div>
                 </div>
-                <button class="celda_de_boton" style="flex: 1; min-width: 58px;" class="boton_pequenio_2" v-on:click="() => explorador.ir_a_seccion('reporte')">↗</button>
+                <button class="celda_de_boton boton_pequenio_2" style="flex: 1; min-width: 58px;" v-on:click="() => explorador.ir_a_seccion('reporte')">↗</button>
             </div>
         </template>
         <template v-for="documento, documento_index in explorador.datos_de_reportes_relativos.documentos">

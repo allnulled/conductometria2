@@ -13,6 +13,7 @@ return await Sistema_de_modulos.definir_componente_vue2(
         seccion_seleccionada: "editor",
         id_timeout_de_script: undefined,
         contenido_de_script: "",
+        contenido_de_consola: "",
         estado_de_script: "editando", // "esperando" / "corrigiendo"
         interpretacion_de_script: undefined,
         posicion_del_cursor: undefined,
@@ -21,6 +22,7 @@ return await Sistema_de_modulos.definir_componente_vue2(
         error_de_script: false,
         tamanio_de_texto: 12,
         familia_de_texto: "normal",
+        error_de_consola: undefined,
       }
     },
     watch: {
@@ -32,11 +34,44 @@ return await Sistema_de_modulos.definir_componente_vue2(
         this.seccion_seleccionada = seccion;
       },
       ir_a_editor() {
-        this.seleccionar_seccion("editor");
-        this.$refs.entrada_de_codigo_1.focus();
+        if(this.seccion_seleccionada === "editor") {
+          this.seleccionar_seccion("consola");
+        } else {
+          this.seleccionar_seccion("editor");
+          this.$refs.entrada_de_codigo_1.focus();
+        }
       },
       ir_a_estadisticas() {
         this.seleccionar_seccion("estadísticas");
+      },
+      ir_a_consola_global() {
+        if(this.seccion_seleccionada === "consola") {
+          this.seleccionar_seccion("editor");
+          this.$refs.entrada_de_codigo_1.focus();
+        } else {
+          this.seleccionar_seccion("consola");
+        }
+      },
+      establecer_mensaje_de_error_de_consola(error) {
+        this.error_de_consola = error;
+      },
+      ejecutar_codigo() {
+        const entrada_fuente = this.$refs.entrada_de_codigo_de_consola_global.value;
+        let entrada_codigo = "";
+        entrada_codigo += "(async function() {\n";
+        entrada_codigo += "  try {\n";
+        entrada_codigo += "    " + entrada_fuente + "\n";
+        entrada_codigo += "  } catch(error) {\n";
+        entrada_codigo += "    console.log(error);\n";
+        entrada_codigo += "    this.establecer_mensaje_de_error_de_consola(error);\n";
+        entrada_codigo += "  }\n";
+        entrada_codigo += "}).call(this)";
+        console.log(entrada_codigo);
+        const salida = this.$window.eval(entrada_codigo);
+        console.log(salida);
+      },
+      limpiar_codigo() {
+        this.$refs.entrada_de_codigo_de_consola_global.value = "";
       },
       parsear_script_con_dilacion() {
         this.$utilidades.tracear("pagina_de_inicio.methods.parsear_script_con_dilacion");
