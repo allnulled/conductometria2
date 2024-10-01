@@ -38,7 +38,6 @@ return await Sistema_de_modulos.definir_componente_vue2(
           this.seleccionar_seccion("consola");
         } else {
           this.seleccionar_seccion("editor");
-          this.$refs.entrada_de_codigo_1.focus();
         }
       },
       ir_a_estadisticas() {
@@ -47,7 +46,6 @@ return await Sistema_de_modulos.definir_componente_vue2(
       ir_a_consola_global() {
         if(this.seccion_seleccionada === "consola") {
           this.seleccionar_seccion("editor");
-          this.$refs.entrada_de_codigo_1.focus();
         } else {
           this.seleccionar_seccion("consola");
         }

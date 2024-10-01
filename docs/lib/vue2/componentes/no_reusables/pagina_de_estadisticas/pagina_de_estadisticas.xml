@@ -1,4 +1,4 @@
-<div>
+<div class="pantalla_de_estadisticas">
 
     <explorador-de-arbol
         identificador-de-reportes="conductometria2_memoria_de_reportes"

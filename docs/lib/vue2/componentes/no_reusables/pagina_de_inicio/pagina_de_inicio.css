@@ -210,3 +210,6 @@
 .boton_transparente:hover {
     opacity: 1;
 }
+.espaciado_lateral_para_scroll_movil {
+    padding-right: 25px !important;
+}

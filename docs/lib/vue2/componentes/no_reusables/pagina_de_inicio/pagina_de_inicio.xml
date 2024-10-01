@@ -12,7 +12,7 @@
                                     </div>
                                 </div>
                                 <div class="panel_editor" :class="{ inactivo: seccion_seleccionada !== 'editor' }">
-                                    <div class="panel_editor_contenido">
+                                    <div class="panel_editor_contenido espaciado_lateral_para_scroll_movil">
                                         <textarea class="entrada_de_codigo"
                                             :class="{ [estado_de_script]: true }"
                                             ref="entrada_de_codigo_1"
@@ -25,7 +25,7 @@
                                     </div>
                                 </div>
                                 <div class="panel_consola_global" :class="{ inactivo: seccion_seleccionada !== 'consola' }">
-                                    <div class="panel_consola_global_contenido" style="position: relative;">
+                                    <div class="panel_consola_global_contenido espaciado_lateral_para_scroll_movil" style="position: relative;">
                                         <textarea class="entrada_de_codigo consola_global"
                                             :class="{ [estado_de_script]: true }"
                                             style="font-family: monospace; font-size: 9px;"
@@ -40,7 +40,7 @@
 
 delete localStorage.conductometria2_memoria_de_reportes"
                                         />
-                                        <div style="position: absolute; top: 9px; right: 9px; left: auto; bottom: auto;">
+                                        <div style="position: absolute; top: auto; right: auto; left: 13px; bottom: 12px;">
                                             <button class="boton_transparente" style="min-width: 25px; font-size: 10px;" v-on:click="limpiar_codigo">🗑️ Reset</button>
                                             <button class="boton_transparente" style="min-width: 25px; font-size: 10px;" v-on:click="ejecutar_codigo">⚡ Ejecutar</button>
                                         </div>

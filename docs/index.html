@@ -8,7 +8,7 @@
     <script src="index.js"></script>
     <style>
         .global_landing_page {
-            position: absolute;
+            position: fixed;
             top: 0px;
             bottom: 0px;
             left: 0px;
@@ -73,30 +73,102 @@
             background-color: inherit !important;
             padding: 0px;
             margin: 0px !important;
+            white-space: wrap;
+            text-wrap-style: auto;
         }
         .global_landing_separator {
             margin: 0px !important;
         }
+        .titulo_de_intersitial {
+            background-color: rgba(0,0,0,0.5);
+            color: white;
+            font-size: 21px;
+            font-family: Arial;
+            padding: 25px;
+        }
+        .banda_de_titulo_de_intersitial {
+            background-color: rgba(28, 41, 143, 0.8);
+            color: rgb(5, 5, 105);
+            color: white;
+            text-shadow: 0 0 1px blue;
+            box-shadow: inset 0 0 8px black, 0 0 2px white;
+            border: 1px solid #CCC;
+            text-align: center;
+            font-size: 15px;
+            font-family: Arial;
+            padding: 12px;
+            border-radius: 4pt;
+            font-weight: bold;
+        }
+        .subtitulo_de_intersitial {
+            color: blue;
+            text-shadow: 0 0 0px blue;
+            font-size: 10px;
+            font-family: Arial;
+            font-weight: normal;
+            text-decoration: underline;
+            font-style: italic;
+            font-style: normal;
+        }
+        .espacio_de_barra_cargable {
+            display: block;
+        }
+        .barra_cargable {
+            width: 100%;
+            border: 1px solid #CCC;
+            background-color: #E0E0E0;
+        }
+        .barra_de_carga {
+            width: 0%;
+            min-height: 20px;
+            border: 1px solid rgb(17, 104, 17);
+            background-color: rgb(79, 227, 79);
+        }
+        .texto_de_barra_de_carga {
+            font-size: 9px;
+            font-weight: normal;
+            font-family: Arial;
+            white-space: nowrap;
+            text-align: left;
+            color: blue
+        }
     </style>
 </head>
-<body>
+<body style="max-width: 100%;">
     <div id="app"></div>
-    <div class="global_landing_page">
-        <table class="global_landing_table">
-            <tbody>
-                <tr>
-                    <td class="global_landing_cell">
-                        <div class="global_landing_panel">
-                            <div class="global_landing_title">cargando conductometría...</div>
-                            <hr class="global_landing_separator" />
-                            <div class="global_landing_subtitle" style="position: relative;">
-                                <pre id="global_loading_object" style="position: absolute; top: 0; left: 0; right: 0; bottom: auto;"></pre>
+    <div class="global_landing_page_root">
+        <div class="global_landing_page">
+            <table class="global_landing_table">
+                <tbody>
+                    <tr>
+                        <td class="global_landing_cell">
+                            <div class="global_landing_panel">
+                                <div class="global_landing_title">cargando...</div>
+                                <hr class="global_landing_separator" />
+                                <div class="global_landing_subtitle" style="position: relative;">
+                                    <pre id="global_loading_object" style="position: absolute; top: 0; left: 0; right: 0; bottom: auto; overflow-x: scroll;"></pre>
+                                </div>
                             </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="titulo_de_intersitial" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+            <div class="banda_de_titulo_de_intersitial">
+                <div style="margin-bottom: 12px;">Bienvenido a la conductometría</div>
+                <div class="espacio_de_barra_cargable">
+                    <div class="barra_cargable" style="position: relative;">
+                        <div class="barra_de_carga" id="global_loading_object_counter">
+                            
                         </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                        <div class="texto_de_barra_de_carga" style="position: absolute; top: 5px; left: auto; right: 5px;">
+                            Cargados <span id="global_loading_object_counter_by_number">0</span> de 151 objetos
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

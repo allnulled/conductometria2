@@ -37,6 +37,19 @@
             } catch (error) {
                 
             }
+            try {
+                const contador = document.body.querySelector("#global_loading_object_counter");
+                const contador_numerico = document.body.querySelector("#global_loading_object_counter_by_number");
+                if(contador) {
+                    const percentage = (this.objetos_cargados / 151) * 100;
+                    contador.style.width = percentage + "%";
+                }
+                if(contador_numerico) {
+                    contador_numerico.textContent = this.objetos_cargados;
+                }
+            } catch (error) {
+                
+            }
         }
         definir(nombreModulo, dependencias, factoria) {
             this.modulos[nombreModulo] = {

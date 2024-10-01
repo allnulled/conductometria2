@@ -15,3 +15,7 @@
     max-height: 200px;
     overflow: scroll;
 }
+
+.pantalla_de_estadisticas {
+    padding-right: 25px;
+}
