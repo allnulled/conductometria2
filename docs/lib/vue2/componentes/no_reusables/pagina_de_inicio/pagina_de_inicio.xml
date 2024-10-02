@@ -11,7 +11,7 @@
                                         <pagina-de-estadisticas :root="this" :datos-origen="interpretacion_de_script" />
                                     </div>
                                 </div>
-                                <div class="panel_editor" :class="{ inactivo: seccion_seleccionada !== 'editor' }">
+                                <div class="panel_editor" :class="{ inactivo: seccion_seleccionada !== 'agenda' }">
                                     <div class="panel_editor_contenido espaciado_lateral_para_scroll_movil">
                                         <textarea class="entrada_de_codigo"
                                             :class="{ [estado_de_script]: true }"
@@ -63,7 +63,7 @@ delete localStorage.conductometria2_memoria_de_reportes"
                             <button class="boton" v-on:click="ir_a_error">Ir a error</button>
                         </template>
                         <button class="boton_pequenio_1" style="min-width: 20px;" v-on:click="ir_a_consola_global" :class="{ active: seccion_seleccionada === 'consola' }">💻</button>
-                        <button class="boton_pequenio_1" style="min-width: 20px;" v-on:click="ir_a_editor" :class="{ active: seccion_seleccionada === 'editor' }">📄</button>
+                        <button class="boton_pequenio_1" style="min-width: 20px;" v-on:click="ir_a_agenda" :class="{ active: seccion_seleccionada === 'agenda' }">📄</button>
                         <button class="boton_pequenio_1" style="min-width: 20px;" v-on:click="ir_a_estadisticas" :class="{ active: seccion_seleccionada === 'estadísticas' }" :disabled="estado_de_script !== 'corregido'">
                             <span v-if="seccion_seleccionada === 'estadísticas'">🟡</span>
                             <span v-else-if="!((estado_de_script === 'corregido') && (seccion_seleccionada !== 'estadísticas'))">🔴</span>
@@ -73,7 +73,7 @@ delete localStorage.conductometria2_memoria_de_reportes"
                 </div>
             </div>
             <div class="panel_fijo_abajo">
-                <span style="color: white;padding-top: 5px;display: inline-block;" v-if="(seccion_seleccionada === 'editor') && posicion_del_cursor">
+                <span style="color: white;padding-top: 5px;display: inline-block;" v-if="(seccion_seleccionada === 'agenda') && posicion_del_cursor">
                     <span>
                         <template v-if="posicion_del_cursor.inicio.posicion === posicion_del_cursor.fin.posicion">
                             <span>Pos: </span> {{ posicion_del_cursor.inicio.posicion }} de {{ contenido_de_script.length }} | Coord: {{ posicion_del_cursor.inicio.linea }}:{{ posicion_del_cursor.inicio.columna }}
@@ -84,7 +84,7 @@ delete localStorage.conductometria2_memoria_de_reportes"
                     </span>
                 </span>
                 <span class="float_right text_align_right">
-                    <template v-if="seccion_seleccionada === 'editor'">
+                    <template v-if="seccion_seleccionada === 'agenda'">
                         <button class="boton min_width_0" v-on:click="alternar_familia_de_texto">F</button>
                         <button class="boton min_width_0" v-on:click="minimizar_texto">-</button>
                         <button class="boton min_width_0" v-on:click="maximizar_texto">+</button>

@@ -10,7 +10,7 @@ return await Sistema_de_modulos.definir_componente_vue2(
       this.$utilidades.tracear("pagina_de_inicio.data");
       return {
         Sistema_de_dialogos: window.Sistema_de_dialogos,
-        seccion_seleccionada: "editor",
+        seccion_seleccionada: "agenda",
         id_timeout_de_script: undefined,
         contenido_de_script: "",
         contenido_de_consola: "",
@@ -33,11 +33,11 @@ return await Sistema_de_modulos.definir_componente_vue2(
         this.$utilidades.tracear("pagina_de_inicio.methods.seleccionar_seccion");
         this.seccion_seleccionada = seccion;
       },
-      ir_a_editor() {
-        if(this.seccion_seleccionada === "editor") {
+      ir_a_agenda() {
+        if(this.seccion_seleccionada === "agenda") {
           this.seleccionar_seccion("consola");
         } else {
-          this.seleccionar_seccion("editor");
+          this.seleccionar_seccion("agenda");
         }
       },
       ir_a_estadisticas() {
@@ -45,7 +45,7 @@ return await Sistema_de_modulos.definir_componente_vue2(
       },
       ir_a_consola_global() {
         if(this.seccion_seleccionada === "consola") {
-          this.seleccionar_seccion("editor");
+          this.seleccionar_seccion("agenda");
         } else {
           this.seleccionar_seccion("consola");
         }
