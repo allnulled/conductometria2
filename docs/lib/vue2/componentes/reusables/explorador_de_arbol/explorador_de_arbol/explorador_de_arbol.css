@@ -370,3 +370,26 @@
     border: 1px solid #5044b7;
     box-shadow: 0 0 4px #5044b7;
 }
+
+.explorador_de_arbol .boton_rojo {
+    background: linear-gradient(180deg,#fbd2d2 45%,#ffb3b3 0,#ec5b5b);
+}
+.explorador_de_arbol .boton_rojo:hover,
+.explorador_de_arbol .boton_rojo:hover::before {
+    background: linear-gradient(180deg,#fbd2d2 45%,#ff8b8b 0,#ff3c3c) !important;
+}
+
+.explorador_de_arbol .panel_de_botones_de_dialogo {
+    border-top: 1px solid #CCC;
+    margin-top: 4px;
+    padding-top: 4px;
+}
+
+.explorador_de_arbol .caja_de_error {
+    background-color: rgb(198, 113, 113);
+    border: 3px double red;
+    padding: 8px;
+    color: yellow;
+    font-size: 10px;
+    font-family: "9pt Segoe UI", "SegoeUI", "Noto Sans", "sans-serif";
+}

@@ -39,4 +39,70 @@
     <seccion-de-codigo v-else-if="seccion_seleccionada === 'codigo'" :explorador="this" />
     <seccion-de-datos v-else-if="seccion_seleccionada === 'datos'" :explorador="this" />
     <seccion-de-configuracion v-else-if="seccion_seleccionada === 'configuracion'" :explorador="this" />
+    <template v-if="es_explorador_raiz">
+        <dialog ref="dialogo_de_confirmar_eliminar_reporte">
+            <div class="window" v-if="typeof explorador_de_documento_a_eliminar !== 'undefined'">
+                <div class="title-bar">
+                    <div class="title-bar-text">Eliminar reporte</div>
+                </div>
+                <div class="window-body">
+                    <div style="font-size: 10px; padding: 4px; padding-bottom: 12px;">
+                        <div style="text-align: center; font-weight: bold; font-size: 12px; padding-bottom: 12px; padding-top: 8px;">¿Seguro que quieres eliminar el reporte «{{ explorador_de_documento_a_eliminar.documento_a_eliminar.nombre }}»?</div>
+                        <div>Este documento tiene {{ explorador_de_documento_a_eliminar.documento_a_eliminar.documentos.length }} documentos hijo.</div>
+                        <div>Su modificador tiene {{ explorador_de_documento_a_eliminar.documento_a_eliminar.modificador.length }} caracteres.</div>
+                        <div>Su plantilla tiene {{ explorador_de_documento_a_eliminar.documento_a_eliminar.plantilla.length }} caracteres.</div>
+                        <div>Su componente tiene {{ explorador_de_documento_a_eliminar.documento_a_eliminar.componente.length }} caracteres.</div>
+                    </div>
+                    <div class="panel_de_botones_de_dialogo" style="padding: 4px; text-align: right;">
+                        <button class="boton_rojo" v-on:click="() => explorador_de_documento_a_eliminar.eliminar_documento()">Eliminar igualmente</button>
+                        <button v-on:click="explorador_de_documento_a_eliminar.cancelar_eliminar_documento">Cancelar</button>
+                    </div>
+                </div>
+                <div class="status-bar">
+                    <div class="status-field" style="font-size: 10px; padding: 4px;">Si eliminas, perderás este y los reportes que de él pendan.</div>
+                </div>
+            </div>
+        </dialog>
+        <dialog ref="dialogo_de_confirmar_resetear_reportes">
+            <div class="window">
+                <div class="title-bar">
+                    <div class="title-bar-text">Resetear todos los reportes</div>
+                </div>
+                <div class="window-body">
+                    <div style="text-align: center; font-size: 10px; padding: 4px; padding-bottom: 12px;">
+                        <div style="font-weight: bold; font-size: 12px; padding-bottom: 12px; padding-top: 8px;">¿Seguro que quieres resetear todos los reportes?</div>
+                        <div>Esto te haría perder todos los reportes, modificadores, plantillas y componentes ya codificados.</div>
+                    </div>
+                    <div class="panel_de_botones_de_dialogo" style="padding: 4px; text-align: right;">
+                        <button class="boton_rojo" v-on:click="resetear_reportes">Resetear igualmente</button>
+                        <button v-on:click="cancelar_resetear_reportes">Cancelar</button>
+                    </div>
+                </div>
+                <div class="status-bar">
+                    <div class="status-field" style="font-size: 10px; padding: 4px;">Si eliminas, perderás este y los reportes que de él pendan.</div>
+                </div>
+            </div>
+        </dialog>
+        <dialog ref="dialogo_de_confirmar_importar_reportes">
+            <div class="window">
+                <div class="title-bar">
+                    <div class="title-bar-text">Importar reportes externos</div>
+                </div>
+                <div class="window-body">
+                    <div style="text-align: center; font-size: 10px; padding: 4px; padding-bottom: 12px;">
+                        <div style="font-weight: bold; font-size: 12px; padding-bottom: 12px; padding-top: 8px;">¿Seguro que quieres importar reportes externos?</div>
+                        <div>Esto te haría perder todos los reportes, modificadores, plantillas y componentes ya codificados.</div>
+                        <div v-if="error_de_importacion" class="caja_de_error">{{ error_de_importacion.name }} - {{ error_de_importacion.message }}</div>
+                    </div>
+                    <div class="panel_de_botones_de_dialogo" style="padding: 4px; text-align: right;">
+                        <button class="boton_rojo" v-on:click="importar_reportes">Importar igualmente</button>
+                        <button v-on:click="cancelar_importar_reportes">Cancelar</button>
+                    </div>
+                </div>
+                <div class="status-bar">
+                    <div class="status-field" style="font-size: 10px; padding: 4px;">Si importas, perderás este y los reportes que de él pendan.</div>
+                </div>
+            </div>
+        </dialog>
+    </template>
 </div>

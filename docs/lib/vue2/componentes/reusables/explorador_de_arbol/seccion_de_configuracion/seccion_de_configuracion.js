@@ -32,10 +32,9 @@ return await Sistema_de_modulos.definir_componente_vue2(
           this.explorador.ir_a_seccion("configuracion");
         });
       },
-      limpiar_reportes() {
+      confirmar_resetear_reportes() {
         this.panel_seleccionado = "";
-        delete localStorage[this.explorador.explorador_raiz.identificador_de_reportes];
-        return this.explorador.explorador_raiz.cargar_memoria_de_reportes_absolutos(true);
+        return this.explorador.explorador_raiz.confirmar_resetear_reportes();
       },
       alternar_panel_de_importar_reportes() {
         if(this.panel_seleccionado === "importar_reportes") {
@@ -53,12 +52,16 @@ return await Sistema_de_modulos.definir_componente_vue2(
           this.panel_seleccionado = "exportar_reportes";
         }
       },
-      importar_reportes() {
-
+      confirmar_importar_reportes() {
+        return this.explorador.explorador_raiz.confirmar_importar_reportes(this.texto_de_importar, this);
       },
       copiar_texto_de_exportar_reportes() {
-        
-      }
+        navigator.clipboard.writeText(this.texto_de_exportar);
+        this.panel_seleccionado = "";
+      },
+      cancelar_importar_reportes() {
+        this.panel_seleccionado = "";
+      },
     },
     mounted() {
       this.$utilidades.tracear("seccion_de_configuracion.mounted");

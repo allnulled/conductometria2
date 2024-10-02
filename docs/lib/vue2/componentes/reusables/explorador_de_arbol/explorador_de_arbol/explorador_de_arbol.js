@@ -47,6 +47,12 @@ return await Sistema_de_modulos.definir_componente_vue2(
         datos_base: this.datosBase,
         datos_de_reportes: undefined,
         datos_base_modificados: undefined,
+        documento_a_eliminar: undefined,
+        indice_de_documento_a_eliminar: undefined,
+        explorador_de_documento_a_eliminar: undefined,
+        texto_a_importar: "",
+        componente_de_seccion_de_configuracion: undefined,
+        error_de_importacion: undefined,
       }
     },
     methods: {
@@ -328,17 +334,96 @@ return await Sistema_de_modulos.definir_componente_vue2(
         this.move_down_por_id(this.explorador_raiz.datos_de_reportes_absolutos, this.identificador_de_ruta.concat(["documentos", documento_index]));
         return this.guardar_reportes_absolutos();
       },
-      preguntar_de_eliminar_documento(documento_index) {
-        // @TODO: preguntar con un diálogo antes de eliminar documento.
+      confirmar_eliminar_documento(documento_index) {
+        this.explorador_raiz.$refs.dialogo_de_confirmar_eliminar_reporte.showModal();
+        const documento = this.get_por_id(this.explorador_raiz.datos_de_reportes_absolutos, this.identificador_de_ruta.concat(["documentos", documento_index]));
+        this.documento_a_eliminar = documento;
+        this.indice_de_documento_a_eliminar = documento_index;
+        this.explorador_raiz.explorador_de_documento_a_eliminar = this;
       },
-      eliminar_documento(documento_index) {
+      cancelar_eliminar_documento() {
+        this.explorador_raiz.$refs.dialogo_de_confirmar_eliminar_reporte.close();
+        this.documento_a_eliminar = undefined;
+        this.indice_de_documento_a_eliminar = undefined;
+        this.explorador_raiz.explorador_de_documento_a_eliminar = undefined;
+      },
+      eliminar_documento() {
+        const documento_index = this.explorador_raiz.explorador_de_documento_a_eliminar.indice_de_documento_a_eliminar;
+        this.explorador_raiz.$refs.dialogo_de_confirmar_eliminar_reporte.close();
         Eliminar_documento_abierto_si_esta: {
           const documento = this.get_por_id(this.explorador_raiz.datos_de_reportes_absolutos, this.identificador_de_ruta.concat(["documentos", documento_index]));
           const posicion_de_documento = this.documentos_abiertos.indexOf(documento.uuid);
           this.documentos_abiertos.splice(posicion_de_documento, 1);
         }
         this.delete_por_id(this.explorador_raiz.datos_de_reportes_absolutos, this.identificador_de_ruta.concat(["documentos", documento_index]));
+        this.cancelar_eliminar_documento();
         return this.guardar_reportes_absolutos();
+      },
+      confirmar_resetear_reportes() {
+        this.explorador_raiz.$refs.dialogo_de_confirmar_resetear_reportes.showModal();
+      },
+      resetear_reportes() {
+        delete localStorage[this.explorador_raiz.identificador_de_reportes];
+        this.cancelar_resetear_reportes();
+        return Promise.all([
+          this.cargar_memoria_de_parametros(),
+          this.cargar_memoria_de_reportes_absolutos(true),
+          this.cargar_memoria_de_reportes_relativos(true),
+          this.cargar_datos_base_modificados(),
+        ]);
+      },
+      cancelar_resetear_reportes() {
+        this.explorador_raiz.$refs.dialogo_de_confirmar_resetear_reportes.close();
+      },
+      limpiar_variables_de_importar_reportes() {
+        
+      },
+      confirmar_importar_reportes(texto_a_importar, componente_de_seccion_de_configuracion) {
+        this.texto_a_importar = texto_a_importar;
+        this.componente_de_seccion_de_configuracion = componente_de_seccion_de_configuracion;
+        this.explorador_raiz.$refs.dialogo_de_confirmar_importar_reportes.showModal();
+      },
+      importar_reportes() {
+        try {
+          const datos_a_importar = JSON.parse(this.texto_a_importar);
+          if(typeof datos_a_importar !== "object") {
+            throw new Error("Los datos a importar no son un objeto");
+          }
+          if(!("nombre" in datos_a_importar)) {
+            throw new Error("Los datos a importar no tienen un nombre");
+          }
+          if(!("modificador" in datos_a_importar)) {
+            throw new Error("Los datos a importar no tienen un modificador");
+          }
+          if(!("plantilla" in datos_a_importar)) {
+            throw new Error("Los datos a importar no tienen una plantilla");
+          }
+          if(!("componente" in datos_a_importar)) {
+            throw new Error("Los datos a importar no tienen un componente");
+          }
+          if(!("documentos" in datos_a_importar)) {
+            throw new Error("Los datos a importar no tienen documentos");
+          }
+          localStorage[this.explorador_raiz.identificador_de_reportes] = this.texto_a_importar;
+          return Promise.all([
+            this.cargar_memoria_de_parametros(),
+            this.cargar_memoria_de_reportes_absolutos(true),
+            this.cargar_memoria_de_reportes_relativos(true),
+            this.cargar_datos_base_modificados(),
+            () => this.cancelar_importar_reportes()
+          ]);
+        } catch (error) {
+          this.mostrar_error_de_importacion(error);
+        }
+      },
+      cancelar_importar_reportes() {
+        this.texto_a_importar = "";
+        this.componente_de_seccion_de_configuracion = undefined;
+        this.explorador_raiz.$refs.dialogo_de_confirmar_importar_reportes.close();
+        this.mostrar_error_de_importacion(undefined);
+      },
+      mostrar_error_de_importacion(error) {
+        this.error_de_importacion = error;
       },
     },
     mounted() {

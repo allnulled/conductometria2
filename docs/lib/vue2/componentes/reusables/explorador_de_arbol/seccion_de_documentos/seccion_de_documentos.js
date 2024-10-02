@@ -23,8 +23,8 @@ return await Sistema_de_modulos.definir_componente_vue2(
       bajar_documento(documento_index) {
         return this.explorador.bajar_documento(documento_index);
       },
-      eliminar_documento(documento_index) {
-        return this.explorador.eliminar_documento(documento_index);
+      confirmar_eliminar_documento(documento_index) {
+        return this.explorador.confirmar_eliminar_documento(documento_index);
       },
       ir_a_documentos_de_documento(documento_index) {
         const componentes = this.$refs['subexplorador_' + documento_index];
