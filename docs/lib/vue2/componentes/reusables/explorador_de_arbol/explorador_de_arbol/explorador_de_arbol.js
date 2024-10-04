@@ -163,7 +163,6 @@ return await Sistema_de_modulos.definir_componente_vue2(
         } else {
           this.documentos_abiertos.splice(posicion, 1);
         }
-        console.log(this.documentos_abiertos);
       },
       ir_a_seccion(seccion) {
         this.$utilidades.tracear("explorador_de_arbol.ir_a_seccion");

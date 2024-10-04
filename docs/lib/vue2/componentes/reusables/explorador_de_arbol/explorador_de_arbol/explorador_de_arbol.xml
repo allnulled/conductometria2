@@ -1,4 +1,4 @@
-<div class="explorador_de_arbol" :class="{coloreada: ((identificador_de_ruta.length/2) % 2) !== 0}" style="padding-left: 4px; padding-bottom: 4px; padding-top: 4px;" :style="es_explorador_raiz ? 'padding-right: 4px;' : ''">
+<div class="explorador_de_arbol" :class="{coloreada: ((identificador_de_ruta.length/2) % 2) !== 0}" style="padding-left: 2px; padding-bottom: 0px; padding-top: 0px;" :style="es_explorador_raiz ? 'padding-right: 4px; padding: 4px;' : ''">
     <div class="tabla_de_botones" v-if="seccion_seleccionada !== 'documentos'">
         <div class="fila_de_botones">
             <div class="celda_de_boton">

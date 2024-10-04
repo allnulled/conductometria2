@@ -393,3 +393,9 @@
     font-size: 10px;
     font-family: "9pt Segoe UI", "SegoeUI", "Noto Sans", "sans-serif";
 }
+
+.explorador_de_arbol .seccion_de_documentos button {
+    min-height: 20px !important;
+    min-width: 30px !important;
+    font-size: 9px;
+}

@@ -91,6 +91,7 @@ return await Sistema_de_modulos.definir_componente_vue2(
         } catch (error) {
           this.estado_de_script = "erroneo";
           this.error_de_script = error;
+          console.log(error);
         }
       },
       guardar_script() {

@@ -23,9 +23,9 @@
     }
 
     log(...msgs) {
-      for(let index=0; index<msgs.length; index++) {
+      for (let index = 0; index < msgs.length; index++) {
         const msg = msgs[index];
-        if(typeof msg === "string") {
+        if (typeof msg === "string") {
           console.log(msg);
         } else {
           console.log(JSON.stringify(msg, null, 2));
@@ -36,7 +36,7 @@
     traceos = 0;
 
     trace(id, argumentos) {
-      if(!this.opciones.trace) {
+      if (!this.opciones.trace) {
         return;
       }
       console.log("[TRACE] [conductometria2_api] [nº" + this.traceos + "] " + id + " (" + argumentos.length + ")");
@@ -44,7 +44,7 @@
     }
 
     printar_traceos() {
-      for(let index=0; index<this.traceos.length; index++) {
+      for (let index = 0; index < this.traceos.length; index++) {
         const traceo = this.traceos[index];
         console.log(index + ":" + traceo);
       }
@@ -84,26 +84,26 @@
         cantidad_de_tiempo.minutos = Math.floor(minutos_restantes);
       }
       Calcular_polaridad: {
-        if(minutos_originales < 0) {
-          if(cantidad_de_tiempo.dias) {
+        if (minutos_originales < 0) {
+          if (cantidad_de_tiempo.dias) {
             cantidad_de_tiempo.dias = cantidad_de_tiempo.dias * (-1);
           }
-          if(cantidad_de_tiempo.horas) {
+          if (cantidad_de_tiempo.horas) {
             cantidad_de_tiempo.horas = cantidad_de_tiempo.horas * (-1);
           }
-          if(cantidad_de_tiempo.minutos) {
+          if (cantidad_de_tiempo.minutos) {
             cantidad_de_tiempo.minutos = cantidad_de_tiempo.minutos * (-1);
           }
         }
       }
       Anular_nulos: {
-        if(cantidad_de_tiempo.dias === 0) {
+        if (cantidad_de_tiempo.dias === 0) {
           cantidad_de_tiempo.dias = null;
         }
-        if(cantidad_de_tiempo.horas === 0) {
+        if (cantidad_de_tiempo.horas === 0) {
           cantidad_de_tiempo.horas = null;
         }
-        if(cantidad_de_tiempo.minutos === 0) {
+        if (cantidad_de_tiempo.minutos === 0) {
           cantidad_de_tiempo.minutos = null;
         }
       }
@@ -113,7 +113,7 @@
     sumar_cantidades_de_tiempo(...cantidades_de_tiempo) {
       this.trace("interpretacion_de_ast.sumar_cantidades_de_tiempo", arguments);
       let minutos_totales = 0
-      for(let index_parametro=0; index_parametro<cantidades_de_tiempo.length; index_parametro++) {
+      for (let index_parametro = 0; index_parametro < cantidades_de_tiempo.length; index_parametro++) {
         const cantidad_de_tiempo = cantidades_de_tiempo[index_parametro];
         minutos_totales += this.pasar_de_cantidad_de_tiempo_a_minutos(cantidad_de_tiempo);
       }
@@ -123,7 +123,7 @@
     restar_cantidades_de_tiempo(cantidad_de_tiempo_inicial, ...cantidades_de_tiempo) {
       this.trace("interpretacion_de_ast.restar_cantidades_de_tiempo", arguments);
       let minutos_totales = this.pasar_de_cantidad_de_tiempo_a_minutos(cantidad_de_tiempo_inicial);
-      for(let index_parametro=0; index_parametro<cantidades_de_tiempo.length; index_parametro++) {
+      for (let index_parametro = 0; index_parametro < cantidades_de_tiempo.length; index_parametro++) {
         const cantidad_de_tiempo = cantidades_de_tiempo[index_parametro];
         minutos_totales -= this.pasar_de_cantidad_de_tiempo_a_minutos(cantidad_de_tiempo);
       }
@@ -203,7 +203,7 @@
     agregar_acumulacion_de_tiempo(id, cantidad_de_tiempo, fenomeno_causal) {
       this.trace("interpretacion_de_ast.agregar_acumulacion_de_tiempo", arguments);
       const minutos = this.pasar_de_cantidad_de_tiempo_a_minutos(cantidad_de_tiempo);
-      if(!(id in this.acumulaciones)) {
+      if (!(id in this.acumulaciones)) {
         this.acumulaciones[id] = {
           tipo: "acumulación fenoménica",
           minutos: 0,
@@ -255,7 +255,7 @@
     procesar_sentencia(sentencia) {
       this.trace("interpretacion_de_ast.procesar_sentencia", arguments);
       this.agregar_sentencia(sentencia);
-      switch(sentencia.tipo) {
+      switch (sentencia.tipo) {
         case "sentencia de definir fenómeno":
           this.procesar_sentencia_de_definir_fenomeno(sentencia);
           break;
@@ -265,8 +265,11 @@
         case "sentencia de limitar fenómenos":
           this.procesar_sentencia_de_limitar_fenomenos(sentencia);
           break;
+        case "sentencia de cambiar estado":
+          this.procesar_sentencia_de_cambiar_estado(sentencia);
+          break;
         default:
-          this.log("sentencia:");
+          this.log("Sentencia:");
           this.log(sentencia);
           throw new Error("Sentencia no identificada");
       }
@@ -282,6 +285,7 @@
         limites: this.limites,
         acumulaciones: this.acumulaciones,
         notificaciones: this.notificaciones,
+        estados: this.estados,
       };
     }
 
@@ -302,15 +306,15 @@
     reordenar_propiedades_de_objeto(objeto, orden = this.orden_tipico_de_propiedades) {
       this.trace("interpretacion_de_ast.reordenar_propiedades_de_objeto", arguments);
       const salida = {};
-      for(let index=0; index<orden.length; index++) {
+      for (let index = 0; index < orden.length; index++) {
         const propiedad = orden[index];
-        if(propiedad in objeto) {
+        if (propiedad in objeto) {
           salida[propiedad] = objeto[propiedad];
         }
       }
       Iterando_propiedades:
-      for(let propiedad in objeto) {
-        if(propiedad in salida) {
+      for (let propiedad in objeto) {
+        if (propiedad in salida) {
           continue Iterando_propiedades;
         }
         salida[propiedad] = objeto[propiedad];
@@ -395,14 +399,31 @@
       this.propagar_fenomeno(nuevo_fenomeno.hilo, nuevo_fenomeno);
     }
 
+    corregir_cantidad_de_tiempo_segun_polaridad(cantidad, polaridad) {
+      this.trace("interpretacion_de_ast.corregir_cantidad_de_tiempo_segun_polaridad", arguments);
+      const cantidad_2 = Object.assign({}, cantidad);
+      if (polaridad === "-") {
+        if (cantidad_2.dias) {
+          cantidad_2.dias = cantidad_2.dias * (-1)
+        }
+        if (cantidad_2.horas) {
+          cantidad_2.horas = cantidad_2.horas * (-1)
+        }
+        if (cantidad_2.minutos) {
+          cantidad_2.minutos = cantidad_2.minutos * (-1)
+        }
+      }
+      return cantidad_2;
+    }
+
     propagar_fenomeno(hilo_causal, fenomeno_causal) {
       this.trace("interpretacion_de_ast.propagar_fenomeno", arguments);
       Romperrecursividad: {
         const explicaciones = [];
-        for(let index=0; index<hilo_causal.length; index++) {
+        for (let index = 0; index < hilo_causal.length; index++) {
           const punto_causal = hilo_causal[index];
-          if(punto_causal.explicacion) {
-            if(explicaciones.indexOf(punto_causal.explicacion) === -1) {
+          if (punto_causal.explicacion) {
+            if (explicaciones.indexOf(punto_causal.explicacion) === -1) {
               explicaciones.push(punto_causal.explicacion);
             } else {
               throw new Error("Prevenido bucle infinito relacionado con la creencia: " + punto_causal.explicacion);
@@ -412,35 +433,44 @@
       }
       const nombre_de_fenomeno = fenomeno_causal.fenomeno;
       const duracion_de_fenomeno = fenomeno_causal.duracion;
+      Propagando_a_estado_si_escaece: {
+        if(!this.estados.historicos.length) {
+          break Propagando_a_estado_si_escaece;
+        }
+        const ultimo_estado = this.estados.historicos[this.estados.historicos.length-1];
+        if(nombre_de_fenomeno in ultimo_estado) {
+          ultimo_estado[nombre_de_fenomeno] = this.sumar_cantidades_de_tiempo(ultimo_estado[nombre_de_fenomeno], duracion_de_fenomeno);
+        }
+      }
       Propagando_consecuencias_segun_es_producido_por:
-      for(let index_creencias=0; index_creencias<this.creencias.length; index_creencias++) {
+      for (let index_creencias = 0; index_creencias < this.creencias.length; index_creencias++) {
         const creencia = this.creencias[index_creencias];
-        const causas = creencia.es_producido_por;
-        if(causas === null) {
+        const causas = (creencia.es_producido_por ? creencia.es_producido_por : []).concat(creencia.es_consumido_por ? creencia.es_consumido_por : []);
+        if (causas.length === 0) {
           continue Propagando_consecuencias_segun_es_producido_por;
         }
         Iterando_causas_de_creencia:
-        for(let index_causas=0; index_causas<causas.length; index_causas++) {
+        for (let index_causas = 0; index_causas < causas.length; index_causas++) {
           const causa = causas[index_causas];
           const esta_refiriendose_al_mismo_fenomeno = causa.fenomeno === nombre_de_fenomeno;
-          if(!esta_refiriendose_al_mismo_fenomeno) {
+          if (!esta_refiriendose_al_mismo_fenomeno) {
             continue Iterando_causas_de_creencia;
           }
-          if(causa.desde) {
+          if (causa.desde) {
             const diferencia_duracion_y_desde = this.restar_cantidades_de_tiempo(duracion_de_fenomeno, causa.desde);
             const diferencia_duracion_y_desde_en_minutos = this.pasar_de_cantidad_de_tiempo_a_minutos(diferencia_duracion_y_desde);
-            if(diferencia_duracion_y_desde_en_minutos < 0) {
+            if (diferencia_duracion_y_desde_en_minutos < 0) {
               continue Iterando_causas_de_creencia;
             }
           }
-          if(causa.hasta) {
+          if (causa.hasta) {
             const diferencia_duracion_y_hasta = this.restar_cantidades_de_tiempo(duracion_de_fenomeno, causa.hasta);
             const diferencia_duracion_y_hasta_en_minutos = this.pasar_de_cantidad_de_tiempo_a_minutos(diferencia_duracion_y_hasta);
-            if(diferencia_duracion_y_hasta_en_minutos > 0) {
+            if (diferencia_duracion_y_hasta_en_minutos > 0) {
               continue Iterando_causas_de_creencia;
             }
           }
-          if(causa.cada) {
+          if (causa.cada) {
             const ratio = this.dividir_cantidades_de_tiempo(duracion_de_fenomeno, causa.cada);
             const cantidad_de_tiempo_de_fenomeno_propagado = this.multiplicar_cantidad_de_tiempo(causa.variacion.cantidad, ratio);
             this.ejecutar_propagacion_de_fenomeno_segun_es_producido_por(hilo_causal, fenomeno_causal, creencia, index_causas, causa, {
@@ -454,34 +484,34 @@
         }
       }
       Propagando_consecuencias_segun_produce:
-      for(let index_creencias=0; index_creencias<this.creencias.length; index_creencias++) {
+      for (let index_creencias = 0; index_creencias < this.creencias.length; index_creencias++) {
         const creencia = this.creencias[index_creencias];
         const esta_definiendo_mismo_fenomeno = creencia.fenomeno === nombre_de_fenomeno;
-        if(!esta_definiendo_mismo_fenomeno) {
+        if (!esta_definiendo_mismo_fenomeno) {
           continue Propagando_consecuencias_segun_produce;
         }
-        const consecuencias = creencia.produce;
-        if(consecuencias === null) {
+        const consecuencias = (creencia.produce ? creencia.produce : []).concat(creencia.consume ? creencia.consume : []);
+        if (consecuencias.length === 0) {
           continue Propagando_consecuencias_segun_produce;
         }
         Iterando_consecuencias_de_creencia:
-        for(let index_consecuencias=0; index_consecuencias<consecuencias.length; index_consecuencias++) {
+        for (let index_consecuencias = 0; index_consecuencias < consecuencias.length; index_consecuencias++) {
           const consecuencia = consecuencias[index_consecuencias];
-          if(consecuencia.desde) {
+          if (consecuencia.desde) {
             const diferencia_duracion_y_desde = this.restar_cantidades_de_tiempo(duracion_de_fenomeno, consecuencia.desde);
             const diferencia_duracion_y_desde_en_minutos = this.pasar_de_cantidad_de_tiempo_a_minutos(diferencia_duracion_y_desde);
-            if(diferencia_duracion_y_desde_en_minutos < 0) {
+            if (diferencia_duracion_y_desde_en_minutos < 0) {
               continue Iterando_consecuencias_de_creencia;
             }
           }
-          if(consecuencia.hasta) {
+          if (consecuencia.hasta) {
             const diferencia_duracion_y_hasta = this.restar_cantidades_de_tiempo(duracion_de_fenomeno, consecuencia.hasta);
             const diferencia_duracion_y_hasta_en_minutos = this.pasar_de_cantidad_de_tiempo_a_minutos(diferencia_duracion_y_hasta);
-            if(diferencia_duracion_y_hasta_en_minutos > 0) {
+            if (diferencia_duracion_y_hasta_en_minutos > 0) {
               continue Iterando_consecuencias_de_creencia;
             }
           }
-          if(consecuencia.cada) {
+          if (consecuencia.cada) {
             const ratio = this.dividir_cantidades_de_tiempo(duracion_de_fenomeno, consecuencia.cada);
             const cantidad_de_tiempo_de_fenomeno_propagado = this.multiplicar_cantidad_de_tiempo(consecuencia.variacion.cantidad, ratio);
             this.ejecutar_propagacion_de_fenomeno_segun_produce(hilo_causal, fenomeno_causal, creencia, index_consecuencias, consecuencia, {
@@ -494,8 +524,8 @@
           }
         }
       }
-      if(fenomeno_causal.matices) {
-        for(let index_matiz=0; index_matiz<fenomeno_causal.matices.length; index_matiz++) {
+      if (fenomeno_causal.matices) {
+        for (let index_matiz = 0; index_matiz < fenomeno_causal.matices.length; index_matiz++) {
           const matiz = fenomeno_causal.matices[index_matiz];
           this.ejecutar_propagacion_de_fenomeno_segun_matiz([fenomeno_causal], fenomeno_causal, matiz, index_matiz);
         }
@@ -510,13 +540,13 @@
 
     procesar_sentencia_de_registrar_fenomenos(sentencia) {
       this.trace("interpretacion_de_ast.procesar_sentencia_de_registrar_fenomenos", arguments);
-      if(["!","-"].indexOf(sentencia.estado) !== -1) {
+      if (["!", "-"].indexOf(sentencia.estado) !== -1) {
         return;
       }
       Iterando_registro_de_fenomenos:
-      for(let index_registro=0; index_registro<sentencia.registros.length; index_registro++) {
+      for (let index_registro = 0; index_registro < sentencia.registros.length; index_registro++) {
         const registro = sentencia.registros[index_registro];
-        if(["!","-"].indexOf(registro.estado) !== -1) {
+        if (["!", "-"].indexOf(registro.estado) !== -1) {
           continue Iterando_registro_de_fenomenos;
         }
         registro.dia = sentencia.dia;
@@ -532,6 +562,19 @@
       this.agregar_limite(sentencia);
     }
 
+    procesar_sentencia_de_cambiar_estado(sentencia) {
+      this.trace("interpretacion_de_ast.procesar_sentencia_de_cambiar_estado", arguments);
+      const { estado, operacion } = sentencia;
+      if(operacion === "reiniciar") {
+        this.estados.historicos.push(estado);
+      } else if(operacion === "ampliar") {
+        const indice = this.estados.historicos.length ? this.estados.historicos.length-1 : 0;
+        this.estados.historicos[indice] = estado;
+      } else {
+        throw new Error("Operación no reconocida");
+      }
+    }
+
     cargar_interpretacion() {
       this.trace("interpretacion_de_ast.cargar_interpretacion", arguments);
       const cmt_ast = [].concat(this.ast_original);
@@ -543,7 +586,10 @@
       this.limites = [];
       this.acumulaciones = {};
       this.notificaciones = [];
-      for(let index_sentencia_global=0; index_sentencia_global<cmt_ast.length; index_sentencia_global++) {
+      this.estados = {
+        historicos: [{}]
+      };
+      for (let index_sentencia_global = 0; index_sentencia_global < cmt_ast.length; index_sentencia_global++) {
         const sentencia_global = cmt_ast[index_sentencia_global];
         this.procesar_sentencia(sentencia_global);
       }
@@ -553,55 +599,69 @@
     expandir_datos() {
       this.trace("interpretacion_de_ast.expandir_datos", arguments);
       Expandiendo_minutos_de_acumulaciones: {
-        for(let acumulacion_id in this.acumulaciones) {
+        for (let acumulacion_id in this.acumulaciones) {
           const minutos_de_acumulacion = this.acumulaciones[acumulacion_id].minutos;
           const cantidad_de_tiempo_de_acumulacion = this.pasar_minutos_a_cantidad_de_tiempo(minutos_de_acumulacion);
           this.acumulaciones[acumulacion_id].cantidad = cantidad_de_tiempo_de_acumulacion;
         }
       }
+      Expandiendo_ultimo_estado_y_total: {
+        if(!this.estados.historicos.length) {
+          this.estados.ultimo = {};
+          break Expandiendo_ultimo_estado_y_total;
+        }
+        this.estados.ultimo = Object.assign({}, this.estados.historicos[this.estados.historicos.length-1]);
+        const fenomenos = Object.keys(this.estados.ultimo);
+        for(let index=0; index<fenomenos.length; index++) {
+          const fenomeno = fenomenos[index];
+          const estado_de_fenomeno = this.estados.ultimo[fenomeno];
+          const total_en_minutos = this.pasar_de_cantidad_de_tiempo_a_minutos(estado_de_fenomeno);
+          this.estados.ultimo[fenomeno] = Object.assign({}, this.estados.ultimo[fenomeno], {en_minutos: total_en_minutos});
+        }
+      }
       Expandiendo_notificaciones_de_limites_actuales: {
         const ahora = new Date();
         Iterando_dias:
-        for(let index_dias=0; index_dias<this.limites.length; index_dias++) {
+        for (let index_dias = 0; index_dias < this.limites.length; index_dias++) {
           const limite = this.limites[index_dias];
           const esta_en_el_dia = this.comprobar_si_date_esta_entre_dias_del_calendario(ahora, limite.intervalo_de_dias.inicio, limite.intervalo_de_dias.final);
-          if(!esta_en_el_dia) {
+          if (!esta_en_el_dia) {
             continue Iterando_dias;
           }
           Iterando_horas:
-          for(let index_horas=0; index_horas<limite.horas.length; index_horas++) {
+          for (let index_horas = 0; index_horas < limite.horas.length; index_horas++) {
             const limite_segun_horas = limite.horas[index_horas];
             const esta_en_la_hora = this.comprobar_si_date_esta_entre_horas(ahora, limite_segun_horas.intervalo_de_horas.inicio, limite_segun_horas.intervalo_de_horas.final);
-            if(!esta_en_la_hora) {
+            if (!esta_en_la_hora) {
               continue Iterando_horas;
             }
             Iterando_limites_establecidos:
-            for(let index_limites=0; index_limites<limite_segun_horas.limites.length; index_limites++) {
+            for (let index_limites = 0; index_limites < limite_segun_horas.limites.length; index_limites++) {
               const limite_establecido = limite_segun_horas.limites[index_limites];
               const nombre_de_fenomeno_limitado = limite_establecido.fenomeno;
               // @TODO: comprobar qué mensaje (- / = / +) le corresponde según el estado de cada fenómeno.
               // @TODO: hay que calcular la acumulación de los fenómenos limitados pero solo producida en la franja de tiempo que comenta.
               let acumulacion_de_minutos_de_fenomeno_en_intervalo = 0;
               let limite_actual = undefined;
-              if(limite_establecido.cada) {
+              if (limite_establecido.cada) {
                 limite_actual = this.calcular_intervalo_de_tiempo_valido_actual_de_fenomeno_segun_parametro_cada(limite_establecido.cada, limite_segun_horas.intervalo_de_horas.inicio, ahora);
               } else {
                 limite_actual = limite_segun_horas.intervalo_de_horas;
               }
               Iterando_fenomenos:
-              for(let index_fenomeno=0; index_fenomeno<this.fenomenos.length; index_fenomeno++) {
+              for (let index_fenomeno = 0; index_fenomeno < this.fenomenos.length; index_fenomeno++) {
                 const fenomeno = this.fenomenos[index_fenomeno];
                 const nombre_de_fenomeno = fenomeno.fenomeno;
-                if(nombre_de_fenomeno !== nombre_de_fenomeno_limitado) {
+                if (nombre_de_fenomeno !== nombre_de_fenomeno_limitado) {
                   continue Iterando_fenomenos;
                 }
                 const fecha_de_fenomeno = this.pasar_dia_y_hora_a_date(fenomeno.dia, fenomeno.hora);
                 const esta_fenomeno_en_intervalo_de_dias = this.comprobar_si_date_esta_entre_dias_del_calendario(fecha_de_fenomeno, limite.intervalo_de_dias.inicio, limite.intervalo_de_dias.final);
-                if(!esta_fenomeno_en_intervalo_de_dias) {
+                if (!esta_fenomeno_en_intervalo_de_dias) {
                   continue Iterando_fenomenos;
                 }
                 const esta_fenomeno_en_intervalo_de_horas = this.comprobar_si_date_esta_entre_horas(fecha_de_fenomeno, limite_actual.inicio, limite_actual.final);
-                if(!esta_fenomeno_en_intervalo_de_horas) {
+                if (!esta_fenomeno_en_intervalo_de_horas) {
                   continue Iterando_fenomenos;
                 }
                 const minutos_de_duracion_de_fenomeno = this.pasar_de_cantidad_de_tiempo_a_minutos(fenomeno.duracion);
@@ -612,7 +672,7 @@
               const minutos_maximos = this.pasar_de_cantidad_de_tiempo_a_minutos(limite_establecido.maximo);
               const excede_el_minimo = minutos_minimos > acumulacion_de_minutos_de_fenomeno_en_intervalo;
               const excede_el_maximo = minutos_maximos < acumulacion_de_minutos_de_fenomeno_en_intervalo;
-              if(excede_el_minimo) {
+              if (excede_el_minimo) {
                 this.agregar_notificacion({
                   tipo: "notificación",
                   uuid_de_limite: limite.uuid,
@@ -625,9 +685,9 @@
                   intervalo_de_valores_validos: limite_actual,
                   mensaje: limite_establecido.mensajes && limite_establecido.mensajes.minimo ? limite_establecido.mensajes.minimo : "{" + limite_establecido.fenomeno + "} excede el mínimo conforme al límite «" + limite.uuid + "»",
                 });
-              } else if(excede_el_maximo) {
+              } else if (excede_el_maximo) {
                 this.agregar_notificacion({
-                  tipo: "notificación",  
+                  tipo: "notificación",
                   uuid_de_limite: limite.uuid,
                   fenomeno: limite_establecido.fenomeno,
                   estado: "excede el máximo",
@@ -671,15 +731,16 @@
     }
 
     calcular_intervalo_de_tiempo_valido_actual_de_fenomeno_segun_parametro_cada(cada, hora_de_inicio, date_actual) {
+      this.trace("interpretacion_de_ast.calcular_intervalo_de_tiempo_valido_actual_de_fenomeno_segun_parametro_cada", arguments);
       const date_inicial = this.pasar_de_hora_a_date(hora_de_inicio, date_actual);
       const minutos_por_parte = this.pasar_de_cantidad_de_tiempo_a_minutos(cada);
       let date_pivote = new Date(date_inicial);
-      while(date_pivote <= date_actual) {
+      while (date_pivote <= date_actual) {
         const date_inicio = this.generar_fecha_segun_incremento_de_minutos(date_pivote, 0);
         const date_final = this.generar_fecha_segun_incremento_de_minutos(date_pivote, minutos_por_parte);
         date_pivote = date_final;
-        if(date_actual >= date_inicio) {
-          if(date_actual <= date_final) {
+        if (date_actual >= date_inicio) {
+          if (date_actual <= date_final) {
             return {
               inicio: this.pasar_date_a_hora_solamente(date_inicio),
               final: this.pasar_date_a_hora_solamente(date_final)
@@ -702,7 +763,7 @@
       this.trace("interpretacion_de_ast.pasar_de_dia_a_date", arguments);
       const fecha = new Date();
       fecha.setFullYear(dia.anyo);
-      fecha.setMonth(dia.mes-1);
+      fecha.setMonth(dia.mes - 1);
       fecha.setDate(dia.dia);
       fecha.setHours(0);
       fecha.setMinutes(0);
@@ -754,7 +815,7 @@
     llenar_por_la_izquierda(texto, longitud = 2, relleno = "0") {
       this.trace("interpretacion_de_ast.llenar_por_la_izquierda", arguments);
       let llenado = "" + texto;
-      while(llenado.length < longitud) {
+      while (llenado.length < longitud) {
         llenado = relleno + llenado;
       }
       return llenado;
@@ -778,10 +839,10 @@
       legible += this.llenar_por_la_izquierda(fecha.getMilliseconds(), 3);
       return legible;
     }
-    
+
   };
 
-  const interpretar_ast = function(...args) {
+  const interpretar_ast = function (...args) {
     return new Interpretacion_de_ast(...args);
   };
 
