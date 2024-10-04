@@ -6,7 +6,7 @@
                     <div style="font-size: 10px;">Memoria de reportes: </div>
                 </div>
                 <div class="celda_de_boton" style="flex: 1;">
-                    <button class="boton_pequenio_1" v-on:click="confirmar_resetear_reportes">Resetear</button>
+                    <button class="boton_pequenio_1 boton_rojo" v-on:click="confirmar_resetear_reportes">Resetear</button>
                 </div>
                 <div class="celda_de_boton" style="flex: 1;">
                     <button class="boton_pequenio_1" v-on:click="alternar_panel_de_importar_reportes" :class="{active: panel_seleccionado === 'importar_reportes'}">Importar</button>
@@ -18,7 +18,7 @@
             <div class="fila_de_botones" v-if="panel_seleccionado === 'importar_reportes'">
                 <div class="celda_de_boton" style="flex: 100;">
                     <textarea class="entrada_de_formulario_1" v-model="texto_de_importar" style="height: 200px;" placeholder='{"Instrucciones": "Escribe el JSON a importar para los reportes"}' />
-                    <button class="boton_pequenio_1" v-on:click="confirmar_importar_reportes">Importar reportes</button>
+                    <button class="boton_pequenio_1 boton_rojo" v-on:click="confirmar_importar_reportes">Importar reportes</button>
                 </div>
             </div>
             <div class="fila_de_botones" v-if="panel_seleccionado === 'exportar_reportes'">

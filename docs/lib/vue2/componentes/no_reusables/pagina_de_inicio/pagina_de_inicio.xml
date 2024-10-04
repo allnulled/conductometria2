@@ -91,7 +91,7 @@ limitar entre 2024/08/15 y 2025/08/15 {
                                     <div class="panel_consola_global_contenido espaciado_lateral_para_scroll_movil" style="position: relative;">
                                         <textarea class="entrada_de_codigo consola_global"
                                             :class="{ [estado_de_script]: true }"
-                                            style="font-family: monospace; font-size: 9px;"
+                                            style=""
                                             ref="entrada_de_codigo_de_consola_global"
                                             spellcheck="false"
                                             v-model="contenido_de_consola"

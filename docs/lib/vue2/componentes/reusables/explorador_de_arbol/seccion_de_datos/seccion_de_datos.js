@@ -15,11 +15,16 @@ return await Sistema_de_modulos.definir_componente_vue2(
     data() {
       this.$utilidades.tracear("seccion_de_datos.data");
       return {
-        
+        esta_mostrando_codigo: false,
       }
     },
     methods: {
-
+      mostrar_codigo() {
+        this.esta_mostrando_codigo = true;
+      },
+      mostrar_visualizador_de_nodos() {
+        this.esta_mostrando_codigo = false;
+      }
     },
     mounted() {
       this.$utilidades.tracear("seccion_de_datos.mounted");

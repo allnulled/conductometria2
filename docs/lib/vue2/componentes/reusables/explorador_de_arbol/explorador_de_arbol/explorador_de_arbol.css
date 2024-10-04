@@ -354,10 +354,11 @@
 }
 .explorador_de_arbol .seccion_de_datos {
     background-color: white;
-    padding: 8px;
-    border: 1px solid black;
-    box-shadow: 0 0 4px black;
+    padding: 4px;
+    border: 1px solid #888;
+    box-shadow: 0 0 0px black;
     margin-top: 4px;
+    border-radius: 3pt;
 }
 .explorador_de_arbol .titulo_de_documento_inicial {
     font-weight: bold;

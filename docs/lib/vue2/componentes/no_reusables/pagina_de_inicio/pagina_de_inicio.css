@@ -160,7 +160,7 @@
 .entrada_de_codigo {
     width: 100%;
     height: 100%;
-    border: 4px double black;
+    border: 3px double black;
     color: blue;
     font-size: 12px;
     text-wrap: nowrap;
@@ -169,7 +169,7 @@
 }
 .entrada_de_codigo:focus {
     outline: none;
-    border: 4px double black;
+    border: 3px double black;
     box-shadow: 0 0 4px black;
 }
 
@@ -206,8 +206,11 @@
     padding-bottom: 0px;
 }
 .entrada_de_codigo.consola_global {
-    background-color: #222;
-    color: #FF0;
+    background-color: #05041e;
+    color: white;
+    font-family: var(--fuente_principal) !important;
+    font-size: 12px;
+    border: 3px double #378286;
 }
 .boton_transparente {
     opacity: 0.7;
