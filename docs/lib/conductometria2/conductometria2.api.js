@@ -60,9 +60,13 @@
     pasar_de_cantidad_de_tiempo_a_minutos(cantidad_de_tiempo) {
       this.trace("interpretacion_de_ast.pasar_de_cantidad_de_tiempo_a_minutos", arguments);
       let total_minutos = 0;
-      total_minutos += cantidad_de_tiempo.dias ? cantidad_de_tiempo.dias * 60 * 24 : 0;
-      total_minutos += cantidad_de_tiempo.horas ? cantidad_de_tiempo.horas * 60 : 0;
-      total_minutos += cantidad_de_tiempo.minutos ? cantidad_de_tiempo.minutos : 0;
+      try {
+        total_minutos += cantidad_de_tiempo.dias ? cantidad_de_tiempo.dias * 60 * 24 : 0;
+        total_minutos += cantidad_de_tiempo.horas ? cantidad_de_tiempo.horas * 60 : 0;
+        total_minutos += cantidad_de_tiempo.minutos ? cantidad_de_tiempo.minutos : 0;
+      } catch (error) {
+        return 0;
+      }
       return total_minutos;
     }
 

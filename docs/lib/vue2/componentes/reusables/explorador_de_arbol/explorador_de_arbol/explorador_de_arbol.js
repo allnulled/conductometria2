@@ -185,7 +185,7 @@ return await Sistema_de_modulos.definir_componente_vue2(
               uuid: this.generar_uuid(),
               nombre: "Reporte inicial",
               modificador: "",
-              plantilla: "",
+              plantilla: "<widget-de-inicio :datos='datos' :padre='this' />",
               componente: "",
               documentos: [],
             });

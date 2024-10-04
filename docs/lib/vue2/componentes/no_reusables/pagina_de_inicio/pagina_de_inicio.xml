@@ -13,7 +13,7 @@
                                 </div>
                                 <div class="panel_editor" :class="{ inactivo: seccion_seleccionada !== 'agenda' }">
                                     <div class="panel_editor_contenido espaciado_lateral_para_scroll_movil">
-                                        <textarea class="entrada_de_codigo"
+                                        <textarea class="entrada_de_codigo editor_de_agenda"
                                             :class="{ [estado_de_script]: true }"
                                             ref="entrada_de_codigo_1"
                                             spellcheck="false"
@@ -123,7 +123,7 @@ delete localStorage.conductometria2_memoria_de_reportes"
                     <span class="float_right">
                         <template v-if="estado_de_script === 'erroneo'">
                             <button class="boton" v-on:click="mostrar_error" style="min-width: 25px;">?</button>
-                            <button class="boton" v-on:click="ir_a_error">Ir a error</button>
+                            <button class="boton" v-if="error_de_script.location" v-on:click="ir_a_error">Ir a error</button>
                         </template>
                         <button class="boton_pequenio_1" style="min-width: 20px;" v-on:click="ir_a_consola_global" :class="{ active: seccion_seleccionada === 'consola' }">💻</button>
                         <button class="boton_pequenio_1" style="min-width: 20px;" v-on:click="ir_a_agenda" :class="{ active: seccion_seleccionada === 'agenda' }">📄</button>
@@ -147,7 +147,7 @@ delete localStorage.conductometria2_memoria_de_reportes"
                     </span>
                 </span>
                 <span class="float_right text_align_right">
-                    <template v-if="seccion_seleccionada === 'agenda'">
+                    <template v-if="['agenda','consola'].indexOf(seccion_seleccionada) !== -1">
                         <button class="boton min_width_0" v-on:click="alternar_familia_de_texto">F</button>
                         <button class="boton min_width_0" v-on:click="minimizar_texto">-</button>
                         <button class="boton min_width_0" v-on:click="maximizar_texto">+</button>
@@ -163,7 +163,9 @@ delete localStorage.conductometria2_memoria_de_reportes"
             </div>
             <div class="window-body has-space scrollable">
                 <div>El error producido es el siguiente:</div>
-                <pre class="cuadro_de_error">{{ JSON.stringify(error_de_script, null, 2) }}</pre>
+                <pre class="cuadro_de_error">{{ error_de_script.name }}
+{{ error_de_script.message }}
+{{ JSON.stringify(error_de_script, null, 2) }}</pre>
                 <div class="text_align_right">
                     <button class="" v-on:click="cerrar_error">De acuerdo</button>
                 </div>

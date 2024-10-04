@@ -1,5 +1,5 @@
 <div class="seccion_de_datos">
-    <div style="display: flex; flex-direction: row;  justify-content: space-between; gap: 1px 2px; margin-bottom: 4px;">
+    <div style="display: flex; flex-direction: row;  justify-content: space-between; gap: 1px 2px; margin-bottom: 4px; float:right;">
         <div style="flex: 100;"></div>
         <button class="boton_pequenio_1" style="flex: 1; white-space: nowrap; min-width: 75px !important; min-height: 20px !important;" :class="{active: esta_mostrando_codigo}" v-on:click="mostrar_codigo">Código</button>
         <button class="boton_pequenio_1" style="flex: 1; white-space: nowrap; min-width: 75px !important; min-height: 20px !important;" :class="{active: !esta_mostrando_codigo}" v-on:click="mostrar_visualizador_de_nodos">Esquema</button>

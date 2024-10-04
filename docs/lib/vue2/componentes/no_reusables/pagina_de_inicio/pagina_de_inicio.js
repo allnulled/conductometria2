@@ -20,8 +20,8 @@ return await Sistema_de_modulos.definir_componente_vue2(
         id_timeout_de_actualizar_cursor: undefined,
         estado_de_script: "corregido",
         error_de_script: false,
-        tamanio_de_texto: 12,
-        familia_de_texto: "normal",
+        tamanio_de_texto: 10,
+        familia_de_texto: "monoespaciado",
         error_de_consola: undefined,
       }
     },
@@ -154,11 +154,13 @@ return await Sistema_de_modulos.definir_componente_vue2(
         this.$utilidades.tracear("pagina_de_inicio.methods.minimizar_texto");
         this.tamanio_de_texto--;
         this.$refs.entrada_de_codigo_1.style.fontSize = this.tamanio_de_texto + "px";
+        this.$refs.entrada_de_codigo_de_consola_global.style.fontSize = this.tamanio_de_texto + "px";
       },
       maximizar_texto() {
         this.$utilidades.tracear("pagina_de_inicio.methods.maximizar_texto");
         this.tamanio_de_texto++;
         this.$refs.entrada_de_codigo_1.style.fontSize = this.tamanio_de_texto + "px";
+        this.$refs.entrada_de_codigo_de_consola_global.style.fontSize = this.tamanio_de_texto + "px";
       },
       alternar_familia_de_texto() {
         this.$utilidades.tracear("pagina_de_inicio.methods.alternar_familia_de_texto");
@@ -166,9 +168,11 @@ return await Sistema_de_modulos.definir_componente_vue2(
         if(es_monoespaciado) {
           this.familia_de_texto = "normal";
           this.$refs.entrada_de_codigo_1.style.fontFamily = "Roboto";
+          this.$refs.entrada_de_codigo_de_consola_global.style.fontFamily = "Roboto";
         } else {
           this.familia_de_texto = "monoespaciado";
           this.$refs.entrada_de_codigo_1.style.fontFamily = "monospace";
+          this.$refs.entrada_de_codigo_de_consola_global.style.fontFamily = "monospace";
         }
       }
     },

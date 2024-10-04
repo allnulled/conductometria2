@@ -82,6 +82,7 @@ const main = async function() {
     await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/no_reusables/buscador_de_sentencias/buscador_de_sentencias.js");
     await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/no_reusables/pagina_de_estadisticas/pagina_de_estadisticas.js");
     await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/no_reusables/pagina_de_inicio/pagina_de_inicio.js");
+    await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/no_reusables/widget_de_inicio/widget_de_inicio.js");
     // await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/no_reusables/visualizador_de_datos/visualizador_de_datos.js");
     await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/no_reusables/conductometria_dato/conductometria_dato.js");
     await Sistema_de_modulos.cargar_script_como_texto("lib/vue2/componentes/no_reusables/mis_dialogos/mis_dialogos.js");
@@ -132,6 +133,7 @@ const main = async function() {
     await Sistema_de_modulos.cargar_estilo("lib/vue2/componentes/no_reusables/buscador_de_sentencias/buscador_de_sentencias.css");
     await Sistema_de_modulos.cargar_estilo("lib/vue2/componentes/no_reusables/pagina_de_estadisticas/pagina_de_estadisticas.css");
     await Sistema_de_modulos.cargar_estilo("lib/vue2/componentes/no_reusables/pagina_de_inicio/pagina_de_inicio.css");
+    await Sistema_de_modulos.cargar_estilo("lib/vue2/componentes/no_reusables/widget_de_inicio/widget_de_inicio.css");
     await Sistema_de_modulos.cargar_estilo("lib/vue2/componentes/no_reusables/conductometria_dato/conductometria_dato.css");
     await Sistema_de_modulos.cargar_estilo("lib/vue2/xcomponents/docs/lib/xcomponents/xcomponents.css");
     

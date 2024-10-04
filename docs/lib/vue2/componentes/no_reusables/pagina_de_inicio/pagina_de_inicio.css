@@ -208,8 +208,6 @@
 .entrada_de_codigo.consola_global {
     background-color: #05041e;
     color: white;
-    font-family: var(--fuente_principal) !important;
-    font-size: 12px;
     border: 3px double #378286;
 }
 .boton_transparente {
@@ -221,4 +219,9 @@
 }
 .espaciado_lateral_para_scroll_movil {
     padding-right: 25px !important;
+}
+.entrada_de_codigo.consola_global,
+.entrada_de_codigo.editor_de_agenda {
+    font-size: 10px;
+    font-family: monospace;
 }
