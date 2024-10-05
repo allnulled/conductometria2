@@ -12,79 +12,42 @@
                                     </div>
                                 </div>
                                 <div class="panel_editor" :class="{ inactivo: seccion_seleccionada !== 'agenda' }">
-                                    <div class="panel_editor_contenido espaciado_lateral_para_scroll_movil">
-                                        <textarea class="entrada_de_codigo editor_de_agenda"
-                                            :class="{ [estado_de_script]: true }"
-                                            ref="entrada_de_codigo_1"
-                                            spellcheck="false"
-                                            v-model="contenido_de_script"
-                                            v-on:input="parsear_script_con_dilacion"
-                                            v-on:keyup="actualizar_posicion_del_cursor"
-                                            v-on:focus="actualizar_posicion_del_cursor"
-                                            v-on:click="actualizar_posicion_del_cursor"
-                                            placeholder="/* Script de ejemplo */
-
-// Lección 1. Puedes definir fenómenos con más propiedades todavía:
-
-definir { C } con {
-  definición {{ C es una vitamina. }}
-  categorías { vitaminas; minerales; nutrientes esenciales; nutrientes; }
-  sinónimos { se separan; con punto y coma; o salto de línea; }
-  antónimos { se separan; con punto y coma; o salto de línea; }
-  relativos { se separan; con punto y coma; o salto de línea; }
-  similares { se separan; con punto y coma; o salto de línea; }
-  precursores { se separan; con punto y coma; o salto de línea; }
-  produce {
-    { A } en +5min cada 2h desde 1h hasta 4h
-  }
-  es producido por {
-    { Z } en +5min cada 2h desde 1h hasta 4h
-  }
-}
-
-// Lección 2. Puedes registrar fenómenos en un día:
-
-registrar 2024/09/15 donde {
-  00:03 { A } 1h
-  00:02 { A } 1h
-  00:01 { A } 1h con matiz de {
-    { C } +5min porque {{ he estado en modo intenso toda la carrera }}
-  }
-}
-
-// Lección 3. Puedes programar notificaciones para limitar los fenómenos con mínimos o máximos:
-
-limitar entre 2024/08/15 y 2025/08/15 {
-  entre 00:00 y 23:59 {
-    { A } mínimo 0min máximo 1h con mensajes {
-        - {{ vitamina A escasea }}
-        = {{ vitamina A está equilibrada }}
-        + {{ vitamina A rebosa }}
-    }
-    { B } cada 2h mínimo 0min máximo 30min
-    { B } mínimo 0min máximo 30min
-    { B } mínimo 0min máximo 30min
-    { B } mínimo 0min máximo 30min
-    { B } mínimo 0min máximo 30min
-    { B } mínimo 0min máximo 30min
-    { B } mínimo 0min máximo 30min
-    { B } mínimo 0min máximo 30min
-    { B } mínimo 0min máximo 30min
-    { B } mínimo 0min máximo 30min
-    { B } mínimo 0min máximo 30min
-    { B } mínimo 0min máximo 30min
-    { B } mínimo 0min máximo 30min
-    { B } mínimo 0min máximo 30min
-    { B } mínimo 0min máximo 30min
-    { B } mínimo 0min máximo 30min
-    { B } mínimo 0min máximo 30min
-    { B } mínimo 0min máximo 30min
-    { B } mínimo 0min máximo 30min
-    { B } mínimo 0min máximo 30min
-    { B } mínimo 0min máximo 30min
-    { B } mínimo 0min máximo 30min
-  }
-}" />
+                                    <div class="panel_editor_contenido">
+                                        <div class="panel_de_editor_de_agenda" style="position: relative;">
+                                            <div class="espacio_de_textarea_de_editor_de_agenda">
+                                                <textarea class="entrada_de_codigo editor_de_agenda"
+                                                    :class="{ [estado_de_script]: true }"
+                                                    ref="entrada_de_codigo_1"
+                                                    spellcheck="false"
+                                                    v-model="contenido_de_script"
+                                                    v-on:input="parsear_script_con_dilacion"
+                                                    v-on:keyup="actualizar_posicion_del_cursor"
+                                                    v-on:focus="actualizar_posicion_del_cursor"
+                                                    v-on:click="actualizar_posicion_del_cursor"
+                                                    :placeholder="texto_de_relleno_de_agenda" />
+                                            </div>
+                                            <div class="espacio_de_botones_de_editor_de_agenda">
+                                                <div style="position: relative;">
+                                                    <button :class="{active: esta_seccionador_seleccionado}" :disabled="(estado_de_script !== 'corregido')" v-on:click="alternar_seccionador">
+                                                        <span v-if="estado_de_script === 'corregido'">📦</span>
+                                                        <span v-else>🚫</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel_de_seccionador_de_agenda" :class="{activo: esta_seccionador_seleccionado && (estado_de_script === 'corregido')}">
+                                            <div class="contenido" v-if="interpretacion_de_script">
+                                                <div v-if="interpretacion_de_script.configuraciones" class="titulo_de_seccion">{{ interpretacion_de_script.configuraciones.titulo ?? 'Secciones del script' }}</div>
+                                                <template v-if="interpretacion_de_script.secciones && interpretacion_de_script.secciones.length">
+                                                    <div class="bloque_de_seccion_en_seccionador" :class="{es_hoy_es: seccion.tipo === 'sentencia de hoy es'}" v-for="seccion, seccion_index in interpretacion_de_script.secciones" v-bind:key="'seccion_' + seccion_index">
+                                                        <div class="como_link" href="javascript:void(0)" v-on:click="() => ir_a_seccion_en_codigo(seccion.localizacion.end.offset)">{{ seccion_index + 1 }}: <b> {{ seccion.seccion }}</b></div>
+                                                    </div>
+                                                </template>
+                                                <template v-else>
+                                                    <div style="padding: 8px; font-size: 10px; font-weight: bold;">No hay secciones definidas en el script.</div>
+                                                </template>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="panel_consola_global" :class="{ inactivo: seccion_seleccionada !== 'consola' }">
@@ -99,9 +62,7 @@ limitar entre 2024/08/15 y 2025/08/15 {
                                             v-on:keyup="() => {}"
                                             v-on:focus="() => {}"
                                             v-on:click="() => {}" 
-                                            placeholder="// Para borrar la base de datos de reportes:
-
-delete localStorage.conductometria2_memoria_de_reportes"
+                                            :placeholder="texto_de_relleno_de_consola"
                                         />
                                         <div style="position: absolute; top: auto; right: auto; left: 13px; bottom: 12px;">
                                             <button class="boton_transparente" style="min-width: 25px; font-size: 10px;" v-on:click="limpiar_codigo">🗑️ Reset</button>
@@ -126,7 +87,7 @@ delete localStorage.conductometria2_memoria_de_reportes"
                             <button class="boton" v-if="error_de_script.location" v-on:click="ir_a_error">Ir a error</button>
                         </template>
                         <button class="boton_pequenio_1" style="min-width: 20px;" v-on:click="ir_a_consola_global" :class="{ active: seccion_seleccionada === 'consola' }">💻</button>
-                        <button class="boton_pequenio_1" style="min-width: 20px;" v-on:click="ir_a_agenda" :class="{ active: seccion_seleccionada === 'agenda' }">📄</button>
+                        <button class="boton_pequenio_1" style="min-width: 20px;" v-on:click="ir_a_agenda" :class="{ active: seccion_seleccionada === 'agenda' }">📅</button>
                         <button class="boton_pequenio_1" style="min-width: 20px;" v-on:click="ir_a_estadisticas" :class="{ active: seccion_seleccionada === 'estadísticas' }" :disabled="estado_de_script !== 'corregido'">
                             <span v-if="seccion_seleccionada === 'estadísticas'">🟡</span>
                             <span v-else-if="!((estado_de_script === 'corregido') && (seccion_seleccionada !== 'estadísticas'))">🔴</span>

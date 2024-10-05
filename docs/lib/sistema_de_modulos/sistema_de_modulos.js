@@ -27,6 +27,7 @@
             return '' + this.padEndSegundos(diferencia_en_segundos, 3, '0');
         }
         objetos_cargados = 0;
+        objetos_por_cargar = 155;
         informar_sobre_objeto_de_carga(mensaje) {
             try {
                 const mensajero = document.body.querySelector("#global_loading_object");
@@ -41,7 +42,7 @@
                 const contador = document.body.querySelector("#global_loading_object_counter");
                 const contador_numerico = document.body.querySelector("#global_loading_object_counter_by_number");
                 if(contador) {
-                    const percentage = (this.objetos_cargados / 151) * 100;
+                    const percentage = (this.objetos_cargados / this.objetos_por_cargar) * 100;
                     contador.style.width = percentage + "%";
                 }
                 if(contador_numerico) {

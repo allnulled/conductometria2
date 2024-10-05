@@ -2,7 +2,7 @@ return await Sistema_de_modulos.definir_componente_vue2(
   "lib/vue2/componentes/no_reusables/pagina_de_inicio/pagina_de_inicio.js",
   "lib/vue2/componentes/no_reusables/pagina_de_inicio", [
 
-], async function (mentemetria) {
+], async function () {
   return {
     name: "pagina-de-inicio",
     templateUrl: "lib/vue2/componentes/no_reusables/pagina_de_inicio/pagina_de_inicio.xml",
@@ -23,6 +23,9 @@ return await Sistema_de_modulos.definir_componente_vue2(
         tamanio_de_texto: 10,
         familia_de_texto: "monoespaciado",
         error_de_consola: undefined,
+        texto_de_relleno_de_agenda: "",
+        texto_de_relleno_de_consola: "delete localStorage.conductometria2_memoria_de_reportes",
+        esta_seccionador_seleccionado: false,
       }
     },
     watch: {
@@ -32,6 +35,16 @@ return await Sistema_de_modulos.definir_componente_vue2(
       seleccionar_seccion(seccion) {
         this.$utilidades.tracear("pagina_de_inicio.methods.seleccionar_seccion");
         this.seccion_seleccionada = seccion;
+      },
+      alternar_seccionador() {
+        this.$utilidades.tracear("pagina_de_inicio.methods.alternar_seccionador");
+        this.esta_seccionador_seleccionado = !this.esta_seccionador_seleccionado;
+      },
+      ir_a_seccion_en_codigo(offset_index) {
+        this.$utilidades.tracear("pagina_de_inicio.methods.ir_a_seccion_en_codigo");
+        const entrada_de_codigo_1 = this.$refs.entrada_de_codigo_1;
+        entrada_de_codigo_1.setSelectionRange(offset_index, offset_index);
+        entrada_de_codigo_1.focus();
       },
       ir_a_agenda() {
         if(this.seccion_seleccionada === "agenda") {

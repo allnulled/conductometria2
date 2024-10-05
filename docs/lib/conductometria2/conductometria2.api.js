@@ -272,6 +272,18 @@
         case "sentencia de cambiar estado":
           this.procesar_sentencia_de_cambiar_estado(sentencia);
           break;
+        case "sentencia de sección":
+          this.procesar_sentencia_de_seccion(sentencia);
+          break;
+        case "sentencia de configurar":
+          this.procesar_sentencia_de_configurar(sentencia);
+          break;
+        case "sentencia de hoy es":
+          this.procesar_sentencia_de_hoy_es(sentencia);
+          break;
+        case "sentencia de avisar":
+          this.procesar_sentencia_de_avisar(sentencia);
+          break;
         default:
           this.log("Sentencia:");
           this.log(sentencia);
@@ -290,6 +302,9 @@
         acumulaciones: this.acumulaciones,
         notificaciones: this.notificaciones,
         estados: this.estados,
+        secciones: this.secciones,
+        avisos: this.avisos,
+        configuraciones: this.configuraciones,
       };
     }
 
@@ -579,9 +594,35 @@
       }
     }
 
+    procesar_sentencia_de_seccion(sentencia) {
+      this.trace("interpretacion_de_ast.procesar_sentencia_de_seccion", arguments);
+      // @TOTEST:
+      this.secciones.push(sentencia);
+    }
+
+    procesar_sentencia_de_configurar(sentencia) {
+      this.trace("interpretacion_de_ast.procesar_sentencia_de_configurar", arguments);
+      // @TOTEST:
+      this.configuraciones[sentencia.clave] = sentencia.valor;
+    }
+
+    procesar_sentencia_de_hoy_es(sentencia) {
+      this.trace("interpretacion_de_ast.procesar_sentencia_de_hoy_es", arguments);
+      // @TOTEST:
+      this.configuraciones.hoy = sentencia.seccion;
+      this.procesar_sentencia_de_seccion(sentencia);
+    }
+
+    procesar_sentencia_de_avisar(sentencia) {
+      this.trace("interpretacion_de_ast.procesar_sentencia_de_avisar", arguments);
+      // @TOTEST:
+    }
+
     cargar_interpretacion() {
       this.trace("interpretacion_de_ast.cargar_interpretacion", arguments);
       const cmt_ast = [].concat(this.ast_original);
+      /////////////////////////////////////////
+      // 1. Propiedades de la interpretación:
       this.uuid_maximo = 0;
       this.sentencias = [];
       this.creencias = [];
@@ -593,10 +634,17 @@
       this.estados = {
         historicos: [{}]
       };
+      this.secciones = [];
+      this.avisos = [];
+      this.configuraciones = {};
+      /////////////////////////////////////////
+      // 2. Procesamiento de sentencias de la interpretación:
       for (let index_sentencia_global = 0; index_sentencia_global < cmt_ast.length; index_sentencia_global++) {
         const sentencia_global = cmt_ast[index_sentencia_global];
         this.procesar_sentencia(sentencia_global);
       }
+      /////////////////////////////////////////
+      // 3. Expansión de datos de la interpretación:
       this.expandir_datos();
     }
 
