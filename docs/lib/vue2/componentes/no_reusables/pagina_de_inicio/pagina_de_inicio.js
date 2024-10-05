@@ -44,6 +44,7 @@ return await Sistema_de_modulos.definir_componente_vue2(
         this.$utilidades.tracear("pagina_de_inicio.methods.ir_a_seccion_en_codigo");
         const entrada_de_codigo_1 = this.$refs.entrada_de_codigo_1;
         entrada_de_codigo_1.setSelectionRange(offset_index, offset_index);
+        this.esta_seccionador_seleccionado = false;
         entrada_de_codigo_1.focus();
       },
       ir_a_agenda() {
