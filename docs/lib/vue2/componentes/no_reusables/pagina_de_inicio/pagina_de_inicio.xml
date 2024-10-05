@@ -40,7 +40,7 @@
                                                 <div v-if="interpretacion_de_script.configuraciones" class="titulo_de_seccion">{{ interpretacion_de_script.configuraciones.titulo ?? 'Secciones del script' }}</div>
                                                 <template v-if="interpretacion_de_script.secciones && interpretacion_de_script.secciones.length">
                                                     <div class="bloque_de_seccion_en_seccionador" :class="{es_hoy_es: seccion.tipo === 'sentencia de hoy es'}" v-for="seccion, seccion_index in interpretacion_de_script.secciones" v-bind:key="'seccion_' + seccion_index">
-                                                        <div class="como_link" href="javascript:void(0)" v-on:click="() => ir_a_seccion_en_codigo(seccion.localizacion.end.offset)">{{ seccion_index + 1 }}: <b> {{ seccion.seccion }}</b></div>
+                                                        <div class="como_link" href="javascript:void(0)" v-on:click="() => ir_a_seccion_en_codigo(seccion.localizacion.end.offset)">{{ seccion_index + 1 }}: <b> {{ seccion.seccion }}</b> ({{ Math.trunc((seccion.localizacion.start.offset / contenido_de_script.length) * 10000) / 100 }}%)</div>
                                                     </div>
                                                 </template>
                                                 <template v-else>
