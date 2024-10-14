@@ -18,7 +18,6 @@ return await Sistema_de_modulos.definir_componente_vue2(
         interpretacion_de_script: undefined,
         posicion_del_cursor: undefined,
         id_timeout_de_actualizar_cursor: undefined,
-        estado_de_script: "corregido",
         error_de_script: false,
         tamanio_de_texto: 10,
         familia_de_texto: "monoespaciado",
@@ -197,7 +196,9 @@ return await Sistema_de_modulos.definir_componente_vue2(
     mounted() {
         this.$utilidades.tracear("pagina_de_inicio.mounted");
         this.cargar_script();
-        this.ir_a_estadisticas();
+        if(this.estado_de_script === "corregido") {
+          this.ir_a_estadisticas();
+        }
     },
   };
 });
