@@ -19,7 +19,7 @@ return await Sistema_de_modulos.definir_componente_vue2(
         ahora_para_tiempo: new Date(),
         estan_subdatos_cargados: false,
         actividades_del_dia: [],
-        tareas_seleccionadas_del_grafico: [],
+        tareas_seleccionadas_del_grafico: ["cumplidas", "fallidas", "pendientes"],
         actividades_del_dia_fallidas: [],
         actividades_del_dia_pendientes: [],
         actividades_del_dia_cumplidas: [],
