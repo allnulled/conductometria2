@@ -10,19 +10,20 @@ Para acceder a la aplicación solo tienes que ir a:
 
 ## Uso
 
+**Lección 1.** Puedes definir fenómenos con solo el nombre:
+
 ```
-/* Script de ejemplo */
-
-// Lección 1. Puedes definir fenómenos con solo el nombre:
-
 definir { actividad 1 }
 definir { actividad 2 }
 definir { actividad 3 }
 definir { actividad 4 }
 definir { actividad 5 }
 
-// Lección 2. Puedes definir fenómenos con más propiedades:
+```
 
+**Lección 2.** Puedes definir fenómenos con más propiedades:
+
+```
 definir { A } con {
   definición {{ A es una vitamina. }}
   categorías { vitaminas; minerales; nutrientes esenciales; nutrientes; }
@@ -39,8 +40,11 @@ definir { B } con {
   }
 }
 
-// Lección 3. Puedes definir fenómenos con más propiedades todavía:
+```
 
+**Lección 3.** Puedes definir fenómenos con más propiedades todavía:
+
+```
 definir { C } con {
   definición {{ C es una vitamina. }}
   categorías { vitaminas; minerales; nutrientes esenciales; nutrientes; }
@@ -61,8 +65,11 @@ definir { C } con {
   }
 }
 
-// Lección 4. Puedes registrar fenómenos en un día:
+```
 
+**Lección 4.** Puedes registrar fenómenos en un día:
+
+```
 registrar 2024/09/15 donde {
   00:03 { A } 1h
   00:02 { A } 1h
@@ -75,8 +82,11 @@ registrar 2024/09/15 donde {
   +00:10 { D } 1h // + Quiere decir que: ha sido completada (igual que si no pones nada)
 }
 
-// Lección 5. Puedes programar notificaciones para limitar los fenómenos con mínimos o máximos:
+```
 
+**Lección 5.** Puedes programar notificaciones para limitar los fenómenos con mínimos o máximos:
+
+```
 limitar entre 2024/08/15 y 2025/08/15 {
   entre 00:00 y 23:59 {
     { A } mínimo 0min máximo 1h con mensajes {
@@ -114,18 +124,28 @@ limitar entre 2024/08/15 y 2025/08/15 {
   }
 }
 
-// Lección 6. Puedes compartimentar tu script en secciones:
+```
 
+**Lección 6.** Puedes compartimentar tu script en secciones:
+
+```
 sección {{ Configuraciones }}
 sección {{ Creencias }}
 sección {{ Acciones }}
 sección {{ Límites }}
 
-// Lección 7. Puedes seccionar un día también (un día es una sección automáticamente):
+```
 
+**Lección 7.** Puedes seccionar un día también (un día es una sección automáticamente):
+
+```
 hoy es lunes, 23 de octubre de 2024
 
-// Lección 8. Puedes reiniciar el estado, que es un objeto que sirve para observar más de cerca algunos fenómenos, estableciendo valores virutales de referencia en cada reseteo:
+```
+
+**Lección 8.** Puedes reiniciar el estado, que es un objeto que sirve para observar más de cerca algunos fenómenos, estableciendo valores virutales de referencia en 
+
+```ada reseteo:
 
 reiniciar estado con {
   { rojo } en +0h
@@ -133,16 +153,22 @@ reiniciar estado con {
   { verde } en +0h
 }
 
-// Lección 9. Puedes ampliar el estado también, que es lo mismo pero sin eliminar todos los fenómenos previamente establecidos:
+```
 
+**Lección 9.** Puedes ampliar el estado también, que es lo mismo pero sin eliminar todos los fenómenos previamente establecidos:
+
+```
 ampliar estado con {
   { blanco } en +0h
   { negro } en +0h
   { gris } en +0h
 }
 
-// Lección 10. Puedes establecer valores para las configuraciones. Esto puede tener efectos en alguna parte del programa:
+```
 
+**Lección 10.** Puedes establecer valores para las configuraciones. Esto puede tener efectos en alguna parte del programa:
+
+```
 configurar { nombre } en {{ Carlos }}
 configurar { titulo } en {{ Secciones del documento }}
 configurar { recordatorios } en {{
