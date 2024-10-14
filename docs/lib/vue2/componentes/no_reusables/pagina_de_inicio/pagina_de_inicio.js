@@ -55,7 +55,11 @@ return await Sistema_de_modulos.definir_componente_vue2(
         }
       },
       ir_a_estadisticas() {
-        this.seleccionar_seccion("estadísticas");
+        if(this.seccion_seleccionada === "estadísticas") {
+          this.seleccionar_seccion("agenda");
+        } else {
+          this.seleccionar_seccion("estadísticas");
+        }
       },
       ir_a_consola_global() {
         if(this.seccion_seleccionada === "consola") {
@@ -193,6 +197,7 @@ return await Sistema_de_modulos.definir_componente_vue2(
     mounted() {
         this.$utilidades.tracear("pagina_de_inicio.mounted");
         this.cargar_script();
+        this.ir_a_estadisticas();
     },
   };
 });

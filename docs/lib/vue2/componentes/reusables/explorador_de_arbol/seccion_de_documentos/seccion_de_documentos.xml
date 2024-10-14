@@ -3,8 +3,8 @@
         <template v-if="explorador.es_explorador_raiz">
             <div class="fila_de_botones" style="margin-top: 1px;">
                 <div class="celda_de_boton" style="flex: 100;">
-                    <div class="titulo_de_documento_inicial" style="text-align: right;">
-                        <span>{{ explorador.datos_de_reportes_relativos.nombre }}</span>
+                    <div class="titulo_de_documento_inicial" style="text-align: left;">
+                        <span>{{ explorador.datos_de_reportes_relativos.nombre }} <span class="nota_de_titulo">(documentos)</span></span>
                     </div>
                 </div>
                 <button class="celda_de_boton boton_pequenio_2" style="flex: 1; min-width: 58px;" v-on:click="() => explorador.ir_a_seccion('reporte')">↗</button>

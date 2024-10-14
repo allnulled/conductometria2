@@ -46,6 +46,7 @@ return await Sistema_de_modulos.definir_componente_vue2(
         // 4. Datos observados:
         datos_base: this.datosBase,
         datos_de_reportes: undefined,
+        datos_de_reportes_relativos: undefined,
         datos_base_modificados: undefined,
         documento_a_eliminar: undefined,
         indice_de_documento_a_eliminar: undefined,

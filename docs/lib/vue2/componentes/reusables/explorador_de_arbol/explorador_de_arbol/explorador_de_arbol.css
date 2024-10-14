@@ -322,7 +322,7 @@
     padding-top: 4px;
 }
 .explorador_de_arbol .seccion_de_reporte {
-    padding-top: 4px;
+    padding: 0px;
 }
 .explorador_de_arbol .seccion_de_reporte .titulo_de_reporte {
     background-color: #333;
@@ -346,11 +346,13 @@
     font-size: 10px;
 }
 .explorador_de_arbol .caja_de_reporte {
+    /*
     border: 1px solid black;
     box-shadow: 0 0 4px black;
-    padding: 8px;
     background-color: #333;
     color: white;
+    padding: 8px;
+    */
 }
 .explorador_de_arbol .seccion_de_datos {
     background-color: white;
@@ -368,8 +370,16 @@
     padding-left: 8px;
     padding-right: 8px;
     background-color: #759ce0;
+    background-color: white;
     border: 1px solid #5044b7;
     box-shadow: 0 0 4px #5044b7;
+    text-align: left;
+}
+.explorador_de_arbol .nota_de_titulo {
+    font-weight: normal;
+    font-style: italic;
+    color: black;
+    font-size: 9px;
 }
 
 .explorador_de_arbol .boton_rojo {

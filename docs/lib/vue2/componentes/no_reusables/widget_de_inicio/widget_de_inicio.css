@@ -1,0 +1,139 @@
+.widget_de_inicio .etiqueta {
+    font-weight: bold;
+    text-align: right;
+    font-family: var(--fuente_principal)
+}
+.widget_de_inicio table {
+    border: 1px solid white;
+}
+.widget_de_inicio .reporte {
+    margin-top: 4px;
+    padding: 8px;
+    border: 1px solid #111122;
+    border: 1px solid #bdbeca;
+    border-radius: 0pt;
+    background-color: #bdbeca;
+    background-color: #111122;
+}
+.color_cumplidas {
+    font-weight: bold;
+    color: rgb(141, 206, 105);
+}
+.color_pendientes {
+    font-weight: bold;
+    color: rgb(86, 64, 119);
+}
+.color_fallidas {
+    font-weight: bold;
+    color: rgb(180, 92, 92);
+}
+.color_totales {
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+}
+.barra_de_estado_del_dia {
+    display: flex;
+    flex-direction: row;
+    min-height: 20px;
+    border: 1px solid #111122;
+}
+.mensaje_con_borde {
+    border: 1px solid #111122;
+    text-align: center;
+    font-size: 10px;
+    padding: 4px;
+    background-color: white;
+}
+.barra_de_estado_del_dia > .barra {
+    min-height: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 9px;
+    padding: 4px;
+    padding-top: 4px;
+    color: rgb(15, 13, 13);
+}
+.barra_de_estado_del_dia > .barra.barra_de_cumplidas {
+    background-color: rgb(79, 209, 9);
+    cursor: pointer;
+}
+.barra_de_estado_del_dia > .barra.barra_de_pendientes {
+    background-color: rgb(90, 55, 144);
+    cursor: pointer;
+}
+.barra_de_estado_del_dia > .barra.barra_de_fallidas {
+    background-color: rgb(181, 38, 38);
+    cursor: pointer;
+}
+.barra_de_estado_del_dia > .barra.barra_de_cumplidas:hover {
+    background-color: rgb(56, 145, 8);
+    color: white;
+}
+.barra_de_estado_del_dia > .barra.barra_de_pendientes:hover {
+    background-color: rgb(60, 39, 91);
+    color: white;
+}
+.barra_de_estado_del_dia > .barra.barra_de_fallidas:hover {
+    background-color: rgb(112, 24, 24);
+    color: white;
+}
+.widget_de_inicio .titulo {
+    background-color: #111122;
+    color: white;
+    padding: 0px;
+    padding-left: 4px;
+    padding-right: 4px;
+    font-size: 9px;
+    text-align: left;
+    font-family: var(--fuente_principal);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.widget_de_inicio .bloque {
+    margin-bottom: 8px;
+}
+.widget_de_inicio .tabla1 {
+    background-color: white;
+    color: blue;
+}
+.widget_de_inicio .grupo_de_palabras {
+    white-space: nowrap;
+}
+.widget_de_inicio .texto_de_actividad_1 {
+    font-size: 12px;
+    text-transform: uppercase;
+    text-decoration: underline;
+    font-weight: bold;
+}
+.widget_de_inicio .texto_de_actividad_2 {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.widget_de_inicio .texto_de_actividad_3 {
+  font-size: 9px;
+  text-align: left;
+  background-color: blue;
+  color: white;
+  padding: 2px;
+  width: 100%;
+  text-transform: uppercase;
+}
+.widget_de_inicio .recordatorios {
+    background-color: #5e1010;
+    color: #FF0;
+    box-shadow: 0 0 2px #FF0;
+    border-radius: 3pt;
+    padding: 4px;
+    padding-left: 8px;
+    font-size: 9px;
+    list-style-type: bullet;
+    
+}
+.widget_de_inicio .recordatorios > .recordatorio {
+    white-space: nowrap;
+}
+
+.widget_de_inicio .recordatorios > .recordatorio > .caja_de_recordatorio {
+    text-align: left;
+}

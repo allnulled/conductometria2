@@ -596,26 +596,26 @@
 
     procesar_sentencia_de_seccion(sentencia) {
       this.trace("interpretacion_de_ast.procesar_sentencia_de_seccion", arguments);
-      // @TOTEST:
       this.secciones.push(sentencia);
     }
 
     procesar_sentencia_de_configurar(sentencia) {
       this.trace("interpretacion_de_ast.procesar_sentencia_de_configurar", arguments);
-      // @TOTEST:
       this.configuraciones[sentencia.clave] = sentencia.valor;
     }
 
     procesar_sentencia_de_hoy_es(sentencia) {
       this.trace("interpretacion_de_ast.procesar_sentencia_de_hoy_es", arguments);
-      // @TOTEST:
+      if(sentencia.estado === "!") {
+        return;
+      }
       this.configuraciones.hoy = sentencia.seccion;
       this.procesar_sentencia_de_seccion(sentencia);
     }
 
     procesar_sentencia_de_avisar(sentencia) {
       this.trace("interpretacion_de_ast.procesar_sentencia_de_avisar", arguments);
-      // @TOTEST:
+      // @TODO: por hacer la sintaxis y todo todavía
     }
 
     cargar_interpretacion() {

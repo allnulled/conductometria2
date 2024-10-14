@@ -1,3 +1,97 @@
 <div class="widget_de_inicio">
-    Inicio
+    <div v-if="!estan_subdatos_cargados">
+        Cargando datos...
+    </div>
+    <div class="reporte" v-else>
+        <div class="bloque" v-if="datos.configuraciones.nombre">
+            <div class="titulo">1. Inicio:</div>
+            <div style="background-color: white; color: black !important;  padding: 4px; font-size: 10px; text-align: center;">
+                <span>¡Hola, <b>{{ datos.configuraciones.nombre }}</b>!</span>
+                <span>Así está tu día.</span>
+            </div>
+        </div>
+        <div class="bloque" v-if="datos.configuraciones.recordatorios && datos.configuraciones.recordatorios.length">
+            <div class="titulo">2. Autorrecordatorios:</div>
+            <div class="recordatorios">
+                <div class="recordatorio" v-for="recordatorio, recordatorio_index in datos.configuraciones.recordatorios.split(';')" v-bind:key="'recordatorio_' + recordatorio_index">
+                    <div class="mensaje_de_recordatorio">⬝ {{ recordatorio.trim() }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="bloque">
+            <div class="titulo">3. Minuto actual:</div>
+            <table class="tabla1" style="width: 100%; border: 1px solid #0e0e26; border-collapse: collapse;">
+                <tr>
+                    <td class="texto_de_actividad_2" style="width: 50%; text-align: right; padding: 2px;">{{ llenar_por_la_izquierda(ahora_para_tiempo.getHours(), 2) }}</td>
+                    <td class="texto_de_actividad_2" style="width: 1%; text-align: center; padding: 2px;"> : </td>
+                    <td class="texto_de_actividad_2" style="width: 50%; text-align: left; padding: 2px;">{{ llenar_por_la_izquierda(ahora_para_tiempo.getMinutes(), 2) }}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="bloque">
+            <div class="titulo">4. Misiones de la hora actual:</div>
+            <table class="tabla1" style="width: 100%; border: 1px solid #0e0e26; " v-if="actividades_de_hora_actual.length">
+                <tr v-for="actividad, actividad_index in actividades_de_hora_actual" v-bind:key="'actividad_' + actividad_index">
+                    <!--td style="font-size: 9px;text-align: center; padding: 2px;">{{ actividad_index + 1 }}.</td-->
+                    <td style="font-size: 9px;text-align: center; border: 1px solid blue;">{{ pasar_hora_a_texto(actividad.hora) }}</td>
+                    <td style="width: 100%;" class="texto_de_actividad_3">{{ actividad.fenomeno }}</td>
+                    <td style="font-size: 9px;text-align: center; border: 1px solid blue;">{{ pasar_duracion_a_texto(actividad.duracion) }}</td>
+                </tr>
+            </table>
+            <div class="mensaje_con_borde" v-else>No hay.</div>
+        </div>
+        <div class="bloque">
+            <div class="titulo">5. Misiones del día actual:</div>
+            <div class="barra_de_estado_del_dia" v-if="actividades_del_dia.length">
+                <div class="barra barra_de_cumplidas" :style="'flex:' + estadisticas_de_actividades_del_dia.porcentaje_de_tareas_cumplidas + '%;'" v-on:click="seleccionar_cumplidas_del_dia">
+                    <div class="grupo_de_palabras">{{ actividades_del_dia_cumplidas.length }} cumplidas</div>
+                    <div>{{ estadisticas_de_actividades_del_dia.porcentaje_de_tareas_cumplidas }}%</div>
+                </div>
+                <div class="barra barra_de_fallidas" :style="'flex:' + estadisticas_de_actividades_del_dia.porcentaje_de_tareas_fallidas + '%;'" v-on:click="seleccionar_fallidas_del_dia">
+                    <div class="grupo_de_palabras">{{ actividades_del_dia_fallidas.length }} fallidas</div>
+                    <div>{{ estadisticas_de_actividades_del_dia.porcentaje_de_tareas_fallidas }}%</div>
+                </div>
+                <div class="barra barra_de_pendientes" :style="'flex:' + estadisticas_de_actividades_del_dia.porcentaje_de_tareas_pendientes + '%;'" v-on:click="seleccionar_pendientes_del_dia">
+                    <div class="grupo_de_palabras">{{ actividades_del_dia_pendientes.length }} pendientes</div>
+                    <div>{{ estadisticas_de_actividades_del_dia.porcentaje_de_tareas_pendientes }}%</div>
+                </div>
+            </div>
+            <div class="mensaje_con_borde" v-else>No hay.</div>
+        </div>
+        <div class="bloque">
+            <div class="titulo">6. Misiones de la hora siguiente:</div>
+            <table class="tabla1" style="width: 100%; border: 1px solid #0e0e26;" v-if="actividades_de_hora_siguiente.length">
+                <tr v-for="actividad, actividad_index in actividades_de_hora_siguiente" v-bind:key="'actividad_siguiente_' + actividad_index">
+                    <!--td style="font-size: 9px;text-align: center; padding: 2px;">{{ actividad_index + 1 }}.</td-->
+                    <td style="font-size: 9px;text-align: center; border: 1px solid blue;">{{ pasar_hora_a_texto(actividad.hora) }}</td>
+                    <td style="width: 100%;" class="texto_de_actividad_3">{{ actividad.fenomeno }}</td>
+                    <td style="font-size: 9px;text-align: center; border: 1px solid blue;">{{ pasar_duracion_a_texto(actividad.duracion) }}</td>
+                </tr>
+            </table>
+            <div class="mensaje_con_borde" v-else>No hay.</div>
+        </div>
+        <div class="bloque">
+            <div class="titulo">7. Estado actual:</div>
+            <table class="tabla1" style="width: 100%; border: 1px solid #0e0e26;" v-if="estado_actual && Object.keys(estado_actual).length">
+                <tr v-for="fenomeno, fenomeno_index in estado_actual" v-bind:key="'fenomeno_siguiente_' + fenomeno_index">
+                    <td style="font-size: 9px;text-align: left; background-color: blue; color: white; padding: 2px; width: 100%; text-transform: uppercase;">{{ fenomeno_index }}</td>
+                    <td class="grupo_de_palabras" style="font-size: 9px;text-align: center; border: 1px solid blue; width: 1%;">{{ pasar_duracion_a_minutos(fenomeno) }}min</td>
+                    <td class="grupo_de_palabras" style="font-size: 9px;text-align: center; border: 1px solid blue; width: 1%;">{{ pasar_duracion_a_texto(fenomeno) }}</td>
+                </tr>
+            </table>
+            <div class="mensaje_con_borde" v-else>No hay.</div>
+        </div>
+        <div class="bloque">
+            <div class="titulo">8. Fenómenos del día:</div>
+            <table class="tabla1" style="width: 100%; border: 1px solid #0e0e26;" v-if="fenomenos_del_dia && fenomenos_del_dia.length">
+                <tr v-for="fenomeno, fenomeno_index in fenomenos_del_dia" v-bind:key="'fenomeno_del_dia_' + fenomeno_index">
+                    <td class="grupo_de_palabras" style="font-size: 9px;text-align: center; border: 1px solid blue; width: 1%;">{{ pasar_hora_a_texto(fenomeno.hora) }}</td>
+                    <td style="font-size: 9px;text-align: left; background-color: blue; color: white; padding: 2px; width: 100%; text-transform: uppercase;">{{ fenomeno.fenomeno }}</td>
+                    <td class="grupo_de_palabras" style="font-size: 9px;text-align: center; border: 1px solid blue; width: 1%;">{{ pasar_duracion_a_minutos(fenomeno.duracion) }}min</td>
+                    <td class="grupo_de_palabras" style="font-size: 9px;text-align: center; border: 1px solid blue; width: 1%;">{{ pasar_duracion_a_texto(fenomeno.duracion) }}</td>
+                </tr>
+            </table>
+            <div class="mensaje_con_borde" v-else>No hay.</div>
+        </div>
+    </div>
 </div>
