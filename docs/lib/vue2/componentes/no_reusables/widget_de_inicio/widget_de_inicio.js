@@ -19,7 +19,7 @@ return await Sistema_de_modulos.definir_componente_vue2(
         ahora_para_tiempo: new Date(),
         estan_subdatos_cargados: false,
         actividades_del_dia: [],
-        tareas_seleccionadas_del_grafico: undefined,
+        tareas_seleccionadas_del_grafico: [],
         actividades_del_dia_fallidas: [],
         actividades_del_dia_pendientes: [],
         actividades_del_dia_cumplidas: [],
@@ -202,16 +202,28 @@ return await Sistema_de_modulos.definir_componente_vue2(
         this.temporizador = clearInterval(this.temporizador);
       },
       seleccionar_cumplidas_del_dia() {
-        this.tareas_seleccionadas_del_grafico = "cumplidas";
-        this.$window.alert("cumplidas");
+        const pos = this.tareas_seleccionadas_del_grafico.indexOf("cumplidas");
+        if(pos === -1) {
+          this.tareas_seleccionadas_del_grafico.push("cumplidas");
+        } else {
+          this.tareas_seleccionadas_del_grafico.splice(pos, 1);
+        }
       },
       seleccionar_fallidas_del_dia() {
-        this.tareas_seleccionadas_del_grafico = "fallidas";
-        this.$window.alert("fallidas");
+        const pos = this.tareas_seleccionadas_del_grafico.indexOf("fallidas");
+        if(pos === -1) {
+          this.tareas_seleccionadas_del_grafico.push("fallidas");
+        } else {
+          this.tareas_seleccionadas_del_grafico.splice(pos, 1);
+        }
       },
       seleccionar_pendientes_del_dia() {
-        this.tareas_seleccionadas_del_grafico = "pendientes";
-        this.$window.alert("pendientes");
+        const pos = this.tareas_seleccionadas_del_grafico.indexOf("pendientes");
+        if(pos === -1) {
+          this.tareas_seleccionadas_del_grafico.push("pendientes");
+        } else {
+          this.tareas_seleccionadas_del_grafico.splice(pos, 1);
+        }
       },
     },
     mounted() {

@@ -51,31 +51,30 @@
     font-size: 9px;
     padding: 4px;
     padding-top: 4px;
+    padding-left: 0px;
+    padding-right: 0px;
     color: rgb(15, 13, 13);
 }
 .barra_de_estado_del_dia > .barra.barra_de_cumplidas {
-    background-color: rgb(79, 209, 9);
+    background-color: rgb(135, 198, 101);
     cursor: pointer;
 }
 .barra_de_estado_del_dia > .barra.barra_de_pendientes {
-    background-color: rgb(90, 55, 144);
+    background-color: rgb(145, 139, 199);
     cursor: pointer;
 }
 .barra_de_estado_del_dia > .barra.barra_de_fallidas {
-    background-color: rgb(181, 38, 38);
+    background-color: rgb(210, 133, 133);
     cursor: pointer;
 }
-.barra_de_estado_del_dia > .barra.barra_de_cumplidas:hover {
-    background-color: rgb(56, 145, 8);
-    color: white;
+.barra_de_estado_del_dia > .barra.barra_de_cumplidas.activado {
+    background-color: rgb(79, 209, 9);
 }
-.barra_de_estado_del_dia > .barra.barra_de_pendientes:hover {
-    background-color: rgb(60, 39, 91);
-    color: white;
+.barra_de_estado_del_dia > .barra.barra_de_pendientes.activado {
+    background-color: rgb(65, 51, 189);
 }
-.barra_de_estado_del_dia > .barra.barra_de_fallidas:hover {
-    background-color: rgb(112, 24, 24);
-    color: white;
+.barra_de_estado_del_dia > .barra.barra_de_fallidas.activado {
+    background-color: rgb(181, 38, 38);
 }
 .widget_de_inicio .titulo {
     background-color: #111122;
