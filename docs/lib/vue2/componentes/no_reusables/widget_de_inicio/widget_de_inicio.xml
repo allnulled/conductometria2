@@ -6,8 +6,8 @@
         <div class="bloque" v-if="datos.configuraciones.nombre">
             <div class="titulo">Inicio:</div>
             <div style="background-color: white; color: black !important;  padding: 4px; font-size: 10px; text-align: center;">
-                <span>¡Hola, <b>{{ datos.configuraciones.nombre }}</b>!</span>
-                <span>Así está tu día.</span>
+                <span>¿Cómo <span v-if="datos.configuraciones.sexo === 'masculino'">está hoy, <b>señor</b></span><span v-else-if="datos.configuraciones.sexo === 'femenino'">está usted hoy, <b>señorita</b></span><span v-else> está hoy,</span> <b>{{ datos.configuraciones.nombre }}</b>?</span>
+                <span>Permítame mostrarle su día.</span>
             </div>
         </div>
         <div class="bloque" v-if="datos.configuraciones.recordatorios && datos.configuraciones.recordatorios.length">
@@ -27,6 +27,18 @@
                     <td class="texto_de_actividad_2" style="width: 50%; text-align: left; padding: 2px;">{{ llenar_por_la_izquierda(ahora_para_tiempo.getMinutes(), 2) }}</td>
                 </tr>
             </table>
+        </div>
+        <div class="bloque">
+            <div class="titulo">Notificaciones:</div>
+            <table class="tabla1" style="width: 100%; border: 1px solid #0e0e26; " v-if="notificaciones_de_limites.length">
+                <tr v-for="notificacion, notificacion_index in notificaciones_de_limites" v-bind:key="'notificacion_' + notificacion_index">
+                    <td style="font-size: 9px;text-align: center; border: 1px solid blue; min-width: 15px;">{{ notificacion.mensaje.sentido === "++" ? "Bueno" : "Malo"}}</td>
+                    <td style="font-size: 9px;text-align: center; border: 1px solid blue; min-width: 15px;">{{ notificacion.mensaje.urgencia }}!</td>
+                    <td style="width: 100%;" class="texto_de_actividad_3">{{ notificacion.mensaje.mensaje }}</td>
+                    <td style="font-size: 9px;text-align: center; border: 1px solid blue; min-width: 15px; white-space: nowrap;">{{ notificacion.estado }}</td>
+                </tr>
+            </table>
+            <div class="mensaje_con_borde" v-else>No hay.</div>
         </div>
         <div class="bloque">
             <div class="titulo">Misiones de la hora actual:</div>

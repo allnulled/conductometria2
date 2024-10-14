@@ -28,6 +28,7 @@ return await Sistema_de_modulos.definir_componente_vue2(
         actividades_de_hora_siguiente: [],
         estado_actual: false,
         fenomenos_del_dia: [],
+        notificaciones_de_limites: [],
       }
     },
     watch: {
@@ -191,6 +192,35 @@ return await Sistema_de_modulos.definir_componente_vue2(
               this.fenomenos_del_dia.push(dato_fenomeno);
             }
           }
+        }
+        Extraemos_las_notificaciones_de_los_limites_por_orden: {
+          const ordenadas = this.datos.notificaciones.sort((notificacion_a, notificacion_b) => {
+            const notificacion_a_sentido = notificacion_a.mensaje.sentido;
+            const notificacion_b_sentido = notificacion_b.mensaje.sentido;
+            if(notificacion_a_sentido === "++") {
+              if(notificacion_b_sentido === "--") {
+                return 1;
+              } else if(notificacion_b_sentido !== "++") {
+                return 1;
+              }
+            }
+            if(notificacion_b_sentido === "++") {
+              if(notificacion_a_sentido === "--") {
+                return -1;
+              } else if(notificacion_a_sentido !== "++") {
+                return -1;
+              }
+            }
+            const notificacion_a_urgencia = notificacion_a.mensaje.urgencia;
+            const notificacion_b_urgencia = notificacion_b.mensaje.urgencia;
+            if(notificacion_a_urgencia < notificacion_b_urgencia) {
+              return 1;
+            } else if(notificacion_a_urgencia > notificacion_b_urgencia) {
+              return -1;
+            }
+            return 0;
+          });
+          this.notificaciones_de_limites = ordenadas;
         }
       },
       iniciar_tiempo() {

@@ -95,9 +95,9 @@ limitar entre 2024/08/15 y 2025/08/15 {
         + {{ vitamina A rebosa }}
     }
     { C } mínimo 0min máximo 1h con mensajes {
-        -/-- {{ vitamina A escasea (y eso es malo) }}
-        =/++ {{ vitamina A está equilibrada (y eso es bueno) }}
-        +/++ {{ vitamina A rebosa (y eso es bueno) }}
+        -/-- {{ vitamina A escasea (y eso es malo) }} con urgencia 10
+        =/++ {{ vitamina A está equilibrada (y eso es bueno) }} con urgencia 1
+        +/++ {{ vitamina A rebosa (y eso es bueno) }} con urgencia 3
     }
     { B } cada 2h mínimo 0min máximo 30min
     { B } mínimo 0min máximo 30min
